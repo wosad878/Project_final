@@ -35,5 +35,8 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+	@RequestMapping("/temp/header")
+	public void header() {}
+	@RequestMapping("/temp/footer")
+	public void footer() {}
 }

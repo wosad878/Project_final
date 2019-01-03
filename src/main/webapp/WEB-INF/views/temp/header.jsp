@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:import url="./bootstrap.jsp"></c:import>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.lnb_inner ul li').hover(function(){
@@ -20,9 +20,6 @@ $(function(){
 	});
 });
 </script>
-<link rel="stylesheet" type="text/css" href="<%=pageContext.getServletContext().getContextPath()%>/resources/css/reset.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <style type="text/css">
 .bar{
 	width: 100%;
@@ -32,8 +29,9 @@ $(function(){
     position: fixed;
 }
 .inner{
-	margin-left: 15%;
-	margin-right: 15%;
+	width: 1230px;
+	margin: 0 auto;
+	min-width: 1230px;
 }
 .left{
 	width: 50%;
@@ -69,8 +67,10 @@ $(function(){
 	border-bottom: 1px solid #e8e8e8;
 	}
 .lnb_inner{
-	width:auto; 
+	width:1230px; 
 	height: inherit;
+	margin: 0 auto;
+	min-width: 1230px;
 }
 .lnb_inner ul{
 	text-align: center;
@@ -132,9 +132,9 @@ $(function(){
 	</div>
 </div>
 <div style="border-bottom: 1px solid black;">
-	<div class="spot" style="padding-top: 40px;margin:0 auto; width:50%; height: 150px;">
-		<div class="inner" style="width: 500px;height: inherit;margin: 0 auto;">
-			<a class="logo" href="" style="height: 150px;"><img class="logoImg" style="padding-top: 25px;box-sizing: border-box;" src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo1.png"></a>
+	<div class="spot" style="padding-top: 40px;margin:0 auto; width:50%; height: 150px; min-width: 500px;">
+		<div class="spot_inner" style="width: inherit;height: inherit;margin: 0 auto;min-width: 500px;">
+			<a class="logo" href="" style="height: 150px; margin: 0 auto;display: inline-block;"><img class="logoImg" style="padding-top: 25px;box-sizing: border-box;" src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo1.png"></a>
 		</div>
 	</div>
 </div>

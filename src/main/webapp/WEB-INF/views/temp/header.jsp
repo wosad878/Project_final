@@ -4,110 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="./bootstrap.jsp"></c:import>
+<link rel="stylesheet" type="text/css" href="<%=pageContext.getServletContext().getContextPath()%>/resources/css/header.css">
+<script type="text/javascript" src="<%=pageContext.getServletContext().getContextPath()%>/resources/js/header.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-$(function(){
-	$('.lnb_inner ul li').hover(function(){
-		$(this).children('ul').stop().fadeToggle(100);
-	});
-	$(".logo").mouseenter(function(){
-		$('.logoImg').attr("src","<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo2.png");
-	});
-	$(".logo").mouseleave(function(){
-		$('.logoImg').attr("src","<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo1.png");
-	});
-});
-</script>
-<style type="text/css">
-.bar{
-	width: 100%;
-	height: 40px;
-	border-bottom: 1px solid #e8e8e8;
-    border-bottom-color: rgba(0,0,0,.09);
-    position: fixed;
-}
-.inner{
-	width: 1230px;
-	margin: 0 auto;
-	min-width: 1230px;
-}
-.left{
-	width: 50%;
-	float: left;
-}
-.bar div{
-	height: 40px;
-}
-.header_ul{
-	height: inherit;
-}
-.header_ul li{
-	display: inline-block;
-	height: inherit;
-	box-sizing: border-box;
-	padding-top: 10px;
-}
-.header_ul li a{
-	padding: 0 10px 0 0;
-	font-size: 12px;
-}
-.right{
-	widows: 50%;
-	padding-top: 10px;
-	box-sizing: border-box;
-	float: right;
-}
-.find{
-	float: right;
-}
-.lnb{
-	height: 50px;
-	border-bottom: 1px solid #e8e8e8;
-	}
-.lnb_inner{
-	width:1230px; 
-	height: inherit;
-	margin: 0 auto;
-	min-width: 1230px;
-}
-.lnb_inner ul{
-	text-align: center;
-	height: inherit;
-}
-.lnb_inner ul li{
-	display: inline-block;
-	margin-right: 70px;
-	position: relative;
-	top: 15px;
-	font-size: 13px;
-}
-.lnb_inner ul li ul{
-	display:none;
-	width: 140px;
-	position: absolute;
-	top: 33px;
-	left: -40px;
-	padding: 10px 0 10px 0;
-	border: 1px solid #ddd;
-	background-color: white;
-}
-.lnb_inner ul li ul li{
-	text-align: left;
-	position:relative;
-	top:0.5px;
-	width: 120px;
-	height: 25px;
-	padding: 0;
-	margin: 0;
-}
-.lnb_inner ul li ul li a{
-	font-size: 13px;
-	padding
-}
-
-</style>
 </head>
 <body>
 <div class="bar">
@@ -131,7 +31,7 @@ $(function(){
 		</div>
 	</div>
 </div>
-<div style="border-bottom: 1px solid black;">
+<div class="logoImage">
 	<div class="spot" style="padding-top: 40px;margin:0 auto; width:50%; height: 150px; min-width: 500px;">
 		<div class="spot_inner" style="width: inherit;height: inherit;margin: 0 auto;min-width: 500px;">
 			<a class="logo" href="" style="height: 150px; margin: 0 auto;display: inline-block;"><img class="logoImg" style="padding-top: 25px;box-sizing: border-box;" src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo1.png"></a>
@@ -141,8 +41,8 @@ $(function(){
 <div class="lnb">
 	<div class="lnb_inner">
 		<ul>
-			<li><a href="">브랜드 스토리</a></li>
-			<li><a href="">전체상품</a>
+			<li><a href=""><span>브랜드 스토리</span></a></li>
+			<li><a href=""><span>전체상품</span></a>
 				<ul>
 					<li><a href="">세트상품</a></li>
 					<li><a href="">천연비누</a></li>
@@ -154,7 +54,7 @@ $(function(){
 					<li><a href="">미용도구</a></li>
 				</ul>
 			</li>
-			<li><a href="">피부고민별</a>
+			<li><a href=""><span>피부고민별</span></a>
 				<ul>
 					<li><a href="">트러블/모공</a></li>
 					<li><a href="">미백/흔적</a></li>
@@ -162,33 +62,34 @@ $(function(){
 					<li><a href="">민감/진정</a></li>				
 				</ul>
 			</li>
-			<li><a href="">제품별</a>
+			<li><a href=""><span>제품별</span></a>
 				<ul>
 					<li><a href="">신상품</a></li>
 					<li><a href="">베스트셀러</a></li>
 					<li><a href="">이벤트상품</a></li>
 				</ul>
 			</li>
-			<li><a href="">이벤트상품</a></li>
-			<li><a href="">이벤트</a>
+			<li><a href=""><span>이벤트상품</span></a></li>
+			<li><a href=""><span>이벤트</span></a>
 				<ul>
 					<li><a href="">진행중 이벤트</a></li>
 					<li><a href="">종료된 이벤트</a></li>
 				</ul>
 			</li>
-			<li><a href="">상품후기</a></li>
-			<li><a href="">커뮤니티</a>
+			<li><a href=""><span>상품후기</span></a></li>
+			<li><a href=""><span>커뮤니티</span></a>
 				<ul>
 					<li><a href="">성분자료실</a></li>
 					<li><a href="">아이사드 실험실</a></li>
 				</ul>
 			</li>
-			<li><a href="">고객센터</a>
+			<li><a href=""><span>고객센터</span></a>
 				<ul>
 					<li><a href="">공지사항</a></li>
 					<li><a href="">회원혜택</a></li>
 					<li><a href="">자주묻는 질문</a></li>
 					<li><a href="">문의게시판</a></li>
+					
 				</ul>
 			</li>
 		</ul>

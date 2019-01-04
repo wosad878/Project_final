@@ -39,4 +39,5 @@ public class HomeController {
 	public void header() {}
 	@RequestMapping("/temp/footer")
 	public void footer() {}
+
 }

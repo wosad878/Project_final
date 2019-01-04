@@ -1,0 +1,486 @@
+스캐너 이용 문자열 입력받고
+	991224 - 123456               7
+	234567 - 892345
+
+	18+27+4+10+12+28+8+18+6+12+20+30
+	
+	193/11 --몫 : 17 나머지 : 6
+
+	11 - 나머지 = 5 
+	
+	5 +  마지막 번호 같으면 맞는 주민번호
+
+	만약에 결과값이 두자리라면 결과값을 /10하고 나머지와 마지막 번호 비교
+
+
+
+517p 정규표현식 공부
+
+String s = "abc, iu - suji * Hani, kim";
+한번에 ,로 바꾸기
+
+TeacherService
+
+메서드명 login
+
+
+ALLEN 이 근무하는 부서명 30 
+
+WARD 급여등급
+
+10번 부서에 있는 사람의 월급 총 합
+
+mgr 번호중 null인사람과 같은 부서에 있는 사람 월급 합계
+ 
+부서번호 20 또는 30인 사람으 ㅣ평균 급여
+
+사원이름중 L 포함된 사원들의 급여 합 급여 평균
+
+시카고에서 근무하는 사원들의 평균급여의 등급은?
+
+사원중  평균급여보다 적은 사원
+
+부서별 직원의 수
+
+직원중 급여가 1500 이상인 직원들의 부서별 급여의 합계, 급여평균
+
+부서별 급여 합계에서 7000이상인 사람이 있는 부서
+60 marketing la
+
+70 hr 워싱턴
+
+IT부서의 사원 명단
+
+emp 테이블에서 입사날이 높은순으로 이름 sal 입사날짜 출력
+
+ford 근무하는 부서명
+
+smith 직장상사
+
+시카고 근무사원들의 평균급여
+
+ALLEN 같은 JOB이면서 급여를 더 많이 받는 직원이 이름,JOB 조회
+
+급여등급이 3인 사원의 이름,급여,부서번호 출력
+
+MGR이 NULL 인 사원과 같은 부서에 근무하는 사원들
+급여 평균의 급여등급과
+같은 등급을 가진 사윈의 이름, 급여, 직무 조회
+select deptno from emp where mgr is null;	//deptno =10
+select avg(sal) from emp where deptno=10;	//ex)2541.66
+select grade from salgrade where 2541.66>=losal and 2541.66<=hisal;	//grade 4
+select losal from salgrade where grade=4;	//2001
+select hisal from salgrade where grade=4;	//3000
+* select ename, sal, job from emp where sal>=2001 and sal<=3000
+=================================================================================
+**select ename, sal, job from emp where sal>=(
+
+  select losal from salgrade
+
+  where grade = (
+
+  select grade from salgrade where losal>=(
+
+  select avg(sal) from emp where deptno=(
+
+  select deptno from emp where mgr is null)))) and
+
+  sal<=(select hisal from salgrade where grade=(
+
+  select grade from salgrade where hisal<=(
+
+  select avg(sal) from emp where deptno=(
+
+  select deptno from emp where mgr is null))));
+
+급여가 3000이상인 사원의 부서명
+
+부서별 급여의 최소 급여를 받고 있는 직원의 이름, job, sal, deptno
+select ename from emp where sal=(select min(sal) from emp where deptno=10);  miller
+select ename from emp where sal=(select min(sal) from emp where deptno=20);  smith
+select ename from emp where sal=(select min(sal) from emp where deptno=30);  james
+
+
+성적관리 프로그램
+선생님 		- 자기 반 학생의 성적을 입력, 조회, 수정, 삭제,개인정보 수정
+학생   		- 자기성적 조회, 개인정보 수정
+개인정보		- 전화번호, 이메일, 주소,.. 
+공통 		- 로그인
+성적 		- 국어 영어 수학 (총점 평균) 계산
+
+선생님 - id,password,name,subject,age,학년,반,생일,입사일
+학생   - id,password,name,age,학년,반,번호,생일
+성적   - 국어,영어,수학,총점,평균,학생id,kind,num
+====================================================================
+	테이블명
+	Teacher
+--------------------------------------------------------------------
+	컬럼	 |데이터타입	|옵션
+	ID	 |varchar2(100)	|primary key
+	PW	 |varchar2(100)	|NOT NULL
+	Name	 |varchar2(100)	|NOT NULL
+	Subject	 |varchar2(100)	|
+	Age	 |number(3)	|
+	Birth	 |Date		|
+	Hiredate |Date 		|
+	ClassID  |varchar2(400)	|reference dept classid
+====================================================================	
+	Student
+--------------------------------------------------------------------
+	Id	|varchar2(100)	|primary key
+	Pw	|varchar2(100)	|NOT NULL
+	Name	|varchat2(100)	|NOT NULL
+	Age	|number(3)	|
+	Num	|number(2)	|
+	Birth	|Date		|
+	ClassID |varchar2(400)	|FOREIGN KEY DEPT- CLASSID
+====================================================================
+	point
+--------------------------------------------------------------------
+	Num	|number(8)	|primary key
+	Id	|varchar2(100)	|notnull
+	Kor	|number(3)	|default 0
+	Eng	|number(3)	|check
+	Math	|number(3)	|check
+	Total	|number(3)	|check
+	Avg	|number(5,2)	|
+	Kind	|varchar2(2)	|	
+====================================================================
+	Dept
+--------------------------------------------------------------------
+	ClassID	|varchar2(400)	|primary key
+	Grade	|number(2)	|NOT NULL
+	Class	|number(2)	|NOT NULL
+
+
+====================================================================
+
+insert delete (point) 입력은 input 총점 평균 계산은 service 출력은 output
+
+
+
+
+Test2
+num,id,kor,eng,math,total,avg,dday
+평균은 소수점2자리
+제약조건 컬럼레벨방식 이름넣고
+ num primary key
+ kor,eng,math 0-100
+
+1)리스트로 가는 링크
+
+selectOne.jsp	:번호를 받아서 한 사람의 모든 정보를 출력
+2)  deleteProcess.jsp	:해당 정보 삭제
+3)  updateForm.jsp	:수정 데이터 입력(id,kor,eng,math)
+    updateProcess.jsp	:수정처리
+
+
+
+notice
+번호,제목,본문,작성자,글작성날짜,조회수
+num number(8) contsraint num pk
+title varchar2(400)
+contents varchar2(4000)
+writer varchar2(400)
+reg_date date
+hit number(8)
+
+제약조건 테이블레벨
+시퀀스
+notice_seq
+
+
+noticeList.jsp		:리스트페이지 최신순으로 정렬
+
+noticeWriteForm.jsp	:notice작성form페이지
+noticeWriteProcess.jsp	:notice작성 처리
+
+noticeSelectOne.jsp	:상세내용 페이지
+
+noticeDeleteProcess.jsp	:해당 공지사항 삭제
+
+noticeUpdateForm.jsp	:notice 수정 form
+
+noticeUpdateProcess.jsp	: 수정 처리 페이지
+
+
+
+
+
+
+
+Member
+
+ 1)회원가입
+ 2)로그인
+ 3)로그아웃
+ 4)MyPage
+ 5)정보수정
+ 6)회원삭제
+ 7)회원리스트 보기
+
+
+
+School
+ Member table
+ ID,pw,name,email,kind(T,S)classMate
+
+
+ Team
+ classMate grade,(학년),ban(반)
+
+ classMate : cm학년반 cm11(1학년1반)cm12(1학년2반)
+
+
+MemberList
+
+회원리스트 - 10개씩, id, name 검색기능 추가
+번호, id, name, kind, 출력
+
+
+QNA
+번호, 제목, 작성자, 내용, 날짜, 조회수, ref(그룹) step(그룹 내 순서) depth(들여쓰기 횟수)
+num title writer contents reg_date hit
+
+
+번호	제목	ref	step	depth
+1	1	1	0	0
+2	2	2	0	0
+3	1_1	1	1+1	1
+4	2_1	2	1	1
+5	1_1_1	1	2+1	2
+6	1_2	1	1	1
+
+
+ref:그룹
+ 1)원본글:자기자신의 글번호
+ 2)답글  :부모글의 ref
+
+
+step:그룹 내의 순서
+ 1)원본글:0
+ 2)답글  
+   a.ref가 부모글의 ref와 같고,step이 부모의 step보다 큰 것들
+     update step1 증가
+
+   b.자기자신의 step에 부모의 ref+1한 값
+
+
+
+depth:들여쓰기
+ 1)원본글:0
+ 2)답글  :부모글의 depth +1
+
+
+
+select * from qna order by ref desc
+번호	제목	ref	step	depth
+2	2	2	0	0
+4	2_1	2	1	1
+5	1_1_1	1	2+1	2
+6	1_2	1	1	1
+1	1	1	0	0
+3	1_1	1	1+1	1
+
+select * from qna order by ref desc, step asc
+번호	제목	ref	step	depth
+2	2	2	0	0
+4	2_1	2	1	1
+1	1	1	0	0
+6	1_2	1	1	1
+3	1_1	1	1+1	1
+5	1_1_1	1	2+1	2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+번호	제목		날짜
+2	2
+4	  2_1
+1	1
+3	  1_1
+5	    1_1_1
+
+java
+com.iu.member
+	MemberDAO
+	MemberDTO
+	MemberService
+	MemberController
+
+메서드
+join		:회원가입 처리(자기 사진 업로드)
+login		:로그인 처리
+selectOne	:개인정보 조회 처리
+update		:개인정보 수정 처리
+logout		:로그아웃
+delete		:회원탈퇴 처리
+
+
+jsp
+memberJoin.jsp		:회원가입 폼 페이지
+memberLogin.jsp		:로그인 폼 페이지
+memberMyPage.jsp	:개인정보 출력 페이지
+memberUpdate.jsp	:개인정보 수정 폼 페이지
+
+
+
+/member/memberJoin.do		:회원가입 폼, 회원가입 처리	1
+/member/memberLogin.do		:로그인 폼, 로그인 처리		2
+/member/memberSelectOne.do	:개인정보 조회			4
+/member/memberUpdate.do		:수정폼, 수정처리		5
+/member/memberLogout.do		:로그아웃 처리			3
+/member/memberDelete.do		:탈퇴처리			6
+
+
+
+
+Notice
+ 1. list - 누구나 열람가능, 글쓰기는 로그인한 선생만 가능
+ 2. selectOne - 누구나 열람가능, 수정 삭제는 글쓴사람만 가능
+QNA
+ 1. list - 누구나 열람가능, 글쓰기는 로그인한 사람만 가능
+ 2. selectOne - 로그인한 사람만 열람가능 수정삭제는 글쓴사람만 가능
+ 3.답글 - 로그인한 사람만 가능
+공통사항
+ 1. 글쓰기 - writer 부분은 로그인한 사람 id(수정불가)
+
+
+
+글 삭제 - 글쓴이
+수정   - 글쓴이 
+
+myPage - 로그인
+수정 - 로그인
+탈퇴
+
+MEMO
+
+번호 : 자동증가(memo_seq) pk 
+
+작성자
+
+내용
+
+작성일
+
+테이블레벨
+
+3개 샘플데이터
+
+
+view 
+/WEB-INF/view/memo/memoList.jsp
+DAODTO
+list - selectList
+
+
+
+post
+delete()
+/file/fileDelete.do
+
+
+QNA
+
+jsp: 리스트, 글하나, 글쓰기폼, 수정, 
+리스트  : /board/boardList.jsp
+글하나  : /board/boardSelect.jsp
+글쓰기폼: /board/boardWrite.jsp
+수정폼  : /board/boardUpdate.jsp
+답글폼  : /board/boardReply.jsp
+
+
+
+URL 주소
+리스트  : /qna/qnaList, 		/notice/noticeList	GET
+글하나  : /qna/qnaSelect, 	/notice/noticeSelect	GET
+글쓰기폼: /qna/qnaWrite, 	/notice/noticeWrite	GET
+글쓰기  : /qna/qnaWrite, 	/notice/noticeWrite	POST
+글수정폼: /qna/qnaUpdate, 	/notice/noticeUpdate	GET
+글수정  : /qna/qnaUpdate, 	/notice/noticeUpdate	POST
+글삭제  : /qna/qnaDelete, 	/notice/noticeDelete	POST
+답글폼  : /qna/qnaReply					GET
+답글	: /qna/qnaReply					POST
+
+Controller
+QnaController, NoticeController
+
+com.iu.qna.QnaDTO
+글번호, 작성자, 제목, 내용reg_date, 조회수, ref(그룹), step(순서), depth(들여쓰기)
+com.iu.notice.NoticeDTO
+
+
+List	:
+Select	: 글이 없는 경우->alert,list이동
+Insert	: 성공->list, 실패->list(alert)
+Update	: 성공-> select (alert), 실패->select (alert)
+Dlelete : 성공->list(alert), 실패 ->select (alert)
+
+
+Member
+회원가입,로그인,로그아웃,마이페이지, 수정 ,탈퇴
+
+MemberDTO
+id,pw,name,email,phone,addr,grade
+
+JSP
+회원가입 폼	: /member/join.jsp
+로그인 폼  	: /member/login.jsp
+마이페이지 	: /member/myPage.jsp
+수정 폼	  	: /member/update.jsp
+
+URL
+회원가입 폼 	: /member/join    //get
+중복확인		: /member/idCheck //get
+회원가입 처리	: /member/join    //post
+		성공:index	실패:회원가입 폼(msg)
+로그인 폼    	: /member/login   //get
+로그인 처리	: /member/login   //post
+		성공:index	실패:로그인 폼(msg)
+마이페이지  	: /member/myPage  //get
+수정 폼      	: /member/update  //get
+수정 처리    	: /member/update  //post
+		성공:마이페이지	실패:마이페이지(msg)
+탈퇴처리		: /member/delete  //get
+		성공:index	실패:index(msg)
+로그아웃		: /member/logout  //get
+		성공:index	실패:index(msg)
+
+Method
+회원가입	: join   로그인	: login	 idCheck : idCheck  수정 : update  탈퇴 : delete
+
+
+주소록-> num, 사진, 이름, 전화번호, 이메일, 메모
+
+Address- num(number) pk, name(varchar2), phone(varchar2), email(varchar2), memo(varchar2) , photo(varchar2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

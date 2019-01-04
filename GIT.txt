@@ -1,0 +1,26 @@
+====================Git====================
+
+1.프로젝트와 Git 연동
+
+ 1)프로젝트 폴더가 있는 경우
+  a)create new repository
+   -Name은 프로젝트명과 동일
+
+
+ 2)프로젝트 폴더가 없는 경우
+
+
+
+============================
+//사용자 삭제
+git config --global --unset user.name 사용자이름
+
+//전체 사용자 삭제
+git config --global --unset-all user.name
+
+//삭제 리스트 확인
+git config --global --list
+
+//사용자 등록
+git config --global user.name id명
+git config --global user.email 이메일명

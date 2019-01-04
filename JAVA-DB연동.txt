@@ -1,0 +1,78 @@
+JAVA - DB 연동
+
+1. API 준비 - ojdbc6.jar
+2. 이클립스 프로젝트 내에서 API 설정 - 프로젝트 별로 실행
+3. java 코드 순서
+   1) 로그인 정보 4가지 - id, pw, url, driver
+   2) driver를 메모리에 로딩(생략 가능하긴 하지만 적는다)
+   3) DB에 로그인 - Connection
+   4) SQL문 작성
+   5) 전송준비
+   6) 전송 후 결과 처리
+   7) 연결 해제
+
+
+4. 
+   1) DTO -> 클래스명 : 테이블명DTO
+      DTO의 멤버변수는 private, 변수명은 테이블의 컬럼명과 동일
+
+   2) DAO -> 클래스명 : 테이블명DAO
+      생성, 수정, 삭제, 조회
+ 
+======================== DB에 제공되는 API 적용  276p =======================
+
+    1) Oracle - ojdbc6.jar 다운 -> project 우클릭 build path->configure build path
+       ->java buile path(또는 project 우클릭->properties->java buile path)
+       ->libraries->add external jars
+	
+======================== 접속에 필요한 4가지 기본 정보 =======================
+
+	String user 	= "scott";
+	String password = "tiger";
+	String url	= "jdbc:oracle:thin:@192.168.10.149:1521:xe";	//자기 아이피 주소 localhost, 127.0.0.1
+	String driver 	= "oracle.jdbc.driver.OracleDriver";
+
+=================================== 순서 ====================================
+
+	1. 4가지 정보
+
+	   String user 		= "scott";
+	   String password	= "tiger";
+	   String url		= "jdbc:oracle:thin:@192.168.10.149:1521:xe";
+	   String driver 	= "oracle.jdbc.driver.OracleDriver";
+
+	2. 메모리 로딩
+
+	   Class.forName(driver);
+
+	3. 로그인
+
+	   Connection con = DriverManager.getConnection(url, user, password);
+
+	4. SQL문작성
+
+	   String sql = "";
+
+	5. statement 연결
+
+	   Statement st = con.createStatement();
+
+	6. 전송 후 결과 처리
+
+	   int result = st.executeUpdate(sql);
+	   System.out.println("result : "+ result);
+	   if ( result>0) {
+	                   System.out.println("입력 성공");
+			  } else {
+			   System.out.println("입력 실패");
+			  }
+
+=============================================================================
+
+
+
+
+
+
+
+

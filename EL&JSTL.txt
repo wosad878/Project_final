@@ -1,0 +1,49 @@
+EL/JSTL
+
+pageScope
+requestScope
+sessionScope
+applicationScope
+
+${스코프명.속성명}
+
+속성명이 하나일 시 스코프명 생략가능
+
+1.라이브러리 다운
+2.jsp페이지 선언부에 <%@ taglib prifix="c" uri=""%>
+
+
+
+gt:	>
+ge: 	>=
+le:	<=
+lt:	<
+eq:	==
+ne:	!=
+empty:	null이거나 공백
+not empty: null 이면 true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

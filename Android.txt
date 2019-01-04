@@ -1,0 +1,825 @@
+======================================================================
+
+안드로이드 에뮬레이터
+
+1)tools -> avd maager
+2)create virtual device
+3)Device 선택(Nexux 5x) -> clone device
+4)상세설정 변경
+5)OS선택
+
+======================================================================
+
+1.설치시 주의사항
+ 1)폴더명은 전부 영문, 이름사이에 공백이 없어야 함
+
+ 2)프로젝트 생성시 에러 발생하면
+   File -> sync project with gradle files
+
+
+2.안드로이드 특징
+
+ 1)안드로이드는 리눅스 기반
+
+ 2)안드로이드는 자바 언어로 개발
+
+ 3)VMdms ART(Android Runtime)
+
+ 4)ART는 앱을 실행할 때 DEX 파일을 실행
+
+
+3.컴포넌트 기반 개발
+ -사용자가 객체를 만드는 것이 아니라, 컨테이너가 만든 객체
+
+ 1)컴포넌트는 앱의 구성단위, 여러개를 조합해서 하나의 앱을 만듬.
+
+ 2)컴포넌트는 앱 내에서 독립적인 실행 단위입니다.
+
+ 3)인텐트(Intent)라는 것을 매개로 하여 컴포넌트 간의 상호 호출
+
+ 4)main 같은 진입 지점이 따로 없음
+
+
+4.안드로이드 컴포넌트 종류
+ 
+ 1)Activity		:UI를 구성하기 위한 컴포넌트
+
+ 2)Service		:UI없이 백그라운드에서 장시간 수행되는 컴포넌트
+
+ 3)ContentProvider	:애플리케이션간 데이터를 공우하기 위한 컴포넌트
+
+ 4)BroadcastReceiver	:이벤트 모델로 수행되는 컴포넌트
+
+
+5.리소스를 이용한 개발
+
+
+
+6.디렉토리 구조
+
+ 
+==================== View =======================================
+1.View : 안드로이드 뷰 클래스의 최상위 클래스
+
+2.View Group : 다른 뷰 여러개를 뷰 그룹안에 포함해서 한꺼번에 제어하기 위한 목적
+
+
+View 속성
+
+1.id 속성
+ 뷰의 식별자
+ 지정한 id값은 R.java 파일에 동록
+ XML에 등록한 ID값을 매개변수로 하여findViewById()함수로 등록
+
+2.LayOut_width, LayOut_height
+ 뷰의 크기를 지정
+ --wrap-content:contents의 크기만큼 차지
+ --match_parent:부모의 크기만큼 차지
+ --20dp 등 직접 수치 입력
+
+3.Background
+ --배경색상
+
+4.padding
+ --위젯의 경계선으로 부터 컨텐츠 간의 간격
+
+5.layout_margin
+ --뷰와 뷰 사이의 간격
+
+6.visibility
+ --visible	:보임				0
+ --invisible	:안보임(자리는 차지함)		4
+ --gone		:안보임(자리를 차지하지 않음)	8
+
+
+============================ 기본 위젯 ========================================
+1.textView
+ -android:maxLines="3"			:긴 문장을 최대 3줄까지 출력
+ -android:ellipsize="end"		:말줄임(...)
+ -android:autoLink="web|email|phone"	:문자열 내에서 autolink에 해당하는 URL 문자열이 자동 링크 형태로 출력
+ -android:textColor=""			:색 지정
+ -android:textSize=""			:크기지정
+ -android:textStyle=""			:bold, italic 등 지정
+ -android:typeFace=""			:폰트지정
+ 
+2.ImageView
+ -이미지파일(iu1.jpg)을 res>drawable 저장
+ -android:src="@drawable/iu1"
+ -android:maxWidth=""			:화면에 출력할 최대 넓이 지정
+ -android:maxheight=""			:화면에 출력할 최대 높이 지정
+ -android:adjustViewBounds="true"	:이미지의 가로세로 비율 유지 여부
+ -android:tint=""			:이미지 위에 다른 색상을 입힐때 사용
+
+
+3.EditText
+ -android:Lines="3"			:처음 화면에 보일 때 특정 줄 만큼 보이게 할 때 사용
+ -android:MaxLines="3"			:처음 화면에는 한줄 입력시 라인이 숫자만큼 늘어남
+ -android:inputType=""			:phone, number, textEmailAdress 등
+
+ --input type
+   none			:모든 문자 입력가능 줄 바꿈 가능
+   text			:none과 동일, 단 줄 바꿈 불가
+   textMultiLine	:여러 줄 입력 가능
+   textUri		:URL입력모드
+   textCapCharacters	:키보드가 자동 대문자 입력 모드
+   textCapWords		:각 단어의 첫글자 입력시 키보드가 자동 대문자 입력
+   textCapSentences	:각 문장의 첫글자 입력시 키보드가 자동  대문자 입력
+   textNoSuggestions	:단어입력시 키보드의 추천단어 보여주기 비활성화
+   textEmailAddress	:이메일 입력모드
+   textPassword		:비밀번호 입력모드, 문자가 .으로 표시됨
+   textVisiblePassword	:비밀번호 입력, 문자열표시
+   number		:숫자 입력
+   numberSigned		:숫자, -입력 가능
+   numberDecimal	:소수점 입력가능
+   numberPassword	:숫자키만 입력, .으로 표시
+   phone		:전화번호 입력
+   datetime		:날짜시간 입력/.:키제공
+   date			:날짜/제공
+   time			:시간:제공
+
+
+4.Button
+
+
+5.checkBox
+ isChecked()	:해당 checkBox가 체크된 상태인지를 반환
+ setChecked()	:체크상태를 바꾸는 함수
+ toggle()	:체크상태를 반대로 변경
+
+
+6.RadioButton
+ 부모로 RadioGroup을 선언
+ check()			:해당 RadioButton을 체크
+ clearCheck()			:체크상태를 해제
+ getCheckedRadioButtonId()	:체크된 RadioButton의 ID값
+
+================================ LayOut 200P ===================================
+-대표적인 속성
+ 1)orientation		:방향 지정 vertical(세로)  horizontal(가로)
+ 2)gravity		:레이아웃 내의 위젯들의 위치선정
+ 3)layout_gravity	:위젯내의 컨텐츠의 위치 선정
+ 4)padding		:레이아웃 내의 위젯들의 여백
+ 5)baseLineAligned	:레이아웃 위젯의 정렬 
+
+
+1.Linear LayOut
+ -뷰의 순서대로 가로나 세로 방향으로 나열
+ -orientation 속성을 제공
+
+ -gravity
+  --top			:대상 객체를 위쪽 끝에 배치
+
+  --bottom		:대상 객체를 아래쪽 끝에 배치
+
+  --left		:대상 객체를 왼쪽 끝에 배치
+
+  --right		:대상 객체를 오른쪽 끝에 배치
+
+  --center		:대상 객체를 수직,수평의 중앙에 배치
+
+  --center_vertical	:대상 객체를 수직 방향의 중앙에 배치
+
+  --center_horizontal	:대상 객체를 수평 방향의 중앙에 배치
+
+  --fill_vertical	:대상 객체를 수직 방향의 여유공간 만큼 확대하여 채우기
+
+  --fill_horizontal	:대상 객체를 수평 방향의 여유공간 만큼 확대하여 채우기
+
+  --fill		:대상 객체를 수직,수평 방향의 여유공간 만큼 확대하여 배치
+
+  --clip_vertical	:대상 객체의 상하길이가 여유공간보다 클 경우 남는 부분을 잘라냄
+
+	--top|clip_vertical	:아래쪽에 남는 부분을 잘라냄
+
+	--bottom|clip_vertical	:위쪽에 남는 부분을 잘라냄
+
+	--center|clip_vertical	:위, 아래쪽에 남는 부분을 잘라냄
+
+  --clip_horizontal	:대상 객체의 좌우길이가 여유공간보다 클 경우 남는 부분을 잘라냄
+
+	--right|clip_horizontal	:왼쪽에 남는 부분을 잘라냄
+
+	--left|clip_horizontal:오른쪽에 남는 부분을 잘라냄
+
+	--center|clip_horizontal:좌,우에 남는 부분을 잘라냄
+
+
+2.Relative LayOut
+
+ 1)부모 컨테이너와의 상대적 위치를 이용
+
+ -layout_alignParentTop		:부모의 윗부분에 위치
+
+ -layout_alignParentBottom	:부모의 아랫부분에 위치
+
+ -layout_alignParentLeft	:부모의 왼쪽부분에 위치
+
+ -layout_alignParentRight	:부모의 오른쪽부분에 위치
+
+ -layout_centerHorizontal	:부모의 가로방향의 중앙에 위치
+
+ -layout_centerVertical		:부모의 세로방향의 중앙에 위치
+
+ -layout_centerInParent		:부모의 가로,세로방향의 중앙에 위치
+
+
+ 2)다른 뷰와 상대적 위치
+
+ -layout_above			:지정한 뷰의 위쪽에 위치
+
+ -layout_below			:지정한 뷰의 아래쪽에 위치
+
+ -layout_toLeftOf		:지정한 뷰의 왼쪽에 위치
+
+ -layout_toRightOf		:지정한 뷰의 오른쪽에 위치
+
+ -layout_alignTop		:지정한 뷰와 윗부분을 정렬
+
+ -layout_alingBottom		:지정한 뷰와 아랫부분을 정렬
+
+ -layout_alignLeft		:지정한 뷰와 왼쪽을 정렬
+
+ -layout_alignRight		:지정한 뷰와 오른쪽을 정렬
+
+ -layout_alignBaseline		:지정한 뷰와 텍스트 기준선을 정렬
+
+
+
+3.Table layOut
+
+4.Grid LayOut
+
+ --뷰를 테이블 구조로 나열(TableLayout과 유사)
+ --일정 수만큼 나열되면 자동으로 개행 
+ --가로나, 세로 방향으로 결정(LinearLayout과 유사)
+
+ -orientation		:기본값은 가로
+
+ -columnCount		:가로방향일때 몇개의 뷰를 나열할지 지정
+
+ -rowCount		:세로방향일때 몇개의 뷰를 나열할지 지정
+
+ -layout_column		:뷰가 위치할 열 인덱스 지정
+
+ -layout_row		:뷰가 위치할 행 인덱스 지정
+
+ -layout_rowSpan	:세로 방향으로 하나의 뷰가 차지하려 할 때
+ 
+ -layout_columnSpan	:가로 방향으로 하나의 뷰가 차지 하려 할 때
+
+
+5.Frame LayOut
+
+6.Constraint LayOut
+
+ -bias			:가중치 0.2 -> 20%
+
+ -ScrollView		:화면 벗어나면 스크롤 가능(내부에 하나의 뷰를 선언)
+
+======================================= 알림창 ============================================
+
+1.Toast
+ 잠깐 보였다가 사라지는 다이얼로그
+ makeText(Context context, CharSequence text, duration);
+ makeText(Context context, int resId, duratin);
+
+ setDuration(int duration)	:보여지는 시간
+ setText(int resId)		:
+ setGravity(int gravity,int xOffset,int yOffset)
+ setMargin(float horizontalMargin, float verticalMargin)
+
+
+2.AlertDialog
+
+ Title
+
+ Message
+
+ Button
+
+ 1)Builder 클래스 생성
+ AlertDialog.Builder dig = new AlertDialog.Builder("ContextName.this");
+ 
+ --Title
+ dig.setIcon()		:타이틀에 아이콘
+ dig.setTitle()		:타이틀의 문자열
+ 
+ --Button
+ dig.setPositiveButton(CharSequense text,listener);	맨 우측
+ dig.setNegativeButton(CharSequense text,listener);	중앙
+ dig.setNuteralButton(CharSequense text,listener);	맨 왼쪽
+
+ --Message
+ 1)Text
+  dig.setText();
+
+ 2)문자배열
+  dig.setItems(문자배열,listener);
+
+ 3)문자배열, 선택(checkBox)
+  dig.setmultiChoiceItems(문자배열,boolean배열,listener);
+
+
+================================= 핸드폰 회전시 디자인 =============================
+
+
+
+
+
+
+
+
+
+3.Key Event
+
+ onKeyDown()		:키가 눌린 순간의 이벤트
+
+ onKeyUp()		:키를 떼는 순간의 이벤트
+ 
+ onKeyLongPress()	:키를 오래 누르는 순간의 이벤트
+
+ Key값
+ 
+  KEYCODE_DPAD_LEFT	:왼쪽 화살표
+
+  KEYCODE_DPAD_RIGHT	:오른쪽 화살표
+
+  KEYCODE_DPAD_UP	:위쪽 화살표
+
+  KEYCODE_DPAD_DOWN	:아래쪽 화살표
+
+  KEYCODE_DPAD_CENTER	:중앙 버튼
+
+  KEYCODE_DPAD_CALL	:통화 버튼 
+
+  KEYCODE_END_CALL	:통화 종료 버튼
+
+  KEYCODE_HOME		:홈버튼
+
+  KEYCODE_BACK		:뒤로가기 버튼
+
+  KEYCODE_VOLUME_UP	:음량 증가 버튼
+
+  KEYCODE_VOLUME_DOWN	:음량 감소 버튼
+
+  KEYCODE_0  ...9	:숫자0-9까지의 버튼
+
+  KEYCODE_A  ...Z	:알파벳 A-Z까지의 버튼
+
+
+
+====================================== Intent =======================================
+
+어플끼리의 통신
+
+MainActivity에서 SubActivity 호출
+
+
+ 1)단순 이동
+ -MainActivity
+  Intent intent = new Intent(context, 호출 할 component);
+
+  Intent intent = new Intent(this, SubActivity.class);
+  startActivity(intent);
+
+ 2)이동 시 데이터 추가
+
+  -MainActivity
+   Intent intent = new Intent(context, 호출 할 component);
+   intent.putExtra("키","밸류");		//primitive type, String, 각 [], Parceable
+   intent.putExtra("name","iu");
+   intent.putExtra("age","24");
+   startActivity(intent);
+
+  -SubActivity
+   intent = getIntent();
+   if(intent != null){
+     String name = intent.getStringExtra("name");
+     int age = intent.getIntExtra("age", 0);
+   }
+
+
+ 3)이동시 데이터가 객체타입일때
+  public class MemberDTO implements Serializable {
+    private String name;
+    private int age;
+    ...
+    getter,setter
+  }
+
+  -MainActivity
+   Intent intent = new Intent(context, 호출 할 component);
+   MemberDTO memberDTO = new MemberDTO();
+   --멤버변수 설정
+   intent.putExtra("member",memberDTO);
+   startActivity(intent);
+
+  -SubActivity
+   intent = getIntent();
+   if(intent != null){
+     MemberDTO memberDTO = (MemberDTO)intent.getSerializableExtra("member");
+   }
+
+
+ 4)Parcelable
+
+
+public class MemberDTO implements Parcelable {
+
+    private String name;
+    private int age;
+
+    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
+
+    public MemberDTO() {
+    }
+
+    public MemberDTO(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    protected MemberDTO(Parcel in) {
+        this.name = in.readString();
+        this.age = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeInt(this.age);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MemberDTO> CREATOR = new Creator<MemberDTO>() {
+        @Override
+        public MemberDTO createFromParcel(Parcel source) {
+            return new MemberDTO(source);
+        }
+
+        @Override
+        public MemberDTO[] newArray(int size) {
+            return new MemberDTO[size];
+        }
+    };
+}
+
+
+  -MainActivity
+   Intent intent = new Intent(context, 호출 할 component);
+   MemberDTO memberDTO = new MemberDTO();
+   --멤버변수 설정
+   intent.putExtra("member",memberDTO);
+   startActivity(intent);
+
+
+  -SubActivity
+   MemberDTO memberDTO = intent.getParcelableExtra("member");
+
+        TextView textView = (TextView) findViewById(R.id.t2);
+        textView.append("\n"+ memberDTO.getName());
+        textView.append("\n"+ memberDTO.getAge());
+
+
+
+2.호출 한 곳으로 되돌아가기
+
+ --MainActivity
+  Intentintent = new Intent(this, SubActivity.class);
+  //intent.putExtra(...)
+
+  startActivityForResult(intent, 11);
+
+  @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 11 && resultCode == RESULT_OK) {
+            Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
+        }
+
+
+ --SubActivity
+  Button button = (Button) findViewById(R.id.btn2);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //MainActivity 호출
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();//activity 종료
+            }
+        });
+
+
+=============================== HTTP 웹서버 연결 ============================
+1.AndroidMainfest.xml
+ -퍼미션 수정
+  <uses-permission android:name="android.permission.INTERNET" />
+
+  -기본 연결방식이 https로 되어있기 때문에 http 연결요청이 거부됨
+  -이 문제를 해결하기 위해 다음 추가
+  <application
+	android:usesCleartexttraffic="true">
+
+2.연결 구현
+
+ 1)Thread 직접 구현
+
+
+ 2)AsyncTask
+  a.execute() 메서드로 실행
+  b.onPreExcute() 실행
+  c.doInBackground() 실행
+   -onProgressUpdate()
+  d.onPostExcute()
+
+  onPreExecute			: 연결하기 전 기본 정보를 세팅하는 메서드
+
+  doInBackground(Void,,,void)	: 실제 연결할 때 작동하는 메서드
+
+  onPostExecute  		: 연결이 끝난 후 작업
+
+  --AsyncTask<파라미터1,파라미터2,파라미터3>
+   파라미터1:doInBackground()의 매개변수
+   파라미터2:doInBackground()의 진행중에 사용되는 파라미터로 onProgressUpdate()의 매개변수
+   파라미터3:doInBackground()의 리턴타입이면서 onPostExcute()의 매개변수로 활용
+
+  --젤리빈 이상
+  --excute()는 UI쓰레드에서 직접 호출
+  --멤버메서드들은 수동으로 호출하면 안됨.
+  --한 객체로 한번만 호출가능
+
+
+ 3)Volluy
+  --외부 라이브러리
+  a.gradle 파일에 라이브러리 등록
+
+	RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+        //JsonObjectRequest(메서드 형식, URL주소, RequestListener(null), ResponseListener, ResponseErrorListener)
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, "http://10.0.2.2/s7/maddress/s1", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    System.out.println(response.getString("name"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(request);
+
+ 4)OkHttp
+
+ 5)RetroFit
+
+
+
+
+====================================== ListView ========================================
+
+1.ListVeiw가 들어갈 Layout.xml생성
+
+2.요소의 디자인 xml 생성
+
+3.Adapter 생성
+
+4.Activity 연결
+
+
+====================================== SQLite =================================================
+데이터 타입
+text,varchar		:문자열
+integer, smalint	:정수(4byte, 2byte)
+real,float, double	:실수(4byte, 8byte)
+boolean			:ture 또는 false
+date,time,timestamp	:시간(날짜,시간,날짜+시간)
+blob, binary		:바이너리
+
+DB생성
+SQLiteDatabase sqLiteDatabase = 컨텍스트.openOrCreateDatabase("db이름",모드,null)
+
+DB삭제
+deleteDatabase("데이터베이스명");
+
+테이블 생성
+CREATE TABLE [IF NOT EXISTS(대괄호 빼고 사용)]테이블명 (컬럼명 데이터타입 제약조건)
+
+쿼리실행
+ -insert,update,delete
+  public void execSQL(String sql) throws Exception{}
+
+ -select
+  public Cursor rawSQL(String sql) throws Exception{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

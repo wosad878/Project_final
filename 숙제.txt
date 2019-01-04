@@ -1,0 +1,36 @@
+Name, Job, sal, 연봉은 Ann_Salary, 입사일, 상사의 번호를 출력
+
+급여에 보너스 100을 추가 한것은 Increased Salary
+
+연봉에 보너스 200을 추가 한것은 Increased AnnSalary
+
+사원번호, 이름, 월급
+ 중 급여가 1500 이상인 사람들
+ename, sal, deptno
+급여 1500이상이며 10 30번 부서에 근무
+
+
+
+ENAME, JOB, SAL
+급여가 1500 이상 2500이하,
+
+1) 이름에 두번째 글자가 A 인직원
+
+2) 이름에 3번째 글자가 A 인 직원
+
+id fname lname email pnum hdate jobid sal com manid depid
+
+
+
+로그인폼 페이지
+회원가입 페이지
+게시판 리스트 페이지
+게시판 작성 페이지
+게시판 수정 페이지
+게시판 글보기 페이지
+
+
+
+
+table memo
+num,writer,contents,sysdate

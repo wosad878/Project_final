@@ -10,7 +10,7 @@
     z-index: 9999;
 }
 .inner{
-	width: 1180px;
+	width: 1253px;
 	margin: 0 auto;
 	box-sizing: border-box;
 }
@@ -47,8 +47,10 @@
 	width: 200px;
 	height: 40px;
 	float: right;
+	margin-right: 40px;
 }
 .logoImage{
+	min-width: 1251px;
 	position: relative;
 	z-index:10;
 }

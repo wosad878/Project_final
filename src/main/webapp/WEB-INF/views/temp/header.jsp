@@ -40,7 +40,7 @@
 </div>
 <div class="lnb">
 	<div class="lnb_inner">
-		<ul>
+		<ul class="lnb_inner_ul">
 			<li><a href=""><span>브랜드 스토리</span></a></li>
 			<li><a href=""><span>전체상품</span></a>
 				<ul>

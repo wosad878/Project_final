@@ -1,4 +1,15 @@
 @charset "UTF-8";
+body {
+	margin: 0;
+	padding:0;
+	height: 100%;
+}
+.container{
+	min-height: 100%;
+	position: relative;
+	padding-bottom:448px;
+	box-sizing: border-box;
+}
 .swiper1 {
     width: 100%;
     height: auto;
@@ -17,6 +28,9 @@
 	margin: 0 auto;
 	position: relative;
 	top: -140px;
+	padding-bottom: 548px;
+	box-sizing: border-box;
+	
 }
 .ad1 li{
 	display: inline-block;

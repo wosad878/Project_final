@@ -34,3 +34,54 @@ id fname lname email pnum hdate jobid sal com manid depid
 
 table memo
 num,writer,contents,sysdate
+
+
+
+문서번호 M_1
+문서명 : MemberList
+URL: /member/memberList
+local : /WEB-INF/views/member/memberList.jsp
+
+--------------------------------------------------------
+	페이지 디자인
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

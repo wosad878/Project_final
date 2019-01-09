@@ -2,15 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-<head>
 <link rel="stylesheet" type="text/css" href="<%=pageContext.getServletContext().getContextPath()%>/resources/css/footer.css">
 <script type="text/javascript" src="<%=pageContext.getServletContext().getContextPath()%>/resources/js/footer.js"></script>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div class="footer">
+<div class="footer_inner">
 	<div class="toparea">
 		<div class="toparea_inner">
 			<ul>
@@ -94,5 +88,3 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>

@@ -3,14 +3,15 @@
 	width: 100%;
 	height: 40px;
 	background: white;
-	opacity: 0.8;
+	opacity: 0.9;
 	border-bottom: 1px solid #e8e8e8;
     border-bottom-color: rgba(0,0,0,.09);
     position: fixed;
     z-index: 9999;
 }
 .inner{
-	width: 1253px;
+	width: 63%;
+	min-width:1200px;
 	margin: 0 auto;
 	box-sizing: border-box;
 }
@@ -47,7 +48,10 @@
 	width: 200px;
 	height: 40px;
 	float: right;
-	margin-right: 40px;
+}
+.find {
+	padding:0;
+	
 }
 .logoImage{
 	min-width: 1251px;
@@ -62,7 +66,7 @@
 	position:relative;
 	background-color: white;
 	z-index: 9999;
-	opacity: 0.8;
+	opacity: 0.9;
 	}
 .lnb_inner{
 	width:1251px; 
@@ -78,10 +82,13 @@
 .lnb_inner_ul li{
 	height:inherit;
 	display: inline-block;
-	margin-right: 70px;
+	margin-right: 80px;
 	position: relative;
 	top: 0px;
 	font-size: 13px;
+}
+.lnb_inner_ul li:last-child{
+	margin-right:0;
 }
 .lnb_inner_ul li a{
 	position: relative;

@@ -6,13 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="/WEB-INF/views/temp/link.jsp"></c:import>
-<c:import url="/WEB-INF/views/temp/header.jsp"></c:import>
 <c:import url="/WEB-INF/views/temp/swiperCss.jsp"></c:import>
 <link href="<%=pageContext.getServletContext().getContextPath()%>/resources/css/home.css" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-
+<c:import url="/WEB-INF/views/temp/header.jsp"></c:import>
 <div class="container">
 	<!-- Slider main container -->
 	<div class="swiper-container swiper1">
@@ -83,8 +82,12 @@
 			</ul>
 		</div>
 	</div>
+	
 	<c:import url="/WEB-INF/views/temp/swiperJs.jsp"></c:import>
-	<c:import url="/WEB-INF/views/temp/footer.jsp"></c:import>
+	
 </div>
+<div class="footer">
+		<c:import url="/WEB-INF/views/temp/footer.jsp"></c:import>
+	</div>
 </body>
 </html>

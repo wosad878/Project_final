@@ -102,6 +102,80 @@
 		border:1px solid #e7e7e7;
 		margin-right: 10px;
 	}
+	.adrbutton {
+		padding: 4.5px 0.95em;
+		min-width: 49px;
+	    font-size: 11px;
+	    height: 28px;
+	    line-height: 27px;
+	    font-weight: normal;
+	    border: 1px solid #e3e3e3;
+	}
+	.adrbutton:visited{
+		color:#666;
+	}
+	.adrbutton:hover {
+		color: #666;
+	}
+	.t3 input{
+		width:50px;
+		height: 22px;
+		border:1px solid #e7e7e7;
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+	.t3 input:first-child {
+		width: 80px;
+		margin-left:0;
+	}
+	.allCheck {
+		background-color: #fbfbfb;
+		border: 1px solid #e7e7e7;
+		padding: 15px;
+		border-bottom: 0;
+	}
+	.allCheck strong {
+		font-size: 14px;
+		font-weight: bold;
+		position: relative;
+		top: -7px;
+	}
+	.allCheck input + label {
+		display: inline-block;
+		width: 22px;
+		height: 22px;
+		background-image: url("<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/btn_join_check.png");
+		cursor: pointer;
+		border-radius: 50%;
+	}
+	.allCheck input:checked + label {
+		 background-image: url("<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/btn_join_check_on.png");
+	}
+	.allCheck input{
+		display: none;
+	}
+	.agreearea1{
+		min-width: 1100px;
+		height: 243px;
+		padding: 16px;
+		box-sizing: border-box;
+		background-color: #fbfbfb;
+		border: 1px solid #e7e7e7;
+	}
+	.agree_left {
+		width: 50%;
+		display: inline;
+	}
+	.agree_left h3 {
+		display: inline;
+	}
+	.agree_right {
+		width: 50%;
+		display: inline;
+	}
+	.agree_right h3 {
+		display: inline;
+	}
 </style>
 </head>
 <body>
@@ -163,19 +237,46 @@
 					</tr>
 					<tr>
 						<th>주소 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td></td>
+						<td><input type="text" name="name" readonly="readonly" style="width: 90px;margin-bottom: 5px;">
+							<a class="adrbutton" href=""><i class="fa fa-map-o" aria-hidden="true" style="margin-right:5px;"></i>주소검색</a><br>
+							<input type="text" name="name" readonly="readonly" style="width: 300px;margin-bottom: 5px;"><span>기본주소</span><br>
+							<input type="text" name="name" style="width: 300px;"><span>나머지주소</span></td>
 					</tr>
 					<tr>
 						<th>일반전화</th>
-						<td></td>
+						<td><select style="width:80px;height: 26px;border:1px solid #e7e7e7;margin-right: 10px;">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="017">017</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select>-<input type="tel" style="width:70px;margin-right:10px;margin-left:10px;">-<input type="tel" style="width:70px;margin-right:10px;margin-left:10px;"></td>
 					</tr>
+					
 					<tr>
 						<th>휴대전화 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td></td>
+						<td><select style="width: 80px;height: 26px;border:1px solid #e7e7e7;margin-right: 10px;">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="017">017</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select>-<input type="tel" style="width:70px;margin-right:10px;margin-left:10px;">-<input type="tel" style="width:70px;margin-right:10px;margin-left:10px;"></td>
 					</tr>
 					<tr>
 						<th>이메일 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td></td>
+						<td><input type="tel" style="margin-right:10px;">@
+							<input type="tel" style="margin-right:10px;margin-left:5px;">
+							<select style="width:100px;height: 26px;border:1px solid #e7e7e7;margin-right: 10px;">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="017">017</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select></td>
 					</tr>
 				</table>
 			</form>
@@ -187,12 +288,31 @@
 			<table>
 				<tr>
 					<th>생년월일 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-					<td></td>
+					<td><input class="" type="text" name="">년<input class="" type="text" name="">월<input class="" type="text" name="">일<span style="margin-left: 5px;">( xxxx-xx-xx )</span></td>
 				</tr>
 			</table>
 		
 		</div>
-		
+		<div style="margin-bottom: 5px; height: 20px;"> 
+			<h3 style="float:left;font-size: 13px;font-weight:bold;">전체 동의</h3>
+		</div>
+		<div class="allCheck">
+			<input type="checkbox" id="allcheck"><label for="allcheck"></label>
+			<strong>이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.</strong>
+		</div>
+		<div class="agreearea1">
+			<div class="agree_left">
+				<h3>[필수] 이용약관 동의</h3>	
+				<div></div>
+			</div>
+			<div class="agree_right">
+				<h3>[필수] 개인정보 수집 및 이용 동의</h3>
+				<div></div>
+			</div>
+		</div>
+		<div class="agreearea2">
+			
+		</div>
 	</div>
 </div>
 </body>

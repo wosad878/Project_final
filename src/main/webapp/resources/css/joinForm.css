@@ -85,6 +85,20 @@ html, body{
 	border:1px solid #e7e7e7;
 	margin-right: 10px;
 }
+.idInfo{
+	display:none;
+	height: 30px;
+}
+.idInfo span{
+	position: relative;
+	top: 13px;
+	font-size: 12px;
+	color: red;
+}
+.checkPw{
+	color: red;
+	font-size: 12px;
+}
 .adrbutton {
 	padding: 4.5px 0.95em;
 	min-width: 49px;
@@ -111,19 +125,19 @@ html, body{
 	width: 80px;
 	margin-left:0;
 }
-.allCheck {
+.allCheckArea {
 	background-color: #fbfbfb;
 	border: 1px solid #e7e7e7;
 	padding: 15px;
 	border-bottom: 0;
 }
-.allCheck strong {
+.allCheckArea strong {
 	font-size: 14px;
 	font-weight: bold;
 	position: relative;
 	top: -7px;
 }
-.allCheck input + label {
+.allCheckArea input + label {
 	display: inline-block;
 	width: 22px;
 	height: 22px;
@@ -131,10 +145,10 @@ html, body{
 	cursor: pointer;
 	border-radius: 50%;
 }
-.allCheck input:checked + label {
+.allCheckArea input:checked + label {
 	 background-image: url("/Project_final/resources/images/icon/btn_join_check_on.png");
 }
-.allCheck input{
+.allCheckArea input{
 	display: none;
 }
 .agreearea1{

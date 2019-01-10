@@ -172,10 +172,6 @@
 			});
 		});
 		
-		$('.adrbutton').click(function(){
-			$('adrbutton').removeAttr('href');
-		});
-		
 		$('input:radio[name="member_type1"]').change(function(){
 			var check = $('input:radio[name="member_type1"]:checked').val();
 			if(check == 1){

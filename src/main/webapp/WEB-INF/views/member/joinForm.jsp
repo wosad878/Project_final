@@ -239,7 +239,7 @@
 	});
 	
 	function checkingPw(pw){
-		var pattern = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,16}$");
+		var pattern = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$");
 		var check = pattern.test(pw);
 		var result = 0;
 		if(check){

@@ -27,7 +27,7 @@
 <div class="logoImage">
 	<div class="spot" style="padding-top: 40px;margin:0 auto; width:50%; height: 150px; min-width: 500px;">
 		<div class="spot_inner" style="width: inherit;height: inherit;margin: 0 auto;min-width: 500px;">
-			<a class="logo" href="" style="height: 150px; margin: 0 auto;display: inline-block;"><img class="logoImg" style="padding-top: 25px;box-sizing: border-box;" src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo1.png"></a>
+			<a class="logo" href="/Project_final/index/home" style="height: 150px; margin: 0 auto;display: inline-block;"><img class="logoImg" style="padding-top: 25px;box-sizing: border-box;" src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo1.png"></a>
 		</div>
 	</div>
 </div>

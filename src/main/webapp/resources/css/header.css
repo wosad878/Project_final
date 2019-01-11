@@ -8,6 +8,7 @@
     border-bottom-color: rgba(0,0,0,.09);
     position: fixed;
     z-index: 9999;
+    top:0;
 }
 .inner{
 	width: 63%;

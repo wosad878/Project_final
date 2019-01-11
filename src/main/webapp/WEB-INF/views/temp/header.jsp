@@ -7,7 +7,7 @@
 	<div class="inner">
 		<div class="left">
 			<ul class="header_ul">
-				<li><a href="">로그인</a></li>
+				<li><a href="/Project_final/member/loginForm">로그인</a></li>
 				<li><a href="/Project_final/member/joinForm">회원가입</a></li>
 				<li><a href="">장바구니</a></li>
 				<li><a href="">마이페이지</a></li>
@@ -27,7 +27,7 @@
 <div class="logoImage">
 	<div class="spot" style="padding-top: 40px;margin:0 auto; width:50%; height: 150px; min-width: 500px;">
 		<div class="spot_inner" style="width: inherit;height: inherit;margin: 0 auto;min-width: 500px;">
-			<a class="logo" href="" style="height: 150px; margin: 0 auto;display: inline-block;"><img class="logoImg" style="padding-top: 25px;box-sizing: border-box;" src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo1.png"></a>
+			<a class="logo" href="/Project_final/index/home" style="height: 150px; margin: 0 auto;display: inline-block;"><img class="logoImg" style="padding-top: 25px;box-sizing: border-box;" src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/logo/logo1.png"></a>
 		</div>
 	</div>
 </div>

@@ -152,15 +152,15 @@
 					<p class="info">저희 쇼핑몰을 이용해 주셔서 감사합니다.</p>
 					<ul>
 						<li><strong>아이디</strong>
-							<span class="userId">${member.id}asdfasd</span>
+							<span class="userId">${member.id}</span>
 						</li>
 						<li>
 							<strong>이름</strong>
-							<span class="userName">${member.name}ddeee</span>
+							<span class="userName">${member.name}</span>
 						</li>
 						<li>
 							<strong>이메일</strong>
-							<span class="userEmail">${member.email}qweqwe</span>
+							<span class="userEmail">${member.email}</span>
 						</li>
 					</ul>
 				</div>

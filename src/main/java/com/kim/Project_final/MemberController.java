@@ -21,23 +21,9 @@ public class MemberController {
 	@RequestMapping(value="joinForm")
 	public void joinForm() {}
 	
-	@RequestMapping(value="joinResult",method=RequestMethod.GET)
+	@RequestMapping(value="joinResult",method=RequestMethod.POST)
 	public Model joinForm(MemberDTO memberDTO, Model model) throws Exception {
-//		//member_seq.nextval,#{id},#{password},#{name},#{address},#{tel},
-//		//#{phone},#{email},#{birth},#{smscheck},#{emailcheck},#{membertype}
-//		System.out.println("getId : "+memberDTO.getId());
-//		System.out.println("getPassword : "+memberDTO.getPassword());
-//		System.out.println("getName : "+memberDTO.getName());
-//		System.out.println("getAddress : "+memberDTO.getAddress());
-//		System.out.println("getTel : "+memberDTO.getTel());
-//		System.out.println("getPhone : "+memberDTO.getPhone());
-//		System.out.println("getEmail : "+memberDTO.getEmail());
-//		System.out.println("getBirth : "+memberDTO.getBirth());
-//		System.out.println("getSmscheck : "+memberDTO.getSmscheck());
-//		System.out.println("getEmailcheck : "+memberDTO.getEmailcheck());
-//		System.out.println("getMembertype : "+memberDTO.getMembertype());
-//		int result = memberService.memberJoin(memberDTO);
-		int result = 2;
+		int result = memberService.memberJoin(memberDTO);
 		if(result == 1) {
 			model.addAttribute("member", memberDTO).addAttribute("result", 1);
 		}else {

@@ -17,9 +17,6 @@ public class MemberController {
 	
 	@Inject
 	private MemberService memberService;
-	
-	@RequestMapping(value="loginForm")
-	public void loginForm() {}
 
 	@RequestMapping(value="joinForm")
 	public void joinForm() {}

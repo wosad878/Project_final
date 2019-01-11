@@ -13,54 +13,100 @@
 	$(document).ready(function(){
 		var checkId = false;
 		var checkPw = false;
-		var checkName = false;
-		var checkAddr = false;
-		var checkPhone = false;
-		var checkEmail = false;
-		var checkBirth = false;
-		var checkAgree = false;
+// 		var checkName = false;
+// 		var checkAddr = false;
+// 		var checkPhone = false;
+// 		var checkEmail = false;
+// 		var checkBirth = false;
+// 		var checkAgree = false;
+		var message = "";
+		var flag = false;
 		
 		$('.positive').click(function(){
-			if($('.name').val() != null && $('.name').val() != ""){
-				checkName = true;
-			}else{
-				checkName = false;
+			if(!flag){
+				if(checkId){
+					flag = true;
+				}else{
+					message = "아이디를 확인해 주세요.";
+					flag = false;
+					$('.id').focus();
+				}
 			}
-			if($('#location1').val() != null && $('#location1').val() != ""){
-				checkAddr = true;
-			}else{
-				checkAddr = false;
+			if(flag){
+				if(checkPw){
+					flag = true;
+				}else{
+					message = "비밀번호를 확인해 주세요.";
+					flag = false;
+					$('.password').focus();
+				}
 			}
-			if($('.phone_first').val() != null && $('.phone_first').val() != "" && $('.phone_middle').val() != null && 
-					$('.phone_middle').val() != "" && $('.phone_last').val() != null && $('.phone_last').val() != ""){
-				checkPhone = true;
-			}else{
-				checkPhone = false;
+			if(flag){
+				if($('.name').val() != ""){
+					flag = true;
+				}else{
+					 message = "이름이 입력되지 않았습니다.";
+					 flag = false;
+					 $('.name').focus();
+				}
 			}
-			if($('.email_first').val() != null && $('.email_first').val() != "" && $('.email_last').val() != null && $('.email_last').val() != ""){
-				checkEmail = true;
-			}else{
-				checkEmail = false;
+			if(flag){
+				if($('#location1').val() != "" && $('#location2').val() != ""){
+					$('#address').val($('#location1').val()+"||"+$('#location2').val()+"||"+$("#location3").val());
+					flag = true;
+				}else{
+					message = "주소가 입력되지 않았습니다.";
+					flag = false;
+					$('#location1').focus();
+				}
 			}
-			if($('.year').val() != null && $('.year').val() != "" && $('.month').val() != null && $('.month').val() != "" &&
-					$('.date').val() != null && $('.date').val() != ""){
-				checkBirth = true;
-			}else{
-				checkBirth = false;
+			if(flag){
+				if($('#phone_first').val() != "" && $('.phone_middle').val() != "" && $('.phone_last').val() != ""){
+					$('#phone').val($('.phone_first').val()+"-"+$('.phone_middle').val()+"-"+$('.phone_last').val());
+					flag = true;
+				}else{
+					message = "휴대폰번호를 입력해 주세요.";
+					flag = false;
+					$('.phone_middle').focus();
+				}
 			}
-			if($('#allcheck').is(':checked')){
-				checkAgree = true;
-			}else{
-				checkAgree = false;
+			if(flag){
+				if($('.email_first').val() != "" && $('.email_last').val() !=""){
+					$('#email').val($('.email_first').val()+"@"+$('.email_last').val());
+					flag = true;
+				}else{
+					message = "이메일을 입력해 주세요.";
+					flag = false;
+					$('.email_first').focus();
+				}
 			}
-			alert(checkId);
-			alert(checkPw);
-			alert(checkName);
-			alert(checkAddr);
-			alert(checkPhone);
-			alert(checkEmail);
-			alert(checkBirth);
-			alert(checkAgree);
+			if(flag){
+				if($('.year').val() != "" && $('.month').val() != "" && $('.date').val() != ""){
+					$('#birth').val($('.year').val()+"-"+$('.month').val()+"-"+$('.date').val());
+					flag = true;
+				}else{
+					message = "생년월일을 입력해 주세요.";
+					flag = false;
+					$('.year').focus();
+				}
+			}
+			if(flag){
+				if($('#allcheck').is(':checked')){
+					flag = true;
+				}else{
+				 	message = "약관에 동의하지 않았습니다.";
+					flag = false;
+					$('#allcheck').focus();
+				}
+			}
+			if(flag){
+				if($('.tel_last').val() != ""){
+					$('#tel').val($('.tel_first').val()+"-"+$('.tel_middle').val()+"-"+$('.tel_last').val());
+				}
+				$('#memberData').submit();
+			}else{
+				alert(message);
+			}
 		});
 
 		
@@ -85,7 +131,7 @@
 		    $(this).val($(this).val().replace(/[^0-9]/g,""));
 		});
 		
-		$('#selectEmail').change(function(){
+		$('#selectEmail').blur(function(){
 			var email = $('#selectEmail option:selected').val();
 			
 			if(email != 'etc'){
@@ -98,19 +144,19 @@
 			}
 		});
 		
-		$('#phone_first_select').change(function(){
+		$('#phone_first_select').blur(function(){
 			var phoneNo = $('#phone_first_select option:selected').val();
 			$('.phone_first').val(phoneNo);
 		});
 		
-		$('.tel_first_select').change(function(){
+		$('.tel_first_select').blur(function(){
 			var telNo = $('.tel_first_select option:selected').val();
 			$('.tel_first').val(telNo);
 		});
 		
-		$('.password').change(function(){
+		$('.password').blur(function(){
 			var message = "";
-			if($('.password2').val() != null && $('.password').val() != ""){
+			if($('.password2').val() != null && $('.password2').val() != ""){
 				var pw = $('.password').val();
 				var check = checkingPw(pw);
 				if(check == 1){
@@ -125,11 +171,11 @@
 					message = "비밀번호를 확인 해 주세요.";
 					checkPw = false;
 				}
+				$('.checkPw').html(message);
 			}
-			$('.checkPw').html(message);
 		});
 		
-		$('.password2').change(function(){
+		$('.password2').blur(function(){
 			var message = "";
 			var pw = $('.password2').val();
 			if($('.password2').val() != $('.password').val()){
@@ -148,7 +194,7 @@
 			$('.checkPw').html(message);
 		});
 		
-		$('.id').change(function(){
+		$('.id').blur(function(){
 			var id = $(this).val();
 			$.ajax({
 				url:'/Project_final/ajax/checkId',
@@ -209,9 +255,9 @@
 	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
 							, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		document.getElementById("location1").value = zipNo;
 		document.getElementById("location2").value = roadAddrPart1;
 		document.getElementById("location3").value = addrDetail;
-		document.getElementById("location1").value = zipNo;
 	}
 </script>
 
@@ -219,7 +265,7 @@
 <body>
 <div class="container">
 	<div class="contents">
-		<form action="">
+		<form id="memberData" action="./joinForm" method="post" >
 			<div class="product_name">
 				<div class="page_location">
 					<h6>Home > 회원가입</h6>
@@ -232,7 +278,7 @@
 				<table>
 					<tr>
 						<th>회원구분 <img src="<%=pageContext.getServletContext().getContextPath() %>/resources/images/icon/ico_required.png"></th>
-						<td><input class="member_type" type="radio" name="member_type" checked="checked" value="normal"><label>개인회원</label></td>
+						<td><input class="member_type" type="radio" name="membertype" checked="checked" value="normal"><label>개인회원</label></td>
 					</tr>
 					<tr>
 						<th>회원인증 <img src="<%=pageContext.getServletContext().getContextPath() %>/resources/images/icon/ico_required.png"></th>
@@ -280,7 +326,8 @@
 						<td><input id="location1" type="text" name="zip" readonly="readonly" style="width: 90px;margin-bottom: 5px;">
 							<a class="adrbutton" onclick="goPopup()" style="cursor:pointer;"><i class="fa fa-map-o" aria-hidden="true" style=" margin-right:5px;"></i>주소검색</a><br>
 							<input id="location2" type="text" name="road" readonly="readonly" style="width: 300px;margin-bottom: 5px;"><span>기본주소</span><br>
-							<input id="location3" type="text" name="detail" style="width: 300px;"><span>나머지주소</span></td>
+							<input id="location3" type="text" name="detail" style="width: 300px;"><span>나머지주소</span>
+							<input id="address" type="hidden" name ="address"></td>
 					</tr>
 					<tr>
 						<th>일반전화</th>
@@ -316,9 +363,10 @@
 								<option value="018">018</option>
 								<option value="019">019</option>
 							</select>-
-							<input class="tel_first" name="tel_first" type="hidden">
+							<input class="tel_first" name="tel_first" type="hidden" value="02">
 							<input class="tel_middle" numberOnly name ="tel_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
-							<input class="tel_last" numberOnly name ="tel_last" type="text" style="width:70px;margin-left:5px;"></td>
+							<input class="tel_last" numberOnly name ="tel_last" type="text" style="width:70px;margin-left:5px;">
+							<input id="tel" type="hidden" name ="tel"></td>
 					</tr>
 					<tr>
 						<th>휴대전화 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
@@ -332,12 +380,14 @@
 							</select>-
 								<input class="phone_first" name="phone_first" type="hidden" value="010">
 								<input class="phone_middle" numberOnly name="phone_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
-								<input class="phone_last" numberOnly name="phone_last" type="text" style="width:70px;margin-left:5px;"></td>
+								<input class="phone_last" numberOnly name="phone_last" type="text" style="width:70px;margin-left:5px;">
+								<input id="phone" type="hidden" name ="phone"></td>
 					</tr>
 					<tr>
 						<th>이메일 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
 						<td><input class="email_first" name="email_first" type="text" style="margin-right:10px;">@
 							<input class="email_last" name="email_last" type="text" readonly="readonly" style="margin-right:10px;margin-left:5px;">
+							<input id="email" type="hidden" name ="email">
 							<select id="selectEmail" style="width:120px;height: 26px;border:1px solid #e7e7e7;margin-right: 10px;">
 								<option value="" selected="selected">- 이메일 선택 -</option>
 								<option value="naver.com">naver.com</option>
@@ -364,6 +414,7 @@
 						<td><input class="year" numberOnly name="year" type="text" name="">년
 							<input class="month" numberOnly name="month" type="text" name="">월
 							<input class="date" numberOnly name="date" type="text" name="">일
+							<input id="birth" type="hidden" name ="birth">
 							<span style="margin-left: 5px;">( xxxx-xx-xx )</span></td>
 					</tr>
 				</table>

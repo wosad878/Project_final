@@ -260,6 +260,7 @@ html, body{
 	padding: 10.5px 38px;
 	border-radius: 5px;
 	background: #363636;
+	cursor: pointer;
 }
 .positive span {
 	margin-left: 5px;
@@ -275,6 +276,7 @@ html, body{
 	padding: 10.5px 59.5px;
 	border-radius: 5px;
 	background: #9b9b9b;
+	cursor: pointer;
 }
 .negative span {
 	color: white;

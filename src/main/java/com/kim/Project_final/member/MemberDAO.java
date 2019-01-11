@@ -12,7 +12,7 @@ public class MemberDAO {
 	private SqlSession session;
 	private final String NAMESPACE = "memberMapper.";
 	
-	public void memberJoin(MemberDTO memberDTO) {
-		session.insert(NAMESPACE+"insert",memberDTO);
+	public int memberJoin(MemberDTO memberDTO) {
+		return session.insert(NAMESPACE+"insert",memberDTO);
 	}
 }

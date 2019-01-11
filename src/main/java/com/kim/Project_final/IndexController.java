@@ -9,5 +9,6 @@ public class IndexController {
 
 	@RequestMapping("home")
 	public void index() {}
+	
 }
 

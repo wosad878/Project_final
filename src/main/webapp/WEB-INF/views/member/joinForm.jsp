@@ -13,12 +13,6 @@
 	$(document).ready(function(){
 		var checkId = false;
 		var checkPw = false;
-// 		var checkName = false;
-// 		var checkAddr = false;
-// 		var checkPhone = false;
-// 		var checkEmail = false;
-// 		var checkBirth = false;
-// 		var checkAgree = false;
 		var message = "";
 		var flag = false;
 		
@@ -100,16 +94,29 @@
 				}
 			}
 			if(flag){
-				if($('.tel_last').val() != ""){
+				if($('.tel_last').val() != "" && $('.tel_middle').val() != ""){
 					$('#tel').val($('.tel_first').val()+"-"+$('.tel_middle').val()+"-"+$('.tel_last').val());
+				}else{
+					$('#tel').val("0");
 				}
+				
+				if($('#smscheck').is(':checked')){
+					$('#smscheck1').val('check');
+				}else{
+					$('#smscheck1').val('notCheck');
+				}
+				
+				if($('#emailcheck').is(':checked')){
+					$('#emailcheck1').val('check');
+				}else{
+					$('#emailcheck1').val('notCheck');
+				}
+				
 				$('#memberData').submit();
 			}else{
 				alert(message);
 			}
 		});
-
-		
 		
 		$('.checkE').click(function(){
 			if($('.agree1').is(':checked') && $('.agree2').is(':checked')){
@@ -265,7 +272,7 @@
 <body>
 <div class="container">
 	<div class="contents">
-		<form id="memberData" action="./joinForm" method="post" >
+		<form id="memberData" action="./joinResult" method="post" >
 			<div class="product_name">
 				<div class="page_location">
 					<h6>Home > 회원가입</h6>
@@ -451,8 +458,10 @@
 				<div class="content">
 					<c:import url="/WEB-INF/views/text/agree3.jsp" />
 				</div>
-				<span>SMS 수신을 동의하십니까? </span> <input id="smscheck" class="smscheck" name="smscheck" type="checkbox" value="check"/><label for="smscheck">동의함</label><br>
-				<span>이메일 수신을 동의하십니까?</span> <input id="emailcheck" class="emailcheck" name="emailcheck" type="checkbox"  value="check"/><label for="emailcheck">동의함</label>
+				<span>SMS 수신을 동의하십니까? </span> <input id="smscheck" class="smscheck" type="checkbox"/><label for="smscheck">동의함</label><br>
+				<input id="smscheck1" type="hidden" name="smscheck">
+				<span>이메일 수신을 동의하십니까?</span> <input id="emailcheck" class="emailcheck" type="checkbox"/><label for="emailcheck">동의함</label>
+				<input id="emailcheck1" type="hidden" name="emailcheck">
 			</div>
 			<div class="selectButton">
 				<a class="positive"><i class="fa fa-check" aria-hidden="true"></i><span>회원가입</span></a>

@@ -9,4 +9,8 @@ public class MemberService {
 
 	@Inject
 	private MemberDAO memberDAO;
+	
+	public int memberJoin(MemberDTO memberDTO) throws Exception {
+		return memberDAO.memberJoin(memberDTO);
+	}
 }

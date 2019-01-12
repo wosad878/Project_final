@@ -16,7 +16,7 @@
 	margin: 0 auto;
 	box-sizing: border-box;
 }
-.left{
+.innerleft{
 	width: 50%;
 	padding-top: 0px;
 	float: left;
@@ -26,26 +26,29 @@
 }
 .header_ul{
 	height: inherit;
+	display: table;
+	width: 780px;
 }
 .header_ul li{
 	display: inline-block;
 	height: inherit;
 	box-sizing: border-box;
 	position:relative;
+	line-height: 20px;
 	top: 10px;
 }
 .header_ul li a{
 	padding: 0 10px 0 0;
 	font-size: 12px;
 }
-.right{
+.innerright{
 	width: 300px;
 	height:40px;
 	padding-top: 10px;
 	box-sizing: border-box;
 	float: right;
 }
-.right form{
+.innerright form{
 	width: 200px;
 	height: 40px;
 	float: right;

@@ -431,7 +431,7 @@
 			</div>
 			<div class="allCheckArea">
 				<input type="checkbox" id="allcheck" name="allcheck"><label for="allcheck"></label>
-				<strong>이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.</strong>
+				<strong>이용약관 및 개인정보수집 및 이용에 모두 동의합니다.</strong>
 			</div>
 			<div class="agreearea1">
 				<div class="agree_left">

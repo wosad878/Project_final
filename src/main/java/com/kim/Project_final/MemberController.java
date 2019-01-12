@@ -21,8 +21,11 @@ public class MemberController {
 	@RequestMapping(value="joinForm")
 	public void joinForm() {}
 	
+	@RequestMapping(value="joinResult")
+	public void joinResult() {}
+	
 	@RequestMapping(value="joinResult",method=RequestMethod.POST)
-	public Model joinForm(MemberDTO memberDTO, Model model) throws Exception {
+	public Model joinResult(MemberDTO memberDTO, Model model) throws Exception {
 		int result = memberService.memberJoin(memberDTO);
 		if(result == 1) {
 			model.addAttribute("member", memberDTO).addAttribute("result", 1);
@@ -31,4 +34,7 @@ public class MemberController {
 		}
 		return model;
 	}
+	
+	@RequestMapping(value="loginForm")
+	public void loginForm() {}
 }

@@ -28,8 +28,8 @@
 	    <div class="swiper-pagination"></div>
 	
 	    <!-- If we need navigation buttons -->
-	    <div class="swiper-button-prev"></div>
-	    <div class="swiper-button-next"></div>
+	    <div class="swiper-button-prev" style="top:410px;"></div>
+	    <div class="swiper-button-next" style="top:410px;"></div>
 	
 	    <!-- If we need scrollbar -->
 	</div>
@@ -83,9 +83,7 @@
 			</ul>
 		</div>
 	</div>
-	
 	<c:import url="/WEB-INF/views/temp/swiperJs.jsp"></c:import>
-	
 </div>
 <div class="footer">
 		<c:import url="/WEB-INF/views/temp/footer.jsp"></c:import>

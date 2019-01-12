@@ -10,11 +10,7 @@
 <c:import url="/WEB-INF/views/temp/header.jsp"/>
 
 <script type="text/javascript">
-	$(function(){
-		$('.mainButton').click(function(){
-			location.href="/Project_final/index/home";
-		});
-	});
+
 </script>
 
 <style type="text/css">
@@ -131,6 +127,7 @@
 	font-weight:bold;
 	font-size: 12px;
 }
+
 </style>
 </head>
 <body>
@@ -165,8 +162,8 @@
 					</ul>
 				</div>
 				<div class="selectButton">
-					<a class="loginButton"><span>로그인</span></a>
-					<a class="mainButton"><span>메인화면</span></a>
+					<a class="loginButton" href="/Project_final/member/loginForm"><span>로그인</span></a>
+					<a class="mainButton" href="/Project_final/index/home"><span>메인화면</span></a>
 				</div>
 			</div>
 		</div>

@@ -15,4 +15,12 @@ public class MemberDAO {
 	public int memberJoin(MemberDTO memberDTO) {
 		return session.insert(NAMESPACE+"insert",memberDTO);
 	}
+	
+	public MemberDTO memberLogin(MemberDTO memberDTO) throws Exception {
+		return session.selectOne(NAMESPACE+"memberLogin", memberDTO);
+	}
+	
+	public int memberUpdate(MemberDTO memberDTO) throws Exception {
+		return session.update(NAMESPACE+"memberUpdate", memberDTO);
+	}
 }

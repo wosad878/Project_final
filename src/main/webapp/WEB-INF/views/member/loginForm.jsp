@@ -11,22 +11,35 @@
 
 <script type="text/javascript">
 	$(function(){
-		$('.loginButton').click(function(){
-			var check = false;
-			var message = "";
-			if($('#id').val() != "" && $('#password').val() != ""){
-				$('#logincheck').submit();
-			}else{
-				if($('#id').val() == "") {
-					message = "아이디 항목은 필수 입력값입니다.";
-				}else if($('#password').val() == "") {
-					message = "패스워드 항목은 필수 입력값입니다.";
-				}
-				alert(message);
-			}
-		});
 		
+		$('.loginButton').click(function(){
+			check();
+		});
+		if('${message}' != ""){
+			alert('${message}');
+		}
 	});
+	
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+             check();
+        }
+	}
+
+	function check(){
+		var check = false;
+		var message = "";
+		if($('#id').val() != "" && $('#password').val() != ""){
+			$('#logincheck').submit();
+		}else{
+			if($('#id').val() == "") {
+				message = "아이디 항목은 필수 입력값입니다.";
+			}else if($('#password').val() == "") {
+				message = "패스워드 항목은 필수 입력값입니다.";
+			}
+			alert(message);
+		}
+	}
 </script>
 
 <style type="text/css">
@@ -159,6 +172,9 @@
 .loginButton:visited {
 	color:#fff;
 }
+.loginButton:link {
+	color:#fff;
+}
 .findmember{
 	overflow: hidden;
     padding: 13px 0 12px;
@@ -186,7 +202,12 @@
     font-weight: 500;
     letter-spacing: 1px;
 }
-.joinButton:visited{color:#fff;}
+.joinButton:link {
+	color:#fff;
+}
+.joinButton:visited{
+	color:#fff;
+}
 
 </style>
 </head>
@@ -207,14 +228,14 @@
 					<h3>MEMBER LOGIN</h3>
 				</div>
 				<div class="loginInner">
-					<form id="logincheck" action="./loginForm" method="post">
+					<form id="logincheck" action="./loginForm" method="post" onkeyup="enterkey()">
 						<div class="idbox">
 							<span>ID</span>
 							<input id="id" type="text" name="id">
 						</div>
 						<div class="pwbox">
 							<span>PASSWORD</span>
-							<input id="password" type="text" name="password">
+							<input id="password" type="password" name="password">
 						</div>
 					</form>
 					<div class="seq">

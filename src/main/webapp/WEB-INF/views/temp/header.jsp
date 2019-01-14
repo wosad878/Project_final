@@ -7,8 +7,17 @@
 	<div class="inner">
 		<div class="innerleft">
 			<ul class="header_ul">
-				<li><a href="/Project_final/member/loginForm">로그인</a></li>
-				<li><a href="/Project_final/member/joinForm">회원가입</a></li>
+				<c:choose>
+					<c:when test="${member ne null}">
+						<li><a href="/Project_final/member/logout">로그아웃</a></li>
+						<li><a href="/Project_final/member/updateForm">정보수정</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/Project_final/member/loginForm">로그인</a></li>
+						<li><a href="/Project_final/member/joinForm">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
+				
 				<li><a href="">장바구니</a></li>
 				<li><a href="">마이페이지</a></li>
 				<li><a href="">커뮤니티</a></li>

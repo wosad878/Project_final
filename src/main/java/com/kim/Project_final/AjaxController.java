@@ -24,7 +24,6 @@ public class AjaxController {
 	
 	public int checkId(String id) throws Exception {
 		String memberId = "";
-		System.out.println(id);
 		String pattern = "^(?=.*?[a-z])(?=.*[0-9])[a-z0-9]{4,16}$";
 		boolean b = Pattern.matches(pattern, id);
 		int result = 3;

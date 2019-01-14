@@ -1,0 +1,290 @@
+@charset "UTF-8";
+html, body{
+	height: 100%;
+}
+.container {
+	position:relative;
+	min-height: 100%;
+}
+.contents{
+	margin: 0 auto 50px auto;
+	min-width: 1100px;
+	max-width: 1200px;
+	min-height: 100%;
+}
+.product_name{
+	height: 60px;
+}
+.page_location{
+	height: 30px;
+}
+.page_location h6{
+	font-size: 11px;
+	float:right;
+	color: #757575;
+	padding-top: 10px;
+	box-sizing: border-box;
+}
+.name_inner{
+	height: 30px;
+}	
+.pro_name{
+	font-weight:bold;
+	box-sizing: border-box;
+	padding-top: 10px;
+}
+.typeWrite{
+	margin-top: 30px;
+	font-size: 11px;
+}
+.typeWrite table {
+	width: 100%;
+	border: 1px solid #e7e7e7;
+    border-bottom-width: 0;
+    color: #353535;
+    margin-bottom: 40px;
+}
+.typeWrite table th{
+	width: 151px;
+    padding: 12px 0 11px 18px;
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+    background-color: #fbfbfb;
+    border-right:1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+.typeWrite table td{
+	text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+	background-color: white; 
+	padding: 12px 10px 11px;
+	border-right:1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+.typeWrite table td label {
+	position:relative;
+	top:-3px;
+}
+.member_type1_inner{
+	margin: 10px 0 0 5px;
+}
+.phone_inner a {
+	
+}
+.phone_inner a img{
+	display: block;
+	margin-bottom: 10px;
+}
+.email_inner{
+	display: none;
+}
+.t2 input{
+	height: 22px;
+	border:1px solid #e7e7e7;
+	margin-right: 10px;
+}
+.idInfo{
+	display:none;
+	height: 30px;
+}
+.idInfo span{
+	position: relative;
+	top: 13px;
+	font-size: 12px;
+	color: red;
+}
+.checkPw{
+	color: red;
+	font-size: 12px;
+}
+.adrbutton {
+	padding: 4.5px 0.95em;
+	min-width: 49px;
+    font-size: 11px;
+    height: 28px;
+    line-height: 27px;
+    font-weight: normal;
+    border: 1px solid #e3e3e3;
+}
+.adrbutton:visited{
+	color:#666;
+}
+.adrbutton:hover {
+	color: #666;
+}
+.t3 input{
+	width:50px;
+	height: 22px;
+	border:1px solid #e7e7e7;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.t3 input:first-child {
+	width: 80px;
+	margin-left:0;
+}
+.allCheckArea {
+	background-color: #fbfbfb;
+	border: 1px solid #e7e7e7;
+	padding: 15px;
+	border-bottom: 0;
+}
+.allCheckArea strong {
+	font-size: 14px;
+	font-weight: bold;
+	position: relative;
+	top: -7px;
+}
+.allCheckArea input + label {
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	background-image: url("/Project_final/resources/images/icon/btn_join_check.png");
+	cursor: pointer;
+	border-radius: 50%;
+}
+.allCheckArea input:checked + label {
+	 background-image: url("/Project_final/resources/images/icon/btn_join_check_on.png");
+}
+.allCheckArea input{
+	display: none;
+}
+.agreearea1{
+	min-width: 1100px;
+	height: 243px;
+	padding: 16px;
+	box-sizing: border-box;
+	background-color: #fbfbfb;
+	border: 1px solid #e7e7e7;
+	border-bottom: 0;
+}
+.agreearea1 h3 {
+	font-size: 12px;
+	font-weight: bold;
+}
+.agreearea1 span {
+	font-size: 12px;
+}
+.agreearea1 input {
+	position: relative;
+	top:3px;
+	margin-left: 20px;
+}
+.agreearea1 label {
+	font-size: 12px;
+	font-weight: bold;
+	position: relative;
+
+}
+.agree_left {
+	width: 49%;
+	display: inline-block;
+	float: left;
+}
+.agree_left h3 {
+	display: inline;
+}
+.agree_right {
+	width: 49%;
+	display: inline-block;
+	float: right;
+}
+.agree_right h3 {
+	display: inline;
+}
+.content{
+	width: 100%;
+	display: inline-block;
+	height: 152px;
+	min-width: 523px;
+	background-color: white;
+	border: 1px solid #e7e7e7;
+	padding: 20px;
+	box-sizing: border-box;
+	margin-top: 20px;
+	
+	overflow: auto;
+}
+.content p {
+	color: #747474;
+   	line-height: 20px;
+   	font-size: 13px;
+}
+.agreeCheck {
+	font-size: 12px;
+}
+.agreearea2 {
+	min-width: 1100px;
+	height: 263px;
+	padding: 16px;
+	box-sizing: border-box;
+	background-color: #fbfbfb;
+	border: 1px solid #e7e7e7;
+}
+.agreearea2 h3 {
+	font-size: 12px;
+	font-weight: bold;
+}
+.agreearea2 span {
+	font-size: 12px;
+}
+.agreearea2 label {
+	font-size: 12px;
+	font-weight: bold;
+	position: relative;
+}
+.agreearea2 .content p {
+	padding-bottom: 18px;
+
+}
+.smscheck {
+	position: relative;
+	top:5px;
+}
+.emailcheck{
+	position: relative;
+	top:5px;
+}
+.selectButton {
+	width: 350px;
+	height: 44px;
+	margin: 60px auto 70px auto;
+}
+.positive {
+	width: 151px;
+	height: 44px;
+	padding: 10.5px 38px;
+	border-radius: 5px;
+	background: #363636;
+	cursor: pointer;
+}
+.positive span {
+	margin-left: 5px;
+}
+.positive span, .positive i {
+	color: white;
+	font-weight:bold;
+	font-size: 12px;
+}
+.negative {
+	width: 151px;
+	height: 44px;
+	padding: 10.5px 59.5px;
+	border-radius: 5px;
+	background: #9b9b9b;
+	cursor: pointer;
+}
+.negative span {
+	color: white;
+	font-weight:bold;
+	font-size: 12px;
+}
+input {
+	padding-left: 10px;
+	box-sizing: border-box;
+}
+select option {
+	font-size: 13px;
+}

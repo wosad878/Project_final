@@ -11,4 +11,14 @@
   			#{phone},#{email},#{birth},#{smscheck},#{emailcheck},#{membertype}
   		)
   	</insert>
+  	<select id="memberLogin" resultType="MemberDTO" parameterType="MemberDTO">
+  		select num, id, name, address, tel, phone, email, birth, membertype,
+  		 smscheck, emailcheck from member
+  		 where id=#{id} and password=#{password}
+  	</select>
+  	<update id="memberUpdate" parameterType="MemberDTO">
+  		update member set password=#{password},address=#{address},tel=#{tel},phone=#{phone},
+  		email=#{email},birth=#{birth},smscheck=#{smscheck},emailcheck=#{emailcheck}
+  		where id = #{id}
+  	</update>
   </mapper>

@@ -6,21 +6,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="/WEB-INF/views/temp/link.jsp"/>
-<c:import url="/WEB-INF/views/temp/header.jsp"/>
-<link href="<%=pageContext.getServletContext().getContextPath()%>/resources/css/joinForm.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="<%=pageContext.getServletContext().getContextPath()%>/resources/js/joinForm.js"></script>
+<c:import url="/WEB-INF/views/temp/link.jsp" />
+<c:import url="/WEB-INF/views/temp/header.jsp" />
+<link href="<%=pageContext.getServletContext().getContextPath()%>/resources/css/updateForm.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="<%=pageContext.getServletContext().getContextPath()%>/resources/js/updateForm.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		if('${message}' != ""){
+			alert('${message}');
+		}
+		
+		$(".tel_first_select option[value='${tel[0]}']").attr('selected','ture');
+		$("#phone_first_select option[value='${phone[0]}']").attr('selected','ture');
+		$("#selectEmail option[value='${email[1]}']").attr('selected','ture');
+		
+		if('${member.smscheck}' =="check"){
+			$("#smscheckOn").attr('checked','true');
+		}else{
+			$("#smscheckOff").attr('checked','true');
+		}
+		if('${member.emailcheck}' =="check"){
+			$("#emailcheckOn").attr('checked','true');
+		}else{
+			$("#emailcheckOff").attr('checked','true');
+		}
+	});
+</script>
 </head>
 <body>
 <div class="container">
 	<div class="contents">
-		<form id="memberData" action="./joinResult" method="post" >
+		<form id="memberData" action="./updateForm" method="post" >
 			<div class="product_name">
 				<div class="page_location">
-					<h6>Home > 회원가입</h6>
+					<h6>Home > My Profile</h6>
 				</div>
 				<div class="name_inner">
-					<h3 class="pro_name">회원가입</h3>
+					<h3 class="pro_name">내 프로필</h3>
 				</div>
 			</div>
 			<div class="typeWrite t1">
@@ -54,7 +77,7 @@
 				<table>
 					<tr>
 						<th>아이디 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td><input class="id" type="text" name="id" style="width: 134px;"><span>(영문소문자/숫자, 4~16자)</span>
+						<td><input class="id" type="text" name="id" style="width: 134px;" value="${member.id}" readonly="readonly"><span>(영문소문자/숫자, 4~16자)</span>
 							<div class="idInfo"><span></span></div></td>
 						
 					</tr>
@@ -68,14 +91,14 @@
 					</tr>
 					<tr>
 						<th>이름 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td><input class="name" type="text" name="name" style="width: 134px;"></td>
+						<td><input class="name" type="text" name="name" style="width: 134px;" readonly="readonly" value="${member.name}"></td>
 					</tr>
 					<tr>
 						<th>주소 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td><input id="location1" type="text" name="zip" readonly="readonly" style="width: 90px;margin-bottom: 5px;">
+						<td><input id="location1" type="text" name="zip" readonly="readonly" style="width: 90px;margin-bottom: 5px;" value="${addr[0]}">
 							<a class="adrbutton" onclick="goPopup()" style="cursor:pointer;"><i class="fa fa-map-o" aria-hidden="true" style=" margin-right:5px;"></i>주소검색</a><br>
-							<input id="location2" type="text" name="road" readonly="readonly" style="width: 300px;margin-bottom: 5px;"><span>기본주소</span><br>
-							<input id="location3" type="text" name="detail" style="width: 300px;"><span>나머지주소</span>
+							<input id="location2" type="text" name="road" readonly="readonly" style="width: 300px;margin-bottom: 5px;" value="${addr[1]}"><span>기본주소</span><br>
+							<input id="location3" type="text" name="detail" style="width: 300px;" value="${addr[2]}"><span>나머지주소</span>
 							<input id="address" type="hidden" name ="address"></td>
 					</tr>
 					<tr>
@@ -112,9 +135,9 @@
 								<option value="018">018</option>
 								<option value="019">019</option>
 							</select>-
-							<input class="tel_first" name="tel_first" type="hidden" value="02">
-							<input class="tel_middle" numberOnly name ="tel_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
-							<input class="tel_last" numberOnly name ="tel_last" type="text" style="width:70px;margin-left:5px;">
+							<input class="tel_first" name="tel_first" type="hidden" value="${tel[0]}">
+							<input class="tel_middle" numberOnly name ="tel_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;" value="${tel[1]}">-
+							<input class="tel_last" numberOnly name ="tel_last" type="text" style="width:70px;margin-left:5px;" value="${tel[2]}">
 							<input id="tel" type="hidden" name ="tel"></td>
 					</tr>
 					<tr>
@@ -127,15 +150,22 @@
 								<option value="018">018</option>
 								<option value="019">019</option>
 							</select>-
-								<input class="phone_first" name="phone_first" type="hidden" value="010">
-								<input class="phone_middle" numberOnly name="phone_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
-								<input class="phone_last" numberOnly name="phone_last" type="text" style="width:70px;margin-left:5px;">
+								<input class="phone_first" name="phone_first" type="hidden" value="${phone[1]}">
+								<input class="phone_middle" numberOnly name="phone_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;" value="${phone[1]}">-
+								<input class="phone_last" numberOnly name="phone_last" type="text" style="width:70px;margin-left:5px;" value="${phone[2]}">
 								<input id="phone" type="hidden" name ="phone"></td>
 					</tr>
 					<tr>
+						<th>SMS 수신여부 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
+						<td><input id="smscheckOn" class="smscheck" type="radio" name="smscheck1" value="check"/><label for="smscheckOn">수신함</label>
+							<input id="smscheckOff" class="smscheck" type="radio" name="smscheck1" value="notCheck"/><label for="smscheckOff">수신안함</label>
+							<input id="smscheck1" type="hidden" name="smscheck">
+							<br><span style="display:inline-block;margin-top:10px;">쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</span></td>
+					</tr>
+					<tr>
 						<th>이메일 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td><input class="email_first" name="email_first" type="text" style="margin-right:10px;">@
-							<input class="email_last" name="email_last" type="text" readonly="readonly" style="margin-right:10px;margin-left:5px;">
+						<td><input class="email_first" name="email_first" type="text" style="margin-right:10px;" value="${email[0]}">@
+							<input class="email_last" name="email_last" type="text" readonly="readonly" style="margin-right:10px;margin-left:5px;" value="${email[1]}">
 							<input id="email" type="hidden" name ="email">
 							<select id="selectEmail" style="width:120px;height: 26px;border:1px solid #e7e7e7;margin-right: 10px;">
 								<option value="" selected="selected">- 이메일 선택 -</option>
@@ -151,6 +181,13 @@
 								<option value="etc">직접입력</option>
 							</select></td>
 					</tr>
+					<tr>
+						<th>이메일 수신여부 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
+						<td><input id="emailcheckOn" class="emailcheck" type="radio" name="emailcheck1" value="check"/><label for="emailcheckOn">수신함</label>
+							<input id="emailcheckOff" class="emailcheck" type="radio" name="emailcheck1" value="notCheck"/><label for="emailcheckOff">수신안함</label>
+							<input id="emailcheck1" type="hidden" name="emailcheck">
+							<br><span style="display:inline-block;margin-top:10px;">쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</span></td>
+					</tr>
 				</table>
 			</div>
 			<div style="margin-bottom: 5px; height: 20px;"> 
@@ -160,53 +197,16 @@
 				<table>
 					<tr>
 						<th>생년월일 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td><input class="year" numberOnly name="year" type="text" name="">년
-							<input class="month" numberOnly name="month" type="text" name="">월
-							<input class="date" numberOnly name="date" type="text" name="">일
+						<td><input class="year" numberOnly name="year" type="text" value="${birth[0]}">년
+							<input class="month" numberOnly name="month" type="text" value="${birth[1]}">월
+							<input class="date" numberOnly name="date" type="text" value="${birth[2]}">일
 							<input id="birth" type="hidden" name ="birth">
 							<span style="margin-left: 5px;">( xxxx-xx-xx )</span></td>
 					</tr>
 				</table>
 			</div>
-			<div style="margin-bottom: 5px; height: 20px;"> 
-				<h3 style="float:left;font-size: 13px;font-weight:bold;">전체 동의</h3>
-			</div>
-			<div class="allCheckArea">
-				<input type="checkbox" id="allcheck" name="allcheck"><label for="allcheck"></label>
-				<strong>이용약관 및 개인정보수집 및 이용에 모두 동의합니다.</strong>
-			</div>
-			<div class="agreearea1">
-				<div class="agree_left">
-					<h3>[필수] 이용약관 동의</h3>
-					<div class="content">
-						<c:import url="/WEB-INF/views/text/agree1.jsp" />
-					</div>
-					<p class="agreeCheck">
-						<span>이용약관에 동의하십니까?</span> <input id="agreem1" class="agree1 checkE" name="agree1" type="checkbox" /><label for="agreem1">동의함</label>
-					</p>
-				</div>
-				<div class="agree_right">
-					<h3>[필수] 개인정보 수집 및 이용 동의</h3>
-					<div class="content">
-						<c:import url="/WEB-INF/views/text/agree2.jsp" />
-					</div>
-					<p class="agreeCheck">
-						<span>개인정보 수집 및 이용에 동의하십니까?</span> <input id="agreem2" class="agree2 checkE" name="agree2" type="checkbox" /><label for="agreem2">동의함</label>
-					</p>
-				</div>
-			</div>
-			<div class="agreearea2">
-				<h3>[선택] 쇼핑정보 수신 동의</h3>
-				<div class="content">
-					<c:import url="/WEB-INF/views/text/agree3.jsp" />
-				</div>
-				<span>SMS 수신을 동의하십니까? </span> <input id="smscheck" class="smscheck" type="checkbox"/><label for="smscheck">동의함</label><br>
-				<input id="smscheck1" type="hidden" name="smscheck">
-				<span>이메일 수신을 동의하십니까?</span> <input id="emailcheck" class="emailcheck" type="checkbox"/><label for="emailcheck">동의함</label>
-				<input id="emailcheck1" type="hidden" name="emailcheck">
-			</div>
 			<div class="selectButton">
-				<a class="positive"><i class="fa fa-check" aria-hidden="true"></i><span>회원가입</span></a>
+				<a class="positive"><i class="fa fa-check" aria-hidden="true"></i><span>회원정보수정</span></a>
 				<a class="negative"><span>취소</span></a>
 			</div>
 		</form>

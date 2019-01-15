@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="productMapper">
+		<select id="totalCount" resultType="java.lang.Integer" parameterType="Pager">
+			select count(num) from product where name like '%'||#{search}||'%'
+		</select>
+		
+		<select id="searchList" resultType="ProductDTO" parameterType="Pager">
+			select * from(
+				select rownum R, p.*, i.fname, i.oname, i.step from (
+					select * from product where name like '%'||#{search}||'%'
+				)p join p_img i on p.name = i.name
+			) where R between #{startRow} and #{lastRow}
+		</select>
+		<select id="selectList" resultType="ProductDTO" parameterType="Pager">
+			select * from(
+				select rownum R, p.*, i.fname, i.oname, i.step from (
+					select * from product where category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%'
+				)p join p_img i on p.name = i.name
+			) where R between #{startRow} and #{lastRow}
+		</select>
+		
+	</mapper>

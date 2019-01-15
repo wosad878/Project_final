@@ -13,7 +13,7 @@
 	.contents{
 		margin: 0 auto;
 		min-width: 1100px;
-		max-width: 1200px;
+		max-width: 1280px;
 	}
 	.product_name{
 		height: 60px;
@@ -60,6 +60,10 @@
 	    font-size: 12px;
 	    color: #444;
 	}
+	.product_list{
+		margin-bottom: 40px;
+		box-sizing: border-box;
+	}
 	.list_menu{
 		border-bottom: 1px solid #e7e7e7;
 		height: 30px;
@@ -73,21 +77,50 @@
 		display:inline;
 		box-sizing: border-box;
 	}
-
 	.list_menu_ul li a{
 		font-size: 12px;
 		color:#888;
 	}
-	.product_item li{
-		width: 25%;
-		height: 413px;
-		background-color: aqua;
+	.item_li{
+		width: 290px;
 		float:left;
+		margin-left: 30px;
+		margin-top: 25px;
+	
+	}
+	.product_item{
+		height: 100%;
+		display: inline-block;
+	}
+	.product_item img{
+		width: 100%;
+	}
+	.pName{
+		border-bottom: 1px solid #e8e8e8;
+	}
+	.pName h3{
+		font-size: 15px;
+		font-weight: bold;
+		display: inline-block;
+		margin-bottom: 10px;
 	}
 	.product_item li span {
 		width: 100%;
 		height: 100%;
-		border: 1px solid black;
+		
+	}
+	.pPrice span {
+		color: #6aa47b;
+		font-size: 14px;
+		display:inline-block;
+		margin:10px 0 10px 0;
+	}
+	.pPrice p{
+		font-size: 13px;
+	}
+	.Paging{
+		display: table;
+		margin: 0 auto 50px auto;
 	}
 </style>
 </head>
@@ -117,7 +150,7 @@
 		</div>
 		<div class="product_list">
 			<div class="list_menu">
-				<span style="font-size:12px;color:#888;">Total <strong style="color:#333;font-weight:bold;">11</strong> items</span>
+				<span style="font-size:12px;color:#888;">Total <strong style="color:#333;font-weight:bold;">${totalCount}</strong> items</span>
 				<ul class="list_menu_ul">
 					<li><a href="">신상품</a></li>
 					<li><a href="">상품명</a></li>
@@ -127,26 +160,50 @@
 				</ul>
 			</div>
 			<ul class="product_item">
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
-				<li><span>123</span></li>
+				<c:forEach items="${list}" var="list">
+				<li class="item_li">
+					<div class="pImg">
+						<img src ="/Project_final/resources/images/1.jpg">
+					</div>
+					<div class="pInfo">
+						<div class="pName">
+							<h3>${list.name}</h3>
+						</div>
+						<div class="pPrice">
+							<ul>
+								<li><span>${list.price}</span></li>
+								<li><p>${list.event}</p></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				</c:forEach>
 			</ul>
 		</div>
-		
+		<div class="Paging">
+			<c:choose>
+				<c:when test="${pager.curBlock > 1}">
+					<a href="/Project_final/product/product_list?curPage=${pager.startNum-1}">[이전]</a>
+				</c:when>
+				<c:otherwise>
+					<a>[이전]</a>
+				</c:otherwise>
+			</c:choose>
+			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+				<a href="/Project_final/product/product_list?curPage=${i}">${i}</a>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${pager.curBlock < pager.totalBlock}">
+					<a href="/Project_final/product/product_list?curPage=${pager.lastNum+1}">[다음]</a>
+				</c:when>
+				<c:otherwise>
+					<a>[다음]</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+	<div class="footer">
+		<c:import url="/WEB-INF/views/temp/footer.jsp" />
 	</div>
 </div>
 </body>

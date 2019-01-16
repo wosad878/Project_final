@@ -9,6 +9,13 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+	<!-- file Upload -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max upload size in bytes -->
+		<property name="maxUploadSize" value="20971520" />
+		<property name="maxInMemorySize" value="1048576" />
+	</bean>
+	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
 		<property name="locations" value="classpath:myBatis/properties/myBatis.properties"></property>
 	</bean>

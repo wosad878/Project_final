@@ -11,6 +11,7 @@ public class Pager {
 	private int lastNum;	//마지막 페이지의 번호
 	private int startRow;	//DB에서 불러온 리스트의 RowNum의 첫번째 숫자 지정(curPage의 아이템의 첫번째 숫자가 됨)
 	private int lastRow;	//DB에서 불러온 리스트의 RowNum의 마지막 숫자 지정(curPage의 아이템의 마지막 숫자가 됨)
+	private int totalPage;
 	private String category1;
 	private String category2;
 	
@@ -27,7 +28,7 @@ public class Pager {
 	}
 	
 	public void makePage(int totalCount) {
-		int totalPage = totalCount/perPage;
+		this.totalPage = totalCount/perPage;
 		if(totalCount % perPage != 0) {
 			totalPage ++;
 		}
@@ -138,9 +139,17 @@ public class Pager {
 		}
 		return search;
 	}
+
 	public void setSearch(String search) {
 		this.search = search;
 	}
 	
+	public int getTotalPage() {
+		return totalPage;
+	}
+	
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
 	
 }

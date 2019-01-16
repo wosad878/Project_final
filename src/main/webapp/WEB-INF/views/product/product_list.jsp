@@ -8,7 +8,15 @@
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/temp/link.jsp"></c:import>
 <c:import url="/WEB-INF/views/temp/header.jsp"></c:import>
-
+<script type="text/javascript">
+	$(function(){
+		$(".pnum").each(function() {
+			if($(this).html() == ${pager.curPage}){
+				$(this).css('background-color','#f2f2f2');
+			}
+		});
+	});
+</script>
 <style type="text/css">
 	.contents{
 		margin: 0 auto;
@@ -32,9 +40,28 @@
 		height: 30px;
 	}	
 	.pro_name{
+		display: inline-block;
 		font-weight:bold;
 		box-sizing: border-box;
 		padding-top: 10px;
+	}
+	.inputProduct{
+		display: inline-block;
+		width: 90px;
+		height: 30px;
+		border:1px solid #e5e5e5;
+		font-size: 12px;
+		text-align: center;
+		border-radius: 5px;
+		line-height: 27px;
+		margin-left: 20px;
+		background-color: #9b9b9b;
+	}
+	.inputProduct:visited{
+		color: white;
+	}
+	.inputProduct:link{
+		color: white;
 	}
 	.sub-menu{
 		height:96px;
@@ -119,8 +146,34 @@
 		font-size: 13px;
 	}
 	.Paging{
+	    display: table;
+	    margin: 0 auto;
+	    padding: 25px 0 30px;
+	    text-align: center;
+	    font-size: 0;
+	}
+	.Paging a{
 		display: table;
-		margin: 0 auto 50px auto;
+		float: left;
+		margin: 0;
+	}
+	ol{
+		float:left;
+	    display: inline-block;
+	}
+	ol li{
+		float: left;
+	    display: inline-block;
+	    border: 1px solid #e5e5e5;
+	    margin: 0 0 0 -1px;
+	    height: 30px;
+	}
+	ol li a{
+	    display: block;
+	    width: 31px;
+	    height: 28px;
+	    font-size: 10px;
+	    line-height: 31px;
 	}
 </style>
 </head>
@@ -133,6 +186,7 @@
 			</div>
 			<div class="name_inner">
 				<h3 class="pro_name">전체상품</h3>
+				<a class="inputProduct" href="/Project_final/product/product_insert">상품등록</a>
 			</div>
 		</div>
 		<div class="sub-menu">
@@ -163,11 +217,11 @@
 				<c:forEach items="${list}" var="list">
 				<li class="item_li">
 					<div class="pImg">
-						<img src ="/Project_final/resources/images/1.jpg">
+						<a href="/Project_final/product/product_select?num=${list.num}"><img src ="/Project_final/resources/images/1.jpg"></a>
 					</div>
 					<div class="pInfo">
 						<div class="pName">
-							<h3>${list.name}</h3>
+							<a href="/Project_final/product/product_select?num=${list.num}"><h3>${list.name}</h3></a>
 						</div>
 						<div class="pPrice">
 							<ul>
@@ -182,22 +236,50 @@
 		</div>
 		<div class="Paging">
 			<c:choose>
-				<c:when test="${pager.curBlock > 1}">
-					<a href="/Project_final/product/product_list?curPage=${pager.startNum-1}">[이전]</a>
+				<c:when test="${pager.curPage == 1}">
+					<a href="#none"><img src = "/Project_final/resources/images/icon/btn_pagingFirst.png"></a>
 				</c:when>
 				<c:otherwise>
-					<a>[이전]</a>
+					<a href="/Project_final/product/product_list?curPage=1">
+						<img src = "/Project_final/resources/images/icon/btn_pagingFirst.png">
+					</a>
 				</c:otherwise>
 			</c:choose>
-			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<a href="/Project_final/product/product_list?curPage=${i}">${i}</a>
-			</c:forEach>
 			<c:choose>
-				<c:when test="${pager.curBlock < pager.totalBlock}">
-					<a href="/Project_final/product/product_list?curPage=${pager.lastNum+1}">[다음]</a>
+				<c:when test="${pager.curBlock > 1}">
+					<a href="/Project_final/product/product_list?curPage=${pager.startNum-1}">
+						<img src = "/Project_final/resources/images/icon/btn_pagingPrev.png">
+					</a>
 				</c:when>
 				<c:otherwise>
-					<a>[다음]</a>
+				<a href="#none"><img src = "/Project_final/resources/images/icon/btn_pagingPrev.png"></a>
+				</c:otherwise>
+			</c:choose>
+			<ol>
+				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					<li>
+						<a class="pnum" href="/Project_final/product/product_list?curPage=${i}">${i}</a>
+					</li>
+				</c:forEach>
+			</ol>
+			<c:choose>
+				<c:when test="${pager.curBlock < pager.totalBlock}">
+					<a href="/Project_final/product/product_list?curPage=${pager.lastNum+1}">
+						<img src = "/Project_final/resources/images/icon/btn_pagingNext.png">
+					</a>
+				</c:when>
+				<c:otherwise>
+					<a href="#none"><img src = "/Project_final/resources/images/icon/btn_pagingNext.png"></a>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${pager.curPage == pager.totalPage}">
+					<a href="#none"><img src = "/Project_final/resources/images/icon/btn_pagingLast.png"></a>
+				</c:when>
+				<c:otherwise>
+					<a href="/Project_final/product/product_list?curPage=${pager.totalPage}">
+						<img src = "/Project_final/resources/images/icon/btn_pagingLast.png">
+					</a>
 				</c:otherwise>
 			</c:choose>
 		</div>

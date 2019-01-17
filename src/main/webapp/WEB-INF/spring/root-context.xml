@@ -42,5 +42,8 @@
 	<context:component-scan base-package="com.kim.Project_final.member" />
 	<context:component-scan base-package="com.kim.Project_final.product" />
 	<context:component-scan base-package="com.kim.Project_final.util" />
+	<context:component-scan base-package="com.kim.Project_final.productImage" />
+	<context:component-scan base-package="com.kim.Project_final.productBoard" />
+	<context:component-scan base-package="com.kim.Project_final.ImgTemp" />
 	
 </beans>

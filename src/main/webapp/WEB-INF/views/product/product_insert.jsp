@@ -9,12 +9,12 @@
 <c:import url="/WEB-INF/views/temp/link.jsp" />
 <c:import url="/WEB-INF/views/temp/header.jsp" />
 <script type="text/javascript" src="<%=pageContext.getServletContext().getContextPath()%>/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="<%=pageContext.getServletContext().getContextPath()%>/resources/editor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
+<%-- <script type="text/javascript" src="<%=pageContext.getServletContext().getContextPath()%>/resources/editor/sample/js/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script> --%>
 <script type="text/javascript">
 $(document).ready(function() {
 	var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함. 
 	
-	// Editor Setting 
+// Editor Setting 
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef : oEditors, // 전역변수 명과 동일해야 함. 
 		elPlaceHolder : "smarteditor",	// 에디터가 그려질 textarea ID 값과 동일 해야 함. 
@@ -29,69 +29,60 @@ $(document).ready(function() {
 			bUseModeChanger : true, 
 		} 
 	}); 
-	// 전송버튼 클릭이벤트 
-	$("#savebutton").click(function(){
-		//if(confirm("저장하시겠습니까?")) { 
-		// id가 smarteditor인 textarea에 에디터에서 대입 
-		oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []); 
-		
-		// 이부분에 에디터 validation 검증 
-		if(validation()) { 
-			$("#frm").submit(); 
-			} 
-		//} 
-		}) 
-	}); 
-// 필수값 Check 
-function validation(){ 
-	var contents = $.trim(oEditors[0].getContents()); 
-	if(contents === '<p>&bnsp;</p>' || contents === ''){ // 기본적으로 아무것도 입력하지 않아도 값이 입력되어 있음. 
-		
-		alert("내용을 입력하세요."); 
-		oEditors.getById['smarteditor'].exec('FOCUS'); 
-		return false; 
-	} 
-	
-	return true; 
-}
-
-//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
-function submitContents(elClickedObj) {
-    // 에디터의 내용이 textarea에 적용된다.
-    oEditors.getById["textAreaContent"].exec("UPDATE_CONTENTS_FIELD", [ ]);
- 
-    // 에디터의 내용에 대한 값 검증은 이곳에서
-    // document.getElementById("textAreaContent").value를 이용해서 처리한다.
-  
-    try {
-        elClickedObj.form.submit();
-    } catch(e) {
-     
-    }
-}
-
-//textArea에 이미지 첨부
-<%-- function pasteHTML(filepath){
-    var sHTML = '<img src="<%=request.getContextPath()%>/path에서 설정했던 경로/'+filepath+'">';
-    oEditors.getById["textAreaContent"].exec("PASTE_HTML", [sHTML]);
-} --%>
-</script>
-<script type="text/javascript">
-$(function(){
 	
 	$('.cancel').click(function(){
-		var path = "/Project_final/product/product_insert";
-		$.ajax({
-			url:"/Project_final/product/product_insert",
-			type:'post',
-			data:{path:path},
-			success:function(data){
-				console.log(data);
-			}
+		location.href="/Project_final/product/imageDelete";
+	});
+	
+	$('.insert').click(function(){
+		$('#category1').val($('#cate1 option:selected').val());
+		$('#category2').val($('#cate2 option:selected').val());
+
+ 		if($('#name').val() == ""){
+ 			alert("상품이름은 필수입력 사항 입니다");
+ 			$('#name').focus();
+ 		}else{
+ 			if($('#price').val() == ""){
+ 				alert("가격은 필수입력 사항 입니다");
+ 				$('#price').focus();
+ 			}else{
+ 				if($('#mainImage').val() == ""){
+ 					alert("대표 이미지는 필수입력 사항 입니다");
+ 					$('#mainImage').focus();
+ 				}else{
+ 					saveText();
+				}
+ 			}
+ 		}
+	});
+	
+	// 전송버튼 클릭이벤트 
+	function saveText(){
+		oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []); 
+		
+		$("#frm").submit(); 
+	}
+	
+	$('#imageAdd').click(function(){
+		var count;
+		$('.subImage').each(function(index){
+			count = index;
+		});
+		if(count > 8){
+			alert('사진첨부는 10개까지 가능합니다');
+		}else{
+			var code = '<div class="subIname_div">';
+			code = code + '<input id="subImage" class="subImage" type="file" name="subImage" style="margin-top: 10px;">';
+			code = code +'<span class="removeImage"><i class="fa fa-minus" style="font-size:24px"></i></span></div>';
+			$('#subImage_td').append(code);
+		}
+		$('.removeImage').click(function(){
+			$(this).parent('div').remove();
 		});
 	});
-});
+}); 
 </script>
+
 <style type="text/css">
 .contents{
 	margin: 0 auto;
@@ -128,6 +119,100 @@ $(function(){
 .inputbuttons{
 	margin-bottom:100px;
 }
+.pro_table{
+	width: 100%;
+	border: 1px solid #e7e7e7;
+    border-bottom-width: 0;
+    color: #353535;
+    margin-bottom: 40px;
+}
+.pro_table th{
+	width: 151px;
+    padding: 12px 0 11px 18px;
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+    background-color: #fbfbfb;
+    border-right:1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+.pro_table td {
+	text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+	background-color: white; 
+	padding: 10px 10px 10px;
+	border-right:1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+#name,#price,#weight,#life,#event,#tag,#memo,#bindname,#stock{
+	height: 20px;
+	border:1px solid #e7e7e7;
+	display: inline-block;
+}
+select{
+	width: 180px;
+	height: 22px;
+	border: 1px solid #e7e7e7;
+}
+th span{
+	font-size: 12px;
+	font-weight: bold;
+}
+.mainImage,.subImage{
+	width: 500px;
+	height: 22px;
+	border:1px solid #e7e7e7;
+	display: inline-block;
+	font-size: 12px;
+}
+.fa-plus{
+	display: inline-block;
+	position: relative;
+	top:5px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+.fa-minus{
+	display: inline-block;
+	position: relative;
+	top:5px;
+	margin-left: 16px;
+	cursor: pointer;
+}
+.inputbuttons{
+	display: block;
+	text-align: center;
+	box-sizing: border-box;
+	padding-top: 80px;
+}
+.buttonsInner{
+	display: inline-block;
+	margin: 0 auto;
+	border-spacing: 0;
+}
+.inputbuttons a{
+	display: inline-block;
+	width: 180px;
+	height: 50px;
+	border: 1px solid #e7e7e7;
+	border-radius: 5px;
+	line-height: 50px;
+	font-weight: bold;
+	color: white;
+}
+.insert{
+	margin-right: 5px;
+	background-color:#363636;
+	cursor:pointer;
+}
+
+
+.cancel{
+	margin-left: 5px;
+	background-color:#9b9b9b;
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -143,24 +228,24 @@ $(function(){
 		</div>
 		<div class="inputText">
 			<form action="./product_insert" method="post" id="frm" enctype="multipart/form-data">
-				<table>
+				<table class="pro_table">
 				<tr>
 					<th><span>상품 이름</span></th>
-					<td><input type="text" name="name"><br></td>
+					<td><input id="name" type="text" name="name" style="width: 500px;"><br></td>
 				</tr>
 				<tr>
 					<th><span>카테고리1</span></th>
-					<td><select>
-							<option value="1">전체</option>
+					<td><select id="cate1">
+							<option value="1" selected="selected">전체</option>
 							<option value="2">피부고민별</option>
 						</select>
-						<input id="hiddenCate1" type="hidden" name="category1">
+						<input id="category1" type="hidden" name="category1">
 					</td>
 				</tr>	
 				<tr>
 					<th><span>카테고리2</span></th>
-					<td><select>
-							<option value="3">세트</option>
+					<td><select id="cate2">
+							<option value="3" selected="selected">세트</option>
 							<option value="4">천연비누</option>
 							<option value="5">스킨/로션/미스트</option>
 							<option value="6">에센스/세럼/크림</option>
@@ -169,50 +254,75 @@ $(function(){
 							<option value="9">바디/헤어</option>
 							<option value="10">미용도구</option>
 						</select>
-						<input id="hiddenCate2" type="hidden" name="category2">
+						<input id="category2" type="hidden" name="category2">
 					</td>
 				</tr>
 				<tr>
 					<th><span>가격</span></th>
-					<td><input type="text" name="price"></td>
+					<td><input id="price" type="text" name="price" style="width: 200px;"></td>
 				</tr>
 				<tr>
 					<th><span>중량</span></th>
-					<td><input type="text" name="weight"></td>
+					<td><input id="weight" type="text" name="weight" style="width: 200px;"></td>
 				</tr>
 				<tr>
 					<th><span>유통기한</span></th>
-					<td><input type="text" name="life"></td>
+					<td><input id="life" type="text" name="life" style="width: 200px;"></td>
 				</tr>
 				<tr>
 					<th><span>이벤트 내용</span></th>
-					<td><input type="text" name="event"></td>
+					<td><input id="event" type="text" name="event" style="width: 700px;"></td>
 				</tr>
 				<tr>
-					<th><span>태크</span></th>
-					<td><input type="text" name="tag"></td>
+					<th><span>태그</span></th>
+					<td><input id="tag" type="text" name="tag" style="width: 700px;"></td>
 				</tr>
 				<tr>
-					<th><span>메모</span></th>
-					<td><input type="text" name="memo"></td>
+					<th><span>설명</span></th>
+					<td><input id="memo" type="text" name="memo" style="width: 100%;"></td>
 				</tr>
 				<tr>
 					<th><span>묶음상품 이름</span></th>
-					<td><input type="text" name="bindname"></td>
+					<td><input id="bindname" type="text" name="bindname" style="width: 200px;"></td>
 				</tr>
 				<tr>
 					<th><span>재고</span></th>
-					<td><input type="text" name="stock"></td>
+					<td><input id="stock" type="text" name="stock" style="width: 200px;"></td>
+				</tr>
+				<tr>
+					<th><span>대표이미지</span></th>
+					<td><input id="mainImage" class="mainImage" type="file" name="mainImage"></td>
+				</tr>
+				<tr>
+					<th><span>상세이미지</span></th>
+					<td id="subImage_td">
+						<div class="subIname_div">
+							<input id="subImage" class="subImage" type="file" name="subImage">
+							<i id="imageAdd" class="fa fa-plus" style="font-size:24px"></i>
+						</div>
+					</td>
 				</tr>
 				</table>
-				<textarea name="contents" id="smarteditor" rows="10" cols="100" style="width:100%; height:600px;"></textarea>
+				
+				<div class="product_name">
+					<div class="name_inner">
+						<h3 class="pro_name">게시글 상세내용</h3>
+					</div>
+				</div>
+				
+				<textarea name="contents" id="smarteditor" rows="10" cols="100" style="width:100%; height:800px;"></textarea>
 			</form>
 		</div>
 		<div class="inputbuttons">
-			<a class="insert" href="#none">등록</a>
-			<a class="cancel" href="#none">취소</a>
+			<div class="buttonsInner">
+				<a class="insert">등록</a>
+				<a class="cancel">취소</a>
+			</div>
 		</div>
 	</div>
+</div>
+<div class="footer">
+	<c:import url="/WEB-INF/views/temp/footer.jsp" />
 </div>
 </body>
 </html>

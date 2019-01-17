@@ -9,16 +9,16 @@
 		
 		<select id="searchList" resultType="ProductDTO" parameterType="Pager">
 			select * from(
-				select rownum R, p.*, i.fname, i.oname, i.step from (
+				select rownum R, p.*, i.fname, i.oname from (
 					select * from product where name like '%'||#{search}||'%'
-				)p join p_img i on p.name = i.name
+				)p join m_img i on p.name = i.name
 			) where R between #{startRow} and #{lastRow}
 		</select>
 		<select id="selectList" resultType="ProductDTO" parameterType="Pager">
 			select * from(
-				select rownum R, p.*, i.fname, i.oname, i.step from (
+				select rownum R, p.*, i.fname, i.oname from (
 					select * from product where category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%'
-				)p join p_img i on p.name = i.name
+				)p join m_img i on p.name = i.name
 			) where R between #{startRow} and #{lastRow}
 		</select>
 		

@@ -7,5 +7,4 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
-
 <link rel="stylesheet" type="text/css" href="<%=pageContext.getServletContext().getContextPath()%>/resources/css/reset.css">

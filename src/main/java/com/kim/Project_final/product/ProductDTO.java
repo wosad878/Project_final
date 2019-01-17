@@ -5,44 +5,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductDTO {
 
-	private int num;
+	private Integer num;
 	private String name;
-	private String catgory1;
-	private String category2;
-	private int price;
+	private Integer category1;
+	private Integer category2;
+	private Integer price;
 	private String weight;
 	private String life;
 	private String event;
 	private String tag;
 	private String memo;
 	private String bindname;
-	private int stock;
-	private String fname;
-	private String oname;
-	private int step;
-	
-	public String getFname() {
-		return fname;
-	}
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-	public String getOname() {
-		return oname;
-	}
-	public void setOname(String oname) {
-		this.oname = oname;
-	}
-	public int getStep() {
-		return step;
-	}
-	public void setStep(int step) {
-		this.step = step;
-	}
-	public int getNum() {
+	private Integer stock;
+	private String reg_date;
+	private Integer count;
+
+	public Integer getNum() {
 		return num;
 	}
-	public void setNum(int num) {
+	public void setNum(Integer num) {
 		this.num = num;
 	}
 	public String getName() {
@@ -51,22 +32,22 @@ public class ProductDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCatgory1() {
-		return catgory1;
+	public Integer getCategory1() {
+		return category1;
 	}
-	public void setCatgory1(String catgory1) {
-		this.catgory1 = catgory1;
+	public void setCategory1(Integer catgory1) {
+		this.category1 = catgory1;
 	}
-	public String getCategory2() {
+	public Integer getCategory2() {
 		return category2;
 	}
-	public void setCategory2(String category2) {
+	public void setCategory2(Integer category2) {
 		this.category2 = category2;
 	}
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	public String getWeight() {
@@ -105,11 +86,23 @@ public class ProductDTO {
 	public void setBindname(String bindname) {
 		this.bindname = bindname;
 	}
-	public int getStock() {
+	public Integer getStock() {
 		return stock;
 	}
-	public void setStock(int stock) {
+	public void setStock(Integer stock) {
 		this.stock = stock;
+	}
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 	
 }

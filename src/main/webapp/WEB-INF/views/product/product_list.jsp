@@ -284,9 +284,9 @@
 			</c:choose>
 		</div>
 	</div>
-	<div class="footer">
-		<c:import url="/WEB-INF/views/temp/footer.jsp" />
-	</div>
+</div>
+<div class="footer">
+	<c:import url="/WEB-INF/views/temp/footer.jsp" />
 </div>
 </body>
 </html>

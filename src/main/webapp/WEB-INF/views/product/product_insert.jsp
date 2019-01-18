@@ -50,7 +50,12 @@ $(document).ready(function() {
  					alert("대표 이미지는 필수입력 사항 입니다");
  					$('#mainImage').focus();
  				}else{
+					if($('.subImage').val() == ""){
+	 					alert("상세 이미지는 필수입력 사항 입니다");
+	 					$('#mainImage').focus();
+ 					}else{
  					saveText();
+ 					}
 				}
  			}
  		}
@@ -59,8 +64,16 @@ $(document).ready(function() {
 	// 전송버튼 클릭이벤트 
 	function saveText(){
 		oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []); 
-		
-		$("#frm").submit(); 
+	
+        var ir1 = $("#smarteditor").val();
+
+        if( ir1 == ""  || ir1 == null || ir1 == '&nbsp;' || ir1 == '<p>&nbsp;</p>')  {
+             alert("내용을 입력하세요.");
+             oEditors.getById["smarteditor"].exec("FOCUS"); //포커싱
+             return;
+        }else{
+			$("#frm").submit(); 
+        }
 	}
 	
 	$('#imageAdd').click(function(){

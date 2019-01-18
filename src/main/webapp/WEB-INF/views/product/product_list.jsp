@@ -217,7 +217,7 @@
 				<c:forEach items="${list}" var="list">
 				<li class="item_li">
 					<div class="pImg">
-						<a href="/Project_final/product/product_select?num=${list.num}"><img src ="/Project_final/resources/images/1.jpg"></a>
+						<a href="/Project_final/product/product_select?num=${list.num}"><img src ="/Project_final/resources/photoUpload/${list.fname}"></a>
 					</div>
 					<div class="pInfo">
 						<div class="pName">

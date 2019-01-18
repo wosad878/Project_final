@@ -9,17 +9,20 @@
 		
 		<select id="searchList" resultType="ProductDTO" parameterType="Pager">
 			select * from(
-				select rownum R, p.*, i.fname, i.oname from (
+				select rownum R, p.* from (
 					select * from product where name like '%'||#{search}||'%'
-				)p join m_img i on p.name = i.name
-			) where R between #{startRow} and #{lastRow}
+				)p ) where R between #{startRow} and #{lastRow}
 		</select>
 		<select id="selectList" resultType="ProductDTO" parameterType="Pager">
 			select * from(
-				select rownum R, p.*, i.fname, i.oname from (
+				select rownum R, p.* from (
 					select * from product where category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%'
-				)p join m_img i on p.name = i.name
-			) where R between #{startRow} and #{lastRow}
+				)p ) where R between #{startRow} and #{lastRow}
 		</select>
-		
+		<insert id="insert" parameterType="ProductDTO">
+			insert into product(num,name,category1,category2,price,weight,life,event,tag,
+								memo,bindname,stock,reg_date,count,fname,oname)values(
+			product_seq.nextval,#{name},#{category1},#{category2},#{price},#{weight},
+			#{life},#{event},#{tag},#{memo},#{bindname},#{stock},sysdate,0,#{fname},#{oname})
+		</insert>
 	</mapper>

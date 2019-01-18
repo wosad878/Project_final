@@ -20,8 +20,15 @@
 		</repository>
 	</repositories>
 	
-	<dependencies>
-	
+		<dependencies>
+			<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency> 
 			<groupId>commons-fileupload</groupId> 
 			<artifactId>commons-fileupload</artifactId> 

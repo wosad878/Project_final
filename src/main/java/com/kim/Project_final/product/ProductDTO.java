@@ -7,8 +7,8 @@ public class ProductDTO {
 
 	private Integer num;
 	private String name;
-	private Integer category1;
-	private Integer category2;
+	private String category1;
+	private String category2;
 	private Integer price;
 	private String weight;
 	private String life;
@@ -19,7 +19,9 @@ public class ProductDTO {
 	private Integer stock;
 	private String reg_date;
 	private Integer count;
-
+	private String fname;
+	private String oname;
+	
 	public Integer getNum() {
 		return num;
 	}
@@ -32,16 +34,16 @@ public class ProductDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getCategory1() {
+	public String getCategory1() {
 		return category1;
 	}
-	public void setCategory1(Integer catgory1) {
+	public void setCategory1(String catgory1) {
 		this.category1 = catgory1;
 	}
-	public Integer getCategory2() {
+	public String getCategory2() {
 		return category2;
 	}
-	public void setCategory2(Integer category2) {
+	public void setCategory2(String category2) {
 		this.category2 = category2;
 	}
 	public Integer getPrice() {
@@ -103,6 +105,18 @@ public class ProductDTO {
 	}
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	public String getOname() {
+		return oname;
+	}
+	public void setOname(String oname) {
+		this.oname = oname;
 	}
 	
 }

@@ -8,5 +8,7 @@
 		<typeAlias type="com.kim.Project_final.member.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.kim.Project_final.product.ProductDTO" alias="ProductDTO"/>
 		<typeAlias type="com.kim.Project_final.util.Pager" alias="Pager"/>
+		<typeAlias type="com.kim.Project_final.productImage.ProductImageDTO" alias="ProductImageDTO"/>
+		<typeAlias type="com.kim.Project_final.productBoard.ProductBoardDTO" alias="ProductBoardDTO"/>
 	</typeAliases>
 </configuration>

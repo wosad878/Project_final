@@ -23,4 +23,7 @@ public class ProductDAO {
 	public List<ProductDTO> selectList(Pager pager) throws Exception {
 		return session.selectList(NAMESPACE+"selectList",pager);
 	}
+	public int insert(ProductDTO productDTO) throws Exception {
+		return session.insert(NAMESPACE+"insert", productDTO);
+	}
 }

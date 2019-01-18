@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="productBoardMapper">
+  	<insert id="insert" parameterType="ProductBoardDTO">
+  		insert into pro_board(num,name,contents,reg_date) values(pro_board_seq.nextval,#{name},#{contents},sysdate)
+  	</insert>
+  	<insert id="imgInsert" parameterType="ProductImageDTO">
+  		insert into pro_board_img (num,name,fname) values(proboardimg_seq.nextval, #{name}, #{fname})
+  	</insert>
+  </mapper>

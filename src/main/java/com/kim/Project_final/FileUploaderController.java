@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kim.Project_final.ImgTemp.ImageTempDTO;
 import com.kim.Project_final.ImgTemp.ImageTempService;
+import com.kim.Project_final.member.MemberDTO;
 
 @Controller
 public class FileUploaderController {
@@ -35,7 +36,8 @@ public class FileUploaderController {
             // 파일명을 받는다 - 일반 원본파일명
             String oldName = request.getHeader("file-name");
             // 파일 기본경로 _ 상세경로
-            String filePath = session.getServletContext().getRealPath("resources/photoUpload/");
+            String filePath = session.getServletContext().getRealPath("resources/photoTemp/");
+            System.out.println(filePath);
             File file = new File(filePath);
             if(!file.exists()) {
             	file.mkdirs();
@@ -45,7 +47,10 @@ public class FileUploaderController {
                           .append(UUID.randomUUID().toString())
                           .append(oldName.substring(oldName.lastIndexOf("."))).toString();
             
-            int result = imageTempService.imageNameSave(saveName);
+            ImageTempDTO imageTempDTO = new ImageTempDTO();
+            imageTempDTO.setImgname(saveName);
+            imageTempDTO.setUserId(((MemberDTO)session.getAttribute("member")).getId());
+            imageTempService.imageNameSave(imageTempDTO);
             
             InputStream is = request.getInputStream();
             OutputStream os = new FileOutputStream(filePath + saveName);
@@ -60,7 +65,7 @@ public class FileUploaderController {
             sb = new StringBuffer();
             sb.append("&bNewLine=true")
               .append("&sFileName=").append(oldName)
-              .append("&sFileURL=").append("http://localhost:80/Project_final/resources/photoUpload/")
+              .append("&sFileURL=").append("http://localhost:80/Project_final/resources/photoTemp/")
         .append(saveName);
         } catch (Exception e) {
             e.printStackTrace();

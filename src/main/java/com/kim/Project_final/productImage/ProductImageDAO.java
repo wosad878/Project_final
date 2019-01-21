@@ -22,7 +22,9 @@ public class ProductImageDAO {
 				new Exception("DB저장 오류");
 			}
 		}
-		
 		return result;
+	}
+	public List<ProductImageDTO> selectImages(String name) throws Exception {
+		return session.selectList(NAMESPACE+"selectImages", name);
 	}
 }

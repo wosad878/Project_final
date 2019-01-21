@@ -158,7 +158,7 @@ $(document).ready(function() {
 	border-right:1px solid #e7e7e7;
     border-bottom: 1px solid #e7e7e7;
 }
-#name,#price,#weight,#life,#event,#tag,#memo,#bindname,#stock{
+#name,#price,#weight,#life,#deliver,#event,#tag,#memo,#bindname,#stock,#minorder{
 	height: 20px;
 	border:1px solid #e7e7e7;
 	display: inline-block;
@@ -283,6 +283,10 @@ th span{
 					<td><input id="life" type="text" name="life" style="width: 200px;"></td>
 				</tr>
 				<tr>
+					<th><span>최소주문수량</span></th>
+					<td><input id="minorder" type="text" name="minorder" style="width: 200px;"></td>
+				</tr>
+				<tr>
 					<th><span>이벤트 내용</span></th>
 					<td><input id="event" type="text" name="event" style="width: 700px;"></td>
 				</tr>
@@ -302,6 +306,11 @@ th span{
 					<th><span>재고</span></th>
 					<td><input id="stock" type="text" name="stock" style="width: 200px;"></td>
 				</tr>
+				<tr>
+					<th><span>배송안내</span></th>
+					<td><input id="deliver" type="text" name="deliver" style="width: 200px;"></td>
+				</tr>
+				
 				<tr>
 					<th><span>대표이미지</span></th>
 					<td><input id="mainImage" class="mainImage" type="file" name="mainImage"></td>

@@ -1,6 +1,11 @@
 package com.kim.Project_final.product;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
+import com.kim.Project_final.productBoard.ProductBoardDTO;
+import com.kim.Project_final.productImage.ProductImageDTO;
 
 @Component
 public class ProductDTO {
@@ -12,6 +17,7 @@ public class ProductDTO {
 	private Integer price;
 	private String weight;
 	private String life;
+	private String deliver;
 	private String event;
 	private String tag;
 	private String memo;
@@ -21,7 +27,22 @@ public class ProductDTO {
 	private Integer count;
 	private String fname;
 	private String oname;
+	private String minorder;
+	private List<ProductImageDTO> images;
+	private ProductBoardDTO productBoardDTO;
 	
+	public ProductBoardDTO getProductBoardDTO() {
+		return productBoardDTO;
+	}
+	public void setProductBoardDTO(ProductBoardDTO productBoardDTO) {
+		this.productBoardDTO = productBoardDTO;
+	}
+	public List<ProductImageDTO> getImages() {
+		return images;
+	}
+	public void setImages(List<ProductImageDTO> images) {
+		this.images = images;
+	}
 	public Integer getNum() {
 		return num;
 	}
@@ -63,6 +84,12 @@ public class ProductDTO {
 	}
 	public void setLife(String life) {
 		this.life = life;
+	}
+	public String getDeliver() {
+		return deliver;
+	}
+	public void setDeliver(String deliver) {
+		this.deliver = deliver;
 	}
 	public String getEvent() {
 		return event;
@@ -117,6 +144,12 @@ public class ProductDTO {
 	}
 	public void setOname(String oname) {
 		this.oname = oname;
+	}
+	public String getMinorder() {
+		return minorder;
+	}
+	public void setMinorder(String minorder) {
+		this.minorder = minorder;
 	}
 	
 }

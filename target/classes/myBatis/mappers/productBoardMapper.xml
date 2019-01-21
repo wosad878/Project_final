@@ -9,4 +9,7 @@
   	<insert id="imgInsert" parameterType="ProductImageDTO">
   		insert into pro_board_img (num,name,fname) values(proboardimg_seq.nextval, #{name}, #{fname})
   	</insert>
+  	<select id="selectOne" parameterType="java.lang.String" resultType="ProductBoardDTO">
+  		select * from pro_board where name= #{name}
+  	</select>
   </mapper>

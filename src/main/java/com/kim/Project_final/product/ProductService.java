@@ -11,6 +11,7 @@ import com.kim.Project_final.productBoard.ProductBoardDAO;
 import com.kim.Project_final.productBoard.ProductBoardDTO;
 import com.kim.Project_final.productImage.ProductImageDAO;
 import com.kim.Project_final.productImage.ProductImageDTO;
+import com.kim.Project_final.productImage.ProductImageService;
 import com.kim.Project_final.util.Pager;
 
 @Service
@@ -30,11 +31,17 @@ public class ProductService {
 	public List<ProductDTO> selectList(Pager pager) throws Exception {
 		return productDAO.selectList(pager);
 	}
-	
 	@Transactional()
 	public void insert(ProductDTO productDTO, ProductBoardDTO productBoardDTO, List<ProductImageDTO> ar) throws Exception {
 		productDAO.insert(productDTO);
 		productBoardDAO.insert(productBoardDTO);
 		productImageDAO.insert(ar);
+	}
+	public ProductDTO selectOne(int num) throws Exception {
+		ProductDTO productDTO = productDAO.selectOne(num);
+		String name = productDTO.getName();
+		productDTO.setImages(productImageDAO.selectImages(name));
+		productDTO.setProductBoardDTO(productBoardDAO.selectOne(name));
+		return productDTO;
 	}
 }

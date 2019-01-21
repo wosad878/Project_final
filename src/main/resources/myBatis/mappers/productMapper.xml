@@ -20,9 +20,13 @@
 				)p ) where R between #{startRow} and #{lastRow}
 		</select>
 		<insert id="insert" parameterType="ProductDTO">
-			insert into product(num,name,category1,category2,price,weight,life,event,tag,
-								memo,bindname,stock,reg_date,count,fname,oname)values(
+			insert into product(num,name,category1,category2,price,weight,life,minorder,event,tag,
+								memo,bindname,stock,reg_date,count,fname,oname,deliver)values(
 			product_seq.nextval,#{name},#{category1},#{category2},#{price},#{weight},
-			#{life},#{event},#{tag},#{memo},#{bindname},#{stock},sysdate,0,#{fname},#{oname})
+			#{life},#{minorder},#{event},#{tag},#{memo},#{bindname},#{stock},sysdate,0,#{fname},#{oname},#{deliver})
 		</insert>
+		<select id="selectOne" parameterType="java.lang.Integer" resultType="ProductDTO" >
+			select * from product where num = #{num}
+		</select>
+		
 	</mapper>

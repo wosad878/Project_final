@@ -6,4 +6,7 @@
 	<insert id="insert" parameterType="ProductImageDTO">
 		insert into ps_img(num, name, fname, oname) values(ps_img_seq.nextval,#{name},#{fname},#{oname})
 	</insert>
+	<select id="selectImages" parameterType="java.lang.String" resultType="ProductImageDTO">
+		select * from ps_img where name = #{name}
+	</select>
   </mapper>

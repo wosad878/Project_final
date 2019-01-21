@@ -38,7 +38,9 @@ public class ProductController {
 	
 	
 	@RequestMapping(value="product_list")
-	public String product(Model model, Pager pager) throws Exception {
+	public String product(Model model, Pager pager, HttpSession session) throws Exception {
+		String outFolder = session.getServletContext().getRealPath("resources/photoUpload/");
+		System.out.println(outFolder);
 		int totalCount = productService.totalCount(pager);
 		pager.makeRow();
 		pager.makePage(totalCount);
@@ -81,14 +83,16 @@ public class ProductController {
 		ProductBoardDTO productBoardDTO = new ProductBoardDTO();
 		ProductImageDTO productImageDTO = null;
 		String inFolder = session.getServletContext().getRealPath("resources/photoTemp/");
-		String outFolder = session.getServletContext().getRealPath("resources/photoUpload/");
 		
+		String outFolder = session.getServletContext().getRealPath("resources/photoUpload/");
 		String [] array = {};
 		String [] array2 = {};
 		
 		productDTO.setOname(mainImage.getOriginalFilename());
 		productDTO.setFname(FileUploader.saveFile(mainImage, outFolder));
 		productBoardDTO.setName(productDTO.getName());
+		contents = contents.replaceAll("http://localhost:80/Project_final/", "/Project_final/");
+		contents = contents.replaceAll("/photoTemp/", "/photoUpload/");
 		productBoardDTO.setContents(contents);
 		
 		ar3 = new ArrayList<ProductImageDTO>();
@@ -102,7 +106,7 @@ public class ProductController {
 		productService.insert(productDTO,productBoardDTO,ar3);
 	
 		for(int i=0;i<ar.size();i++) {
-			array = contents.split("/photoTemp/");
+			array = contents.split("/photoUpload/");
 		}
 		ar2 = new ArrayList<String>();
 		for(int i=0;i<array.length; i++) {
@@ -129,8 +133,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping("product_select")
-	public void product_select(int num) throws Exception {
-		
+	public void product_select(int num, Model model) throws Exception {
+		ProductDTO productDTO = productService.selectOne(num);
+		model.addAttribute("product", productDTO).addAttribute("images",productDTO.getImages());
 	}
 
 }

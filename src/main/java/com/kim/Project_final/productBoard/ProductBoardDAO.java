@@ -24,4 +24,7 @@ public class ProductBoardDAO {
 		}
 		return 1;
 	}
+	public ProductBoardDTO selectOne(String name) throws Exception {
+		return session.selectOne(NAMESPACE+"selectOne", name);
+	}
 }

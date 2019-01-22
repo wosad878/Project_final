@@ -1,6 +1,5 @@
 package com.kim.Project_final;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,9 +132,10 @@ public class ProductController {
 	}
 	
 	@RequestMapping("product_select")
-	public void product_select(int num, Model model) throws Exception {
+	public void product_select(int num, Model model,HttpSession session) throws Exception {
 		ProductDTO productDTO = productService.selectOne(num);
-		model.addAttribute("product", productDTO).addAttribute("images",productDTO.getImages());
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		model.addAttribute("product", productDTO).addAttribute("images",productDTO.getImages()).addAttribute("member",memberDTO);
 	}
 
 }

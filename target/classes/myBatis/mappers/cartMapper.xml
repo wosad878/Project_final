@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cartMapper">
+  	<insert id="cartInsert" parameterType="CartDTO">
+  		insert into cart (id,proname,price,quantity,image) values (#{id},#{proname},#{price},#{quantity},#{image})
+  	</insert>
+  	<select id="cartSelect" parameterType="CartDTO" resultType="CartDTO">
+  		select * from cart where id=#{id} and proname=#{proname}
+  	</select>
+  	<select id="selectList" parameterType="java.lang.String" resultType="CartDTO">
+  		select * from cart where id=#{id}
+  	</select>
+  	<update id="cartUpdate" parameterType="CartDTO">
+  		update cart set quantity = #{quantity} where id=#{id} and proname=#{proname}
+  	</update>
+  </mapper>

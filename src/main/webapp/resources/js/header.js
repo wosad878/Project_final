@@ -1,4 +1,5 @@
 $(function(){
+	
 	$('.lnb_inner ul li').hover(function(){
 		$(this).children('ul').stop().fadeToggle(100);
 	});
@@ -24,4 +25,5 @@ $(function(){
 			$('.lnb').css('top','0');
 		}	
 	});
+	
 });

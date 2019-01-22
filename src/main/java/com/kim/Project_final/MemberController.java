@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -42,15 +43,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="loginForm")
-	public void loginForm() {}
+	public void loginForm(HttpServletRequest request, HttpSession session) {
+		String referer = request.getHeader("Referer");
+		session.setAttribute("path", referer);
+	}
 	
 	@RequestMapping(value="loginForm",method=RequestMethod.POST)
 	public String loginFrom(MemberDTO memberDTO, HttpSession session, RedirectAttributes rd) throws Exception {
-
+		String referer = (String)session.getAttribute("path");
 		memberDTO = memberService.memberLogin(memberDTO);
 		if(memberDTO != null) {
 			session.setAttribute("member", memberDTO);
-			return "redirect:/index/home";
+			
+			return "redirect:"+referer;
 		}else {
 			rd.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해주세요");
 			return "redirect:/member/loginForm";

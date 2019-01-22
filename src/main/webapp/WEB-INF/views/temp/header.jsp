@@ -11,15 +11,16 @@
 					<c:when test="${member ne null}">
 						<li><a href="/Project_final/member/logout">로그아웃</a></li>
 						<li><a href="/Project_final/member/updateForm">정보수정</a></li>
+						<li><a href="/Project_final/cart/myCart">장바구니</a></li>
+						<li><a href="">마이페이지</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/Project_final/member/loginForm">로그인</a></li>
+						<li class="loginUrl"><a href="/Project_final/member/loginForm">로그인</a></li>
 						<li><a href="/Project_final/member/joinForm">회원가입</a></li>
+						<li><a href="/Project_final/member/loginForm">장바구니</a></li>
+						<li><a href="">마이페이지</a></li>
 					</c:otherwise>
 				</c:choose>
-				
-				<li><a href="">장바구니</a></li>
-				<li><a href="">마이페이지</a></li>
 				<li><a href="">커뮤니티</a></li>
 				<li><a href="">문의게시판</a></li>
 				<li><a href="">후기</a></li>

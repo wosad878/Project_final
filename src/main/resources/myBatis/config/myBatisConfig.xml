@@ -10,5 +10,6 @@
 		<typeAlias type="com.kim.Project_final.util.Pager" alias="Pager"/>
 		<typeAlias type="com.kim.Project_final.productImage.ProductImageDTO" alias="ProductImageDTO"/>
 		<typeAlias type="com.kim.Project_final.productBoard.ProductBoardDTO" alias="ProductBoardDTO"/>
+		<typeAlias type="com.kim.Project_final.cart.CartDTO" alias="CartDTO"/>
 	</typeAliases>
 </configuration>

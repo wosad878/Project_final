@@ -11,14 +11,66 @@
 <script type="text/javascript" src="http://kenwheeler.github.io/slick/slick/slick.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	var q = $('#quantity').val();
+	var pText = priceText(q);
+	$('.sprice').html(pText);
+	$('#tprice').html(pText);
 	
-// 	$('.slider-nav').on('mouseenter', '.slick-slide', function (e) {
-// 		var $currTarget = $(e.currentTarget), 
-// 		    index = $currTarget.data('slick-index'),
-// 		    slickObj = $('.slider-for').slick('getSlick');
-
-// 		slickObj.slickGoTo(index);
-// 	});
+	$('#productName').val('${product.name}');
+	$('#productPrice').val('${product.price}');
+	$('#productImage').val('${product.fname}');
+	$('#productTPrice').val('${product.price}');
+	$('#productQuantity').val(1);
+	
+	$('.btn_top_button').click(function(){
+		var q = $('#quantity').val();
+		q = parseInt(q)+1;
+		$('#quantity').val(q);
+		$('#productTPrice').val(q*'${product.price}');
+		$('#productQuantity').val(q);
+		$('#count').html(q+"<p>(개)</p>");
+		var text = priceText(q);
+		$('#tprice').html(text);
+	});
+	$('.btn_bottom_button').click(function(){
+		var q = $('#quantity').val();
+		if($('#quantity').val() > 1){
+			q = parseInt(q)-1;
+			$('#quantity').val(q);
+			$('#productTPrice').val(q*'${product.price}');
+			$('#productQuantity').val(q);
+			$('#count').html(q+"<p>(개)</p>");
+		}
+		var text = priceText(q);
+		$('#tprice').html(text);
+	});
+	
+	$('#quantity').change(function(){
+		var count = $('#quantity').val();
+		var price = '${product.price}';
+		$('#tprice').val(price);
+	});
+	
+	$('.btn_order').click(function(){
+		var id = '${member.id}';
+		if(id == ""){
+			alert('로그인 후 이용 가능합니다');
+			location.href="/Project_final/member/loginForm";
+		}else{
+			$('#frm').attr('action','../order/orderBoard');
+			$('#frm').submit();
+		}
+	});
+	$('.btn_cart').click(function(){
+		var id = '${member.id}';
+		if(id == ""){
+			alert('로그인 후 이용 가능합니다');
+			location.href="/Project_final/member/loginForm";
+		}else{
+			$('#frm').attr('action','../cart/cartInsert');
+			$('#frm').submit();
+		}
+	});
 	
 	$('.slider-for').slick({
 	  slidesToShow: 1,
@@ -35,7 +87,28 @@ $(function(){
 	  centerMode: false,
 	  focusOnSelect: true
 	});
+	
 });
+
+
+function priceText(q){
+	var price = ${product.price};
+	var tprice = String(price * q);
+	var string = tprice.substring(tprice.length-3);
+	var string2;
+	var string3;
+	var text;
+	var s = tprice.length-3;
+	if(s < 4){
+		string2 = tprice.substring(0,s);
+		text = string2+'.'+string+'원';
+	}else{
+		string2 = tprice.substr(tprice.length-6,3);
+		string3 = tprice.substring(0,tprice.length-6);
+		text = string3+'.'+string2+'.'+string+'원';
+	}
+	return text;
+}
 </script>
 <style type="text/css">
 .contents{
@@ -326,7 +399,7 @@ $(function(){
 				<div class="proInfo_detail">
 					<table>
 						<tr>
-							<td><span>판매가격</span><p>${product.price}</p></td>
+							<td><span>판매가격</span><p class="sprice"></p></td>
 						</tr>
 						<c:if test="${product.weight ne null}">
 							<tr>
@@ -370,22 +443,31 @@ $(function(){
 				    			<td>
 				    				<span class="quantity">
 						    			<input id="quantity" type="text" name="quantity" value="1">
-					    				<a href="#none"><img class="btn_top" src="/Project_final/resources/images/icon/btn_count_up.gif"></a>
-					    				<a href="#none"><img class="btn_bottom" src="/Project_final/resources/images/icon/btn_count_down.gif"></a>
+					    				<a class="btn_top_button" href="#none"><img class="btn_top" src="/Project_final/resources/images/icon/btn_count_up.gif"></a>
+					    				<a class="btn_bottom_button" href="#none"><img class="btn_bottom" src="/Project_final/resources/images/icon/btn_count_down.gif"></a>
+					    				
 				    				</span>
 				    			</td>
-				    			<td>${product.price}</td>
+				    			<td><p class="sprice"></p></td>
 			    			</tr>
 			    		</tbody>
 			    	</table>
 			    </div>
 			    <div class="totalPrice">
-			    	<strong>TOTAL:</strong><em>10000원</em><span>1<p>(개)</p></span>
+			    	<strong>TOTAL:</strong><em id="tprice"></em><span id="count">1<p>(개)</p></span>
 			    </div>
 			    <div class="orderButton">
-			    	<a class="btn_order" href=""><span>바로구매</span></a>
-			    	<a class="btn_cart" href=""><span>장바구니</span></a>
+			    	<a class="btn_order" href="#none"><span>바로구매</span></a>
+			    	<a class="btn_cart" href="#none"><span>장바구니</span></a>
 			    	<a class="btn_wish" href=""><span>관심상품</span></a>
+			    	<form id="frm" method="post">
+				    	<input id="productName" type="hidden" name="proname">
+				    	<input id="productImage" type="hidden" name="image">
+				    	<input id="productPrice" type="hidden" name="price">
+				    	<input id="productQuantity" type="hidden" name="quantity">
+				    	<input id="productTPrice" type="hidden" name="totalPrice">
+			    	</form>
+			    	
 			    </div>
 			    <div class="kakao">
 			    	<a class="btn_kakao" href="">

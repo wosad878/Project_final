@@ -38,8 +38,7 @@
 	box-sizing: border-box;
 	padding-top: 10px;
 }
-
-
+.orderArea{}
 .proCategory{
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -51,10 +50,12 @@
 }
 .cartList tr{
     border-top: 1px solid #e7e7e7;
+    text-align: center;
 }
 .cartList tr td{
 	display:table-cell;
     padding: 15px 0;
+    vertical-align: middle;
 }
 .cartList thead tr td{
 	font-size: 12px;
@@ -96,7 +97,7 @@
 					<tr>
 						<td><input type="checkbox"></td>
 						<td><img src="/Project_final/resources/photoUpload/${cartList.image}" style="width:80px;height: 80px;"></td>
-						<td>상품정보</td>
+						<td style="width: 500px;">상품정보</td>
 						<td>판매가</td>
 						<td>수량</td>
 						<td>적립금</td>

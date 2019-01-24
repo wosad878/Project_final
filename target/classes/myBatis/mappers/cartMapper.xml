@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="cartMapper">
   	<insert id="cartInsert" parameterType="CartDTO">
-  		insert into cart (id,proname,price,quantity,image) values (#{id},#{proname},#{price},#{quantity},#{image})
+  		insert into cart (id,proname,quantity) values (#{id},#{proname},#{quantity})
   	</insert>
   	<select id="cartSelect" parameterType="CartDTO" resultType="CartDTO">
   		select * from cart where id=#{id} and proname=#{proname}

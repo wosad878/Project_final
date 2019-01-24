@@ -65,7 +65,10 @@ $(function(){
 		var id = '${member.id}';
 		if(id == ""){
 			alert('로그인 후 이용 가능합니다');
-			location.href="/Project_final/member/loginForm";
+		//	location.href="/Project_final/member/loginForm";
+			$('#frm').attr('action','/Project_final/member/loginForm');
+			$('#frm').attr('method','get');
+			$('#frm').submit();
 		}else{
 			$('#frm').attr('action','../cart/cartInsert');
 			$('#frm').submit();
@@ -454,6 +457,7 @@ function priceText(q){
 			    	</table>
 			    </div>
 			    <div class="totalPrice">
+			    	<input id="productTPrice" type="hidden" name="totalPrice">
 			    	<strong>TOTAL:</strong><em id="tprice"></em><span id="count">1<p>(개)</p></span>
 			    </div>
 			    <div class="orderButton">
@@ -462,12 +466,8 @@ function priceText(q){
 			    	<a class="btn_wish" href=""><span>관심상품</span></a>
 			    	<form id="frm" method="post">
 				    	<input id="productName" type="hidden" name="proname">
-				    	<input id="productImage" type="hidden" name="image">
-				    	<input id="productPrice" type="hidden" name="price">
 				    	<input id="productQuantity" type="hidden" name="quantity">
-				    	<input id="productTPrice" type="hidden" name="totalPrice">
 			    	</form>
-			    	
 			    </div>
 			    <div class="kakao">
 			    	<a class="btn_kakao" href="">

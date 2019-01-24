@@ -13,17 +13,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kim.Project_final.cart.CartDTO;
 import com.kim.Project_final.cart.CartService;
 import com.kim.Project_final.member.MemberDTO;
+import com.kim.Project_final.product.ProductService;
 
 @Controller
 @RequestMapping("/cart/")
 public class CartController {
 	@Inject
 	private CartService cartService;
+	@Inject
+	private ProductService productService;
 	
 	@RequestMapping("myCart")
 	public void myCart(HttpSession session, Model model) throws Exception {
 		MemberDTO memberDTO  = (MemberDTO)session.getAttribute("member");
 		List<CartDTO> ar = cartService.cartSelectList(memberDTO.getId());
+		for(int i =0; i< ar.size(); i++) {
+			ar.get(i).setProductDTO((productService.selectOne(ar.get(i).getProname())));
+		}
 		model.addAttribute("cartList", ar);
 	}
 	

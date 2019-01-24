@@ -229,6 +229,10 @@
 				</div>
 				<div class="loginInner">
 					<form id="logincheck" action="./loginForm" method="post" onkeyup="enterkey()">
+						<c:if test="${not empty cartDTO}">
+							<input type="hidden" name="proname" value="${cartDTO.proname}">
+							<input type="hidden" name="quantity" value="${cartDTO.quantity}">
+						</c:if>
 						<div class="idbox">
 							<span>ID</span>
 							<input id="id" type="text" name="id">

@@ -23,10 +23,14 @@ public class ProductDAO {
 	public List<ProductDTO> selectList(Pager pager) throws Exception {
 		return session.selectList(NAMESPACE+"selectList",pager);
 	}
+	
 	public int insert(ProductDTO productDTO) throws Exception {
 		return session.insert(NAMESPACE+"insert", productDTO);
 	}
 	public ProductDTO selectOne(int num) throws Exception {
 		return session.selectOne(NAMESPACE+"selectOne", num);
+	}
+	public ProductDTO selectOne(String name) throws Exception {
+		return session.selectOne(NAMESPACE+"selectNOne",name);
 	}
 }

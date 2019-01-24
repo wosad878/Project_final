@@ -28,5 +28,8 @@
 		<select id="selectOne" parameterType="java.lang.Integer" resultType="ProductDTO" >
 			select * from product where num = #{num}
 		</select>
+		<select id="selectNOne" resultType="ProductDTO" parameterType="java.lang.String">
+			select * from product where name = #{name}
+		</select>
 		
 	</mapper>

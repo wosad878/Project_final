@@ -2,14 +2,15 @@ package com.kim.Project_final.cart;
 
 import org.springframework.stereotype.Component;
 
+import com.kim.Project_final.product.ProductDTO;
+
 @Component
 public class CartDTO {
 
 	private String id;
 	private String proname;
-	private String price;
 	private String quantity;
-	private String image;
+	private ProductDTO productDTO;
 	
 	public String getId() {
 		return id;
@@ -23,23 +24,17 @@ public class CartDTO {
 	public void setProname(String proname) {
 		this.proname = proname;
 	}
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
-	}
 	public String getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
-	public String getImage() {
-		return image;
+	public ProductDTO getProductDTO() {
+		return productDTO;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setProductDTO(ProductDTO productDTO) {
+		this.productDTO = productDTO;
 	}
 	
 }

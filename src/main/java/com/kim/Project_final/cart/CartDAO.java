@@ -23,6 +23,7 @@ public class CartDAO {
 	public List<CartDTO> cartSelectList(String id) throws Exception {
 		return session.selectList(NAMESPACE+"selectList", id);
 	}
+	
 	public int cartUpdate(CartDTO cartDTO) throws Exception {
 		return session.update(NAMESPACE+"cartUpdate", cartDTO);
 	}

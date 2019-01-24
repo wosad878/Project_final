@@ -31,6 +31,7 @@ public class ProductService {
 	public List<ProductDTO> selectList(Pager pager) throws Exception {
 		return productDAO.selectList(pager);
 	}
+	
 	@Transactional()
 	public void insert(ProductDTO productDTO, ProductBoardDTO productBoardDTO, List<ProductImageDTO> ar) throws Exception {
 		productDAO.insert(productDTO);
@@ -43,5 +44,8 @@ public class ProductService {
 		productDTO.setImages(productImageDAO.selectImages(name));
 		productDTO.setProductBoardDTO(productBoardDAO.selectOne(name));
 		return productDTO;
+	}
+	public ProductDTO selectOne(String name) throws Exception {
+		return productDAO.selectOne(name);
 	}
 }

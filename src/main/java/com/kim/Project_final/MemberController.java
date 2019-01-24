@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kim.Project_final.cart.CartDTO;
+import com.kim.Project_final.cart.CartService;
 import com.kim.Project_final.member.MemberDTO;
 import com.kim.Project_final.member.MemberService;
 
@@ -24,6 +26,9 @@ public class MemberController {
 	
 	@Inject
 	private MemberService memberService;
+	@Inject
+	private CartService cartService;
+	
 
 	@RequestMapping(value="joinForm")
 	public void joinForm() {}
@@ -42,19 +47,41 @@ public class MemberController {
 		return model;
 	}
 	
-	@RequestMapping(value="loginForm")
-	public void loginForm(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value="loginForm",method=RequestMethod.GET)
+	public void loginForm(HttpServletRequest request, HttpSession session, CartDTO cartDTO) {
 		String referer = request.getHeader("Referer");
+		System.out.println(cartDTO.getProname());
+		if(cartDTO.getProname() != null) {
+			request.setAttribute("cartDTO",cartDTO);
+			referer = "../cart/myCart";
+		}
+		System.out.println(referer);
 		session.setAttribute("path", referer);
 	}
 	
 	@RequestMapping(value="loginForm",method=RequestMethod.POST)
-	public String loginFrom(MemberDTO memberDTO, HttpSession session, RedirectAttributes rd) throws Exception {
+	public String loginFrom(MemberDTO memberDTO, HttpSession session, CartDTO cartDTO, RedirectAttributes rd) throws Exception {
 		String referer = (String)session.getAttribute("path");
 		memberDTO = memberService.memberLogin(memberDTO);
 		if(memberDTO != null) {
 			session.setAttribute("member", memberDTO);
-			
+			if(cartDTO.getProname() != "") {
+				int check = 0;
+				List<CartDTO> ar = cartService.cartSelectList(memberDTO.getId());
+				for(int i=0; i< ar.size(); i++) {
+					if(ar.get(i).getProname().equals(cartDTO.getProname())) {
+						cartService.cartUpdate(cartDTO);
+						check = 1;
+						break;
+					}else {
+						check = 2;
+					}
+				}
+				if(check == 2) {
+					cartService.cartInsert(cartDTO);
+				}
+			}else {
+			}
 			return "redirect:"+referer;
 		}else {
 			rd.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해주세요");

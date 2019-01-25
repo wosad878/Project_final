@@ -7,11 +7,18 @@ import com.kim.Project_final.product.ProductDTO;
 @Component
 public class CartDTO {
 
+	private int num;
 	private String id;
 	private String proname;
 	private String quantity;
 	private ProductDTO productDTO;
 	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getId() {
 		return id;
 	}

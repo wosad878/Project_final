@@ -20,6 +20,7 @@ public class OrderController {
 	
 	@RequestMapping(value="orderBoard", method=RequestMethod.POST)
 	public void order(CartDTO cartDTO, HttpSession session) throws Exception {
+		System.out.println(cartDTO.getProname());
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		cartDTO.setId(memberDTO.getId());
 		if(cartService.cartSelect(cartDTO) == null) {
@@ -27,4 +28,5 @@ public class OrderController {
 		}
 		
 	}
+	
 }

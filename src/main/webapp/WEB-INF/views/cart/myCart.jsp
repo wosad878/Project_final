@@ -11,8 +11,60 @@
 <c:import url="/WEB-INF/views/temp/header.jsp" />
 <script type="text/javascript">
 $(function(){
+	
+	$('.btn_deleteOne').click(function(){
+		var ary = new Array();
+		$('.oneCheck').each(function(index){
+			if($(this).is(':checked')){
+				var proname = $(this).parent().siblings('.name').html();
+				ary[index] = proname;
+			}
+		});
+		if(ary.length > 0){
+			location.href="./cartDeleteSelect?ary="+ary;
+		}else{
+			alert('선택된 상품이 없습니다');
+		}
+	});
+	
+	$('#allCheck').click(function(){
+		var check = $('input:checkbox[id="allCheck"]').is(':checked');
+		$('.oneCheck').prop('checked',check);
+		
+	});	
 	var prices = 0;
 	$('.list').each(function(){
+		$(this).find('.btn_order').click(function(){
+			var proname = $(this).parents().siblings('.name').html();
+			$('#frm').attr('action','../order/orderBoard');
+			$('#frm').attr('method','post');
+			$('#frm').append('<input type="hidden" name="proname" value="'+proname+'">');
+			$('#frm').submit();
+		});
+		
+		$(this).find('.btn_change').click(function(){
+			var name = $(this).parents().siblings('.name').html();
+			var count = $(this).siblings().children('#quantity').val();
+			
+			$('#frm').attr('action','./cartUpdate');
+			$('#frm').attr('method','post');
+			$('#frm').append('<input type="hidden" name="proname" value="'+name+'">');
+			$('#frm').append('<input type="hidden" name="quantity" value="'+count+'">');
+			$('#frm').submit();
+		});
+		
+		$(this).find('.btn_top_button').click(function(){
+			var count = parseInt($(this).siblings('#quantity').val());
+			$(this).siblings('#quantity').val(count+1);
+		});
+		
+		$(this).find('.btn_bottom_button').click(function(){
+			var count = parseInt($(this).siblings('#quantity').val());
+			if(count > 1){
+				$(this).siblings('#quantity').val(count-1);
+			}
+		});
+		
 		var price = parseInt($(this).find('.p').html());
 		$(this).find('.p').html(priceText(price, 1))
 		var count = parseInt($(this).find('#quantity').val());
@@ -89,6 +141,26 @@ function priceText(price,count){
 	font-weight:bold;
 	box-sizing: border-box;
 	padding-top: 10px;
+}
+.cart_empty{
+	margin-top:50px;
+	border-top: 1px solid #e7e7e7;
+	border-bottom: 1px solid #e7e7e7;
+	padding: 150px 0 140px;
+	text-align: center;
+}
+.cart_empty p{
+    text-align: center;
+    font-weight: 500;
+    color: #757575;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.s{
+	margin: 0 0 23px;
+    display: block;
+    font-size: 37px;
+    color: #999;
 }
 .orderArea{}
 .proCategory{
@@ -382,103 +454,113 @@ tfoot tr td{
 				<h3 class="pro_name">CART</h3>
 			</div>
 		</div>
-		<div class="orderArea">
-			<div class="proCategory">
-				<h3>일반상품 (${fn:length(cartList)}) </h3>
-			</div>
-			<table class="cartList">
-				<thead>
-					<tr>
-						<td class="check"><input type="checkbox"></td>
-						<td class="image">이미지</td>
-						<td class="name">상품정보</td>
-						<td class="price">판매가</td>
-						<td class="quantity">수량</td>
-						<td class="point">적립금</td>
-						<td class="deliver">배송구분</td>
-						<td class="delever_price">배송비</td>
-						<td class="total">합계</td>
-						<td class="select">선택</td>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${cartList}" var="cartList">
-					<tr class="list">
-						<td class="check"><input type="checkbox"></td>
-						<td class="image"><img src="/Project_final/resources/photoUpload/${cartList.productDTO.fname}" style="width:80px;height: 80px;"></td>
-						<td class="name">${cartList.productDTO.name}</td>
-						<td class="price p">${cartList.productDTO.price}</td>
-						<td class="quantity">
-							<div class="quantity_inner">
-								<span class="count">
-					    			<input id="quantity" type="text" name="quantity" value="${cartList.quantity}">
-				    				<a class="btn_top_button" href="#none"><img class="btn_top" src="/Project_final/resources/images/icon/btn_count_up.gif"></a>
-				    				<a class="btn_bottom_button" href="#none"><img class="btn_bottom" src="/Project_final/resources/images/icon/btn_count_down.gif"></a>
-			    				</span>
-			    				<a class="btn_change" href="">변경</a>
-							</div>
-						</td>
-						<td class="point">-</td>
-						<td class="deliver">기본배송</td>
-						<td class="delever_price dPrice">배송비</td>
-						<td class="total tprice">합계</td>
-						<td class="select">
-							<a class="btn_order btn_select" href="">주문하기</a>
-							<a class="btn_wishlist btn_select" href="">관심상품등록</a>
-							<a class="btn_delete btn_select" href="">삭제</a>
-						</td>
-					</tr>
-				</c:forEach>
-				<tfoot>
-					<tr>
-						<td colspan="10">
-							<strong style="float: left;">[기본배송]</strong>
-							상품구매금액 <span class="prices" style="font-weight: bold;"></span>
-							 + 배송비 <span class="delevery_Endprice"></span>
-							  = 합계:<span class="totalPrice" style="font-weight: bold; font-size: 14px;padding-left: 5px;"></span> 
-						</td>
-					</tr>
-				</tfoot>
-				</tbody>
-			</table>
-		</div>
-		<div class="btn_cart">
-			<a class="btn_deleteOne" href="">삭제하기</a>
-			<a class="btn_wish" href="">관심상품등록</a>
-			<a class="btn_deleteAll" href="">장바구니비우기</a>
-		</div>
-		<div class="total_table">
-			<table>
-				<thead>
-					<tr>
-						<th>
-							<span>총 상품금액</span>
-						</th>
-						<th>
-							<span>총 배송비</span>
-						</th>
-						<th>
-							<span>총 할인금액</span>
-						</th>
-						<th>
-							<span>결제예정금액</span>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="sPrice"></td>
-						<td class="dPrice"></td>
-						<td class="totalDiscount"></td>
-						<td class="orderPrice"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<c:choose>
+			<c:when test="${empty cartList}">
+				<div class="cart_empty">
+					<p><i class="fa fa-search s" aria-hidden="true"></i>장바구니가 비어 있습니다.</p>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="orderArea">
+					<div class="proCategory">
+						<h3>일반상품 (${fn:length(cartList)}) </h3>
+					</div>
+					<table class="cartList">
+						<thead>
+							<tr>
+								<td class="check"><input id="allCheck" type="checkbox"></td>
+								<td class="image">이미지</td>
+								<td class="name">상품정보</td>
+								<td class="price">판매가</td>
+								<td class="quantity">수량</td>
+								<td class="point">적립금</td>
+								<td class="deliver">배송구분</td>
+								<td class="delever_price">배송비</td>
+								<td class="total">합계</td>
+								<td class="select">선택</td>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach items="${cartList}" var="cartList">
+							<tr class="list">
+								<td class="check"><input class="oneCheck" type="checkbox"></td>
+								<td class="image"><img src="/Project_final/resources/photoUpload/${cartList.productDTO.fname}" style="width:80px;height: 80px;"></td>
+								<td class="name">${cartList.productDTO.name}</td>
+								<td class="price p">${cartList.productDTO.price}</td>
+								<td class="quantity">
+									<div class="quantity_inner">
+										<span class="count">
+							    			<input id="quantity" class="q" type="text" name="quantity" value="${cartList.quantity}">
+						    				<a class="btn_top_button" href="#none"><img class="btn_top" src="/Project_final/resources/images/icon/btn_count_up.gif"></a>
+						    				<a class="btn_bottom_button" href="#none"><img class="btn_bottom" src="/Project_final/resources/images/icon/btn_count_down.gif"></a>
+					    				</span>
+					    				<a class="btn_change" href="#none">변경</a>
+									</div>
+								</td>
+								<td class="point">-</td>
+								<td class="deliver">기본배송</td>
+								<td class="delever_price dPrice">배송비</td>
+								<td class="total tprice">합계</td>
+								<td class="select">
+									<a class="btn_order btn_select" href="#none">주문하기</a>
+									<a class="btn_delete btn_select" href="./cartDeleteOne?proname=${cartList.productDTO.name}">삭제</a>
+								</td>
+							</tr>
+						</c:forEach>
+						<tfoot>
+							<tr>
+								<td colspan="10">
+									<strong style="float: left;">[기본배송]</strong>
+									상품구매금액 <span class="prices" style="font-weight: bold;"></span>
+									 + 배송비 <span class="delevery_Endprice"></span>
+									  = 합계:<span class="totalPrice" style="font-weight: bold; font-size: 14px;padding-left: 5px;"></span> 
+								</td>
+							</tr>
+						</tfoot>
+						</tbody>
+					</table>
+					<form id="frm">
+						
+					</form>
+				</div>
+				<div class="btn_cart">
+					<a class="btn_deleteOne" href="#none">삭제하기</a>
+					<a class="btn_deleteAll" href="./cartDeleteAll">장바구니비우기</a>
+				</div>
+				<div class="total_table">
+					<table>
+						<thead>
+							<tr>
+								<th>
+									<span>총 상품금액</span>
+								</th>
+								<th>
+									<span>총 배송비</span>
+								</th>
+								<th>
+									<span>총 할인금액</span>
+								</th>
+								<th>
+									<span>결제예정금액</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="sPrice"></td>
+								<td class="dPrice"></td>
+								<td class="totalDiscount"></td>
+								<td class="orderPrice"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</c:otherwise>
+		</c:choose>
 		<div class="buttons_order">
 			<a class="btn_orderAll" href="">전체상품주문</a>
 			<a class="btn_orderSelect" href="">선택상품주문</a>
-			<a class="btn_productList" href="">쇼핑계속하기</a>
+			<a class="btn_productList" href="/Project_final/product/product_list">쇼핑계속하기</a>
 		</div>
 		<div>
 		

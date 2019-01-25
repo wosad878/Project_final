@@ -25,4 +25,10 @@ public class CartService {
 	public int cartUpdate(CartDTO cartDTO) throws Exception {
 		return cartDAO.cartUpdate(cartDTO);
 	}
+	public int cartDeleteAll(String id) throws Exception{
+		return cartDAO.cartDeleteAll(id);
+	}
+	public int cartDeleteOne(String proname) throws Exception{
+		return cartDAO.cartDeleteOne(proname);
+	}
 }

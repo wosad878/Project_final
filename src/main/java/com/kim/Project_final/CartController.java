@@ -44,4 +44,33 @@ public class CartController {
 		}
 		return "redirect:./myCart";
 	}
+	
+	@RequestMapping(value="cartUpdate", method=RequestMethod.POST)
+	public String cartUpdate(HttpSession session, CartDTO cartDTO) throws Exception {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		cartDTO.setId(memberDTO.getId());
+		cartService.cartUpdate(cartDTO);
+		return "redirect:./myCart";
+	}
+	
+	@RequestMapping("cartDeleteAll")
+	public String cartDeleteAll(HttpSession session) throws Exception {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		cartService.cartDeleteAll(memberDTO.getId());
+		return "redirect:./myCart";
+	}
+	
+	@RequestMapping("cartDeleteSelect")
+	public String cartDeleteSelect(String[] ary) throws Exception {
+		for(int i=0; i<ary.length; i++) {
+			cartService.cartDeleteOne(ary[i]);	
+		}
+		return "redirect:./myCart";
+	}
+	@RequestMapping("cartDeleteOne")
+	public String cartDeleteOne(String proname) throws Exception {
+			cartService.cartDeleteOne(proname);	
+		return "redirect:./myCart";
+	}
+	
 }

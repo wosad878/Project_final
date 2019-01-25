@@ -55,7 +55,6 @@ public class MemberController {
 			request.setAttribute("cartDTO",cartDTO);
 			referer = "../cart/myCart";
 		}
-		System.out.println(referer);
 		session.setAttribute("path", referer);
 	}
 	

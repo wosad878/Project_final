@@ -12,6 +12,22 @@
 <script type="text/javascript">
 $(function(){
 	
+	$('.btn_orderSelect').click(function(){
+		var ary ='';
+		$('.oneCheck').each(function(index){
+			if($(this).is(':checked')){
+				var proname = $(this).parent().siblings('.name').html();
+				alert(proname);
+				ary = ary+'ary='+proname+"&";
+			}
+		});
+		if(ary.length > 0){
+			location.href="../order/orderBoard?"+ary;
+		}else{
+			alert('선택된 상품이 없습니다');
+		}
+	});
+	
 	$('.btn_deleteOne').click(function(){
 		var ary = new Array();
 		$('.oneCheck').each(function(index){
@@ -34,11 +50,15 @@ $(function(){
 	});	
 	var prices = 0;
 	$('.list').each(function(){
+		
+		
 		$(this).find('.btn_order').click(function(){
 			var proname = $(this).parents().siblings('.name').html();
+			var quantity = $(this).parents().siblings('.quantity').find('#quantity').val();
 			$('#frm').attr('action','../order/orderBoard');
-			$('#frm').attr('method','post');
+			$('#frm').attr('method','get');
 			$('#frm').append('<input type="hidden" name="proname" value="'+proname+'">');
+			$('#frm').append('<input type="hidden" name="quantity" value="'+quantity+'">');
 			$('#frm').submit();
 		});
 		
@@ -345,6 +365,7 @@ tfoot tr td{
 	text-align: center;
 	margin-top: 30px;
 	margin-bottom: 50px;
+	margin-left: 154px;
 }
 .buttons_order a{
 	width: 151px;
@@ -558,8 +579,8 @@ tfoot tr td{
 			</c:otherwise>
 		</c:choose>
 		<div class="buttons_order">
-			<a class="btn_orderAll" href="">전체상품주문</a>
-			<a class="btn_orderSelect" href="">선택상품주문</a>
+			<a class="btn_orderAll" href="../order/orderBoard">전체상품주문</a>
+			<a class="btn_orderSelect" href="#none">선택상품주문</a>
 			<a class="btn_productList" href="/Project_final/product/product_list">쇼핑계속하기</a>
 		</div>
 		<div>

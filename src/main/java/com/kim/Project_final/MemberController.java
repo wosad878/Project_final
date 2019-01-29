@@ -50,10 +50,12 @@ public class MemberController {
 	@RequestMapping(value="loginForm",method=RequestMethod.GET)
 	public void loginForm(HttpServletRequest request, HttpSession session, CartDTO cartDTO) {
 		String referer = request.getHeader("Referer");
-		System.out.println(cartDTO.getProname());
 		if(cartDTO.getProname() != null) {
 			request.setAttribute("cartDTO",cartDTO);
 			referer = "../cart/myCart";
+		}
+		if(referer.equals("http://localhost/Project_final/member/loginForm")) {
+			referer = "/index/home";
 		}
 		session.setAttribute("path", referer);
 	}

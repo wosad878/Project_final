@@ -58,6 +58,7 @@ $(function(){
 			location.href="/Project_final/member/loginForm";
 		}else{
 			$('#frm').attr('action','../order/orderBoard');
+			$('#frm').attr('method','get');
 			$('#frm').submit();
 		}
 	});

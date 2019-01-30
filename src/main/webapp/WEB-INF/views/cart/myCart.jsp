@@ -10,7 +10,18 @@
 <c:import url="/WEB-INF/views/temp/link.jsp" />
 <c:import url="/WEB-INF/views/temp/header.jsp" />
 <script type="text/javascript">
+$(document).on("pageload",function(){
+	window.location.reload(true);
+});
 $(function(){
+
+	$('.btn_orderAll').click(function(){
+		if($('.list').length == 0){
+			alert('선택된 상품이 없습니다.');
+		}else{
+			location.href="../order/orderBoard";
+		}
+	});
 	
 	$('.btn_orderSelect').click(function(){
 		var ary ='';
@@ -125,11 +136,11 @@ function priceText(price,count){
 		text = tprice+'원';
 	}else if(s < 4){
 		string2 = tprice.substring(0,s);
-		text = string2+'.'+string+'원';
+		text = string2+','+string+'원';
 	}else{
 		string2 = tprice.substr(tprice.length-6,3);
 		string3 = tprice.substring(0,tprice.length-6);
-		text = string3+'.'+string2+'.'+string+'원';
+		text = string3+','+string2+','+string+'원';
 	}
 	return text;
 }
@@ -579,7 +590,7 @@ tfoot tr td{
 			</c:otherwise>
 		</c:choose>
 		<div class="buttons_order">
-			<a class="btn_orderAll" href="../order/orderBoard">전체상품주문</a>
+			<a class="btn_orderAll" href="#none">전체상품주문</a>
 			<a class="btn_orderSelect" href="#none">선택상품주문</a>
 			<a class="btn_productList" href="/Project_final/product/product_list">쇼핑계속하기</a>
 		</div>

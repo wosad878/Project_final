@@ -9,13 +9,23 @@
 <c:import url="/WEB-INF/views/temp/link.jsp"></c:import>
 <c:import url="/WEB-INF/views/temp/header.jsp"></c:import>
 <script type="text/javascript">
-	$(function(){
-		$(".pnum").each(function() {
-			if($(this).html() == ${pager.curPage}){
-				$(this).css('background-color','#f2f2f2');
-			}
-		});
+$(function(){
+	
+	$('.pPrice').each(function(){
+		var price = $(this).find('span').html();
+		var s = numberWithCommas(price);
+		$(this).find('span').html(s+'원');
 	});
+	
+	$(".pnum").each(function() {
+		if($(this).html() == '${pager.curPage}'){
+			$(this).css('background-color','#f2f2f2');
+		}
+	});
+});
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 </script>
 <style type="text/css">
 	.contents{

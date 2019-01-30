@@ -37,7 +37,14 @@ public class CartController {
 	public String cartInsert(CartDTO cartDTO, HttpSession session) throws Exception {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		cartDTO.setId(memberDTO.getId());
-		if(cartService.cartSelect(cartDTO).getProname() == null) {
+		List<CartDTO> ar = cartService.cartSelectList(memberDTO.getId());
+		int count = 0;
+		for(CartDTO c : ar) {
+			if(c.getProname().equals(cartDTO.getProname())) {
+				count++;
+			}
+		}
+		if(count == 0) {
 			cartService.cartInsert(cartDTO);
 		}else {
 			cartService.cartUpdate(cartDTO);

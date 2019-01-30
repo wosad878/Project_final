@@ -105,11 +105,11 @@ function priceText(q){
 	var s = tprice.length-3;
 	if(s < 4){
 		string2 = tprice.substring(0,s);
-		text = string2+'.'+string+'원';
+		text = string2+','+string+'원';
 	}else{
 		string2 = tprice.substr(tprice.length-6,3);
 		string3 = tprice.substring(0,tprice.length-6);
-		text = string3+'.'+string2+'.'+string+'원';
+		text = string3+','+string2+','+string+'원';
 	}
 	return text;
 }

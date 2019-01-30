@@ -4,6 +4,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kim.Project_final.cart.CartDTO;
+
 @Service
 public class AjaxService {
 
@@ -12,5 +14,8 @@ public class AjaxService {
 	
 	public String checkId(String id) throws Exception {
 		return ajaxDAO.checkId(id);
+	}
+	public int cartDelete(CartDTO cartDTO) throws Exception {
+		return ajaxDAO.cartDelete(cartDTO);
 	}
 }

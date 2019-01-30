@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kim.Project_final.cart.CartDTO;
 import com.kim.Project_final.cart.CartService;
 import com.kim.Project_final.member.MemberDTO;
-import com.kim.Project_final.product.ProductDTO;
 import com.kim.Project_final.product.ProductService;
 
 @Controller
@@ -33,7 +32,6 @@ public class OrderController {
 		List<CartDTO> ar;
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		if(ary != null) {
-			System.out.println(1);
 			ar = new ArrayList<CartDTO>();
 			for(int i=0; i<ary.length; i++) {
 				cartDTO = new CartDTO();
@@ -43,19 +41,23 @@ public class OrderController {
 				ar.add(cartDTO);
 			}
 		}else if(cartDTO.getProname() != null) {
-			System.out.println(2);
 			ar = new ArrayList<CartDTO>();
 			cartDTO.setId(memberDTO.getId());
-			if(cartService.cartSelect(cartDTO) == null) {
-				cartService.cartInsert(cartDTO);
+			List<CartDTO> ar2 = cartService.cartSelectList(memberDTO.getId());
+			int count = 0;
+			for(CartDTO c : ar2) {
+				if(c.getProname().equals(cartDTO.getProname())) {
+					count++;
+				}
 			}
-			if(cartService.cartSelect(cartDTO).getQuantity() != cartDTO.getQuantity()) {
+			if(count == 0) {
+				cartService.cartInsert(cartDTO);
+			}else {
 				cartService.cartUpdate(cartDTO);
 			}
 			cartDTO = cartService.cartSelect(cartDTO);
 			ar.add(cartDTO);
 		}else {
-			System.out.println(3);
 			ar = cartService.cartSelectList(memberDTO.getId());
 		}
 		model.addAttribute("cartList",ar);

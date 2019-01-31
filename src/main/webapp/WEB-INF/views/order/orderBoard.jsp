@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <c:import url="../temp/link.jsp" />
 <c:import url="../temp/header.jsp" />
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <style type="text/css">
 .contents{
 	margin: 0 auto;
@@ -81,6 +81,11 @@
 }
 .orderTable table td:nth-child(4){
 	font-weight: bold;
+}
+.orderTable table td:last-child{
+	width: 80px;
+	text-align: right;
+	padding-right: 10px;
 }
 .orderTable table tfoot{
 }
@@ -275,12 +280,178 @@ textarea:focus {
     color: #353535;
     line-height: 1.5;
 }
+.payment{
+	display: inline-block;
+	width: 100%;
+	border-right: 1px solid #e7e7e7;
+	float: left;
+}
 .base-table{
 	padding: 20px 20px;
 }
+#bank{
+	height: 26px;
+	font-size: 12px;
+    border: 1px solid #e7e7e7;
+}
+#bank-button{
+	display: block;
+	width: 120px;
+	height: 30px;
+	border: 1px solid #e7e7e7;
+	text-align: center;
+	line-height: 27px;
+	margin-top: 10px;
+	border-radius: 4px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    border-bottom-color: #c7c7c7;
+}
+select:focus {
+	outline: none;
+}
+#escro-info{
+	display: none;
+}
+#escro-check{
+	margin-right: 5px;
+}
+#escro-info span{
+	position: relative;
+	top: -8px;
+	font-size: 13px;
+}
+#card-info{
+	background:url('/Project_final/resources/images/icon/ico_info.gif') no-repeat;
+	display: none;
+}
+#card-info span{
+	display: inline-block;
+	margin-left:20px;
+	font-size: 12px;
+	position: relative;
+	top: -6px;
+}
+.totalArea{
+	width: 230px;
+	height: 100%;
+	display: block;
+	margin: 0 -241px 0 0;
+	float:right;
+	font-size: 12px;
+	text-align: right;
+	position: relative;
+}
+.totalArea h4{
+	display: block;
+	position: relative;
+	right: 0;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+.totalArea-price{
+	display: block;
+	color: #e30d15;
+	font-weight: bold;
+	font-size: 16px;
+	margin-right: 10px;
+	margin-top: 15px;
+}
+.totalArea-price span{
+	font-size: 23px;
+}
+.paymentAgree{
+	padding-right: 5px;
+	text-align: left;
+	padding: 0 10px 0 15px;
+	margin-top: 30px;
+}
+.paymentAgree input{
+	margin: 0;
+	position: absolute;
+	left: 0;
+	display: block;
+}
+.paymentAgree label{
+}
+.base-help{
+	margin-top: 20px;
+	margin-bottom: 50px;
+	border: 1px solid #e7e7e7;
+}
+.base-help h3{
+	display: block;
+	padding: 10px 0 10px 10px;
+	border-bottom: 1px solid #e7e7e7;
+	background: #fbfbfb;
+	font-size: 12px;
+	font-weight: bold;
+}
+.base-help div{
+	font-size: 12px;
+	line-height: 20px;
+	vertical-align: middle;
+	padding: 0 10px 18px 10px;
+}
+.base-help ul{
+	margin-top: 18px;
+}
+.base-help li{
+	background: url('/Project_final/resources/images/icon/ico_dash.gif') no-repeat 0.7px;
+	padding-left: 10px;
+}
+#pay-button{
+	display: block;
+	width: 220px;
+	height: 40px;
+	font-size: 12px;
+	font-weight: bold;
+	text-align:center;
+	border: 1px solid black;
+	border-radius: 3px;
+	background: #393939;
+	margin-top: 20px;
+	line-height: 35px;
+}
+#pay-button:link,#pay-button:visited {
+	color: white;
+}
+
 </style>
 <script type="text/javascript">
 $(function(){
+
+	$('#pay-button').click(function(){
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp37914188'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    escrow : false,
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:결제테스트',
+		    amount : 1,
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456',
+		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+	});
+
+	
 	var totalPrice = 0;
 	$('.list').each(function(){
 		var tprice = 0;
@@ -297,8 +468,7 @@ $(function(){
 		$(this).children('.price').html(price+'원');
 		$(this).children('.total').html(tprice+"원");
 	});
-	var tp = numberWithCommas(totalPrice);
-	$('.sPrice span').html(tp);
+	
 	var discount = (totalPrice -2500)/10;
 	if(0<(discount%10)<6){
 		discount = discount - (discount%10);
@@ -307,10 +477,15 @@ $(function(){
 	}
 	tp = numberWithCommas(discount);
 	$('.discount span').html(tp);
-	var lp = totalPrice-discount;
-	tp = numberWithCommas(lp);
-	$('.finalPrice span').html(tp);
 	
+	if(totalPrice >= 30000){
+		var lp = totalPrice-discount;
+	}else{
+		var lp = totalPrice+2500-discount;
+	}
+		var tp = numberWithCommas(lp);
+		$('.finalPrice span').html(tp);
+		$('.totalArea-price span').html(tp);
 	deliverPrice(totalPrice);
 	
 	$('.btn_delete').click(function(){
@@ -362,12 +537,14 @@ function deliverPrice(totalPrice){
 		var tp = numberWithCommas(totalPrice);
 		$('.tfoot').find('p').html(tp);
 		$('.tfoot').find('h6').html(tp);
+		$('.sPrice span').html(tp);
 	}else{
 		$('.tfoot').find('h5').html('2500');
 		var tp = numberWithCommas(totalPrice);
 		$('.tfoot').find('p').html(tp);
 		tp = numberWithCommas(totalPrice+2500);
 		$('.tfoot').find('h6').html(tp);
+		$('.sPrice span').html(tp);
 	}
 }
 function numberWithCommas(x) {
@@ -569,40 +746,76 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			<div class="payArea">
 				<div class="payment">
 					<div class="method">
-						<span><input id="pay1" type="radio" name="payment"><label for="pay1">무통장 입금</label></span>
+						<span><input id="pay1" type="radio" name="payment" checked="checked"><label for="pay1">무통장 입금</label></span>
 						<span><input id="pay2" type="radio" name="payment"><label for="pay2">카드 결제</label></span>
 						<span><input id="pay3" type="radio" name="payment"><label for="pay3">에스크로(실시간 계좌이체)</label></span>
 					</div>
 					<div class="base-table">
 						<!-- 무통장 입금 -->
-						<table>
+						<table id="pay-info">
 							<tbody>
 								<tr>
 									<th>입금자명</th>
-									<td><input id="user" type="text"></td>
+									<td><input id="user" type="text" style="width: 100px;"></td>
 								</tr>
 								<tr>
 									<th>입금은행</th>
-									<td><select>
-											<option></option>
+									<td><select id="bank">
+											<option value="810101-04-267951:(주) 엠에스네츄럴:국민은행:www.kbstar.com">국민은행:000000-00-000000 (주) xxxxxx</option>
 										</select>
+										<a id="bank-button" href="#none">은행사이트 바로가기</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- 에스크로 -->
+						<table id="escro-info">
+							<tbody>
+								<tr>
+									<th></th>
+									<td><input id="escro-check" type="checkbox"><span>에스크로(구매안전)서비스를 적용합니다.</span></td>
+								</tr>
+								<tr>
+									<th>입금은행</th>
+									<td><select id="bank">
+											<option value="810101-04-267951:(주) 엠에스네츄럴:국민은행:www.kbstar.com">국민은행:000000-00-000000 (주) xxxxxx</option>
+										</select>
+										
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<!-- 카드 결제 -->
-						
-						<!-- 에스크로 -->
+						<p id="card-info"><span>소액 결제의 경우 PG사 정책에 따라 결제 금액 제한이 있을 수 있습니다.</span></p>
 					</div>
 					<div></div>
 				</div>
-				<div class="total"></div>
+				<div class="totalArea">
+					<h4><strong></strong><span>최종결제금액</span></h4>
+					<p class="totalArea-price"><span></span>원</p>
+					<p class="paymentAgree">
+						<input id="agreeCheck" value="T" type="checkbox">
+						<label for="agreeCheck">결제정보를 확인하였으며, 구매진행에 동의합니다.</label>
+					</p>
+					<a id="pay-button" href="#none"><i class="fa fa-check" aria-hidden="true"></i> 결제하기</a>
+				</div>
+			</div>
+			<div class="base-help">
+				<h3>무이자 할부 이용 안내</h3>
+				<div>
+					<ul>
+						<li>무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다.</li>
+						<li>무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만 선택하여 주문하여 주시기 바랍니다.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="base-help2">
 			</div>
 		</div>
 	</div>
 </div>
 <div class="footer">
-<%-- 	<c:import url="../temp/footer.jsp" /> --%>
+	<c:import url="../temp/footer.jsp" />
 </div>
 </body>
 </html>

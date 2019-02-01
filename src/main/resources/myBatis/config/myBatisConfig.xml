@@ -11,5 +11,6 @@
 		<typeAlias type="com.kim.Project_final.productImage.ProductImageDTO" alias="ProductImageDTO"/>
 		<typeAlias type="com.kim.Project_final.productBoard.ProductBoardDTO" alias="ProductBoardDTO"/>
 		<typeAlias type="com.kim.Project_final.cart.CartDTO" alias="CartDTO"/>
+		<typeAlias type="com.kim.Project_final.address.AddressDTO" alias="AddressDTO"/>
 	</typeAliases>
 </configuration>

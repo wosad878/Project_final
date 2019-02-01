@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <c:import url="../temp/link.jsp" />
 <c:import url="../temp/header.jsp" />
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
 <style type="text/css">
 .contents{
 	margin: 0 auto;
@@ -181,6 +181,7 @@
 }
 .table table th{
 	width: 151px;
+	min-width: 151px;
     padding: 12px 0 11px 18px;
     text-align: left;
     font-weight: normal;
@@ -253,6 +254,37 @@ textarea:focus {
 }
 .table3 span{
 	font-size: 22px;
+}
+.addr label{
+	font-size: 13px;
+	position: relative;
+	top: 3px;
+	left: -6px;
+}
+.addr input{
+	vertical-align: middle;
+	width: 13px;
+	height: 13px;
+}
+.addr div{
+	display: block;
+}
+.addr a{
+	display: inline-block;
+	width: 89px;
+	height: 30px;
+	color: #fff;
+    border: 1px solid #939393;
+    border-bottom-color: #818181;
+    border-radius: 3px;
+    line-height: 30px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    background: #9b9b9b;
+    font-size: 12px;
+    box-sizing: content-box;
+ 	margin-left: 5px;
+ 	vertical-align: middle;
 }
 .method{
 	padding: 17px 20px 15px;
@@ -415,42 +447,73 @@ select:focus {
 #pay-button:link,#pay-button:visited {
 	color: white;
 }
-
+.es-check{
+	margin: 0;
+}
+.es-label{
+	display: inline-block;
+	position: relative;
+	top: -7px;
+	left: -9px;
+	font-size: 14px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
-
-	$('#pay-button').click(function(){
-		var IMP = window.IMP; // 생략가능
-		IMP.init('imp37914188'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-		IMP.request_pay({
-		    pg : 'inicis', // version 1.1.0부터 지원.
-		    pay_method : 'card',
-		    escrow : false,
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '주문명:결제테스트',
-		    amount : 1,
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',
-		    buyer_postcode : '123-456',
-		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		        var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    } else {
-		        var msg = '결제에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		});
+	var address = '${member.address}';
+	var fn = address.indexOf(['||']);
+	var ln = address.lastIndexOf(['||']);
+	
+	var adr1 = address.substring(0,fn);
+	var adr2 = address.substring(fn+2,ln);
+	var adr3 = address.substring(ln+2);
+	$('#location1').val(adr1);
+	$('#location2').val(adr2);
+	$('#location3').val(adr3);
+		
+	var phone = '${member.phone}';
+	fn = phone.indexOf(['-']);
+	ln = phone.lastIndexOf(['-']);
+	
+	var ph1 = phone.substring(0,fn);
+	var ph2 = phone.substring(fn+1,ln);
+	var ph3 = phone.substring(ln+1);
+	$('.phone_first').val(ph1);
+	$('#phone_first_select').val(ph1);
+	$('.phone_middle').val(ph2);
+	$('.phone_last').val(ph3);
+	
+	var email = '${member.email}';
+	fn = email.indexOf(['@']);
+	var em1 = email.substring(0,fn);
+	var em2 = email.substring(fn+1);
+	$('.email_first').val(em1);
+	$('#selectEmail').val(em2);
+	$('.email_last').val($('#selectEmail').val());
+	
+	$('#selectEmail').change(function(){
+		$('.email_last').val($('#selectEmail').val());
+	})
+	$('#equal').click(function(){
+		$('#receiver').val($('#name').val());
+		$('#locat1').val($('#location1').val());
+		$('#locat2').val($('#location2').val());
+		$('#locat3').val($('#location3').val());
+		$('.phone_f').val($('.phone_first').val());
+		$('#phone_fs').val($('#phone_first_select').val());
+		$('.phone_m').val($('.phone_middle').val());
+		$('.phone_l').val($('.phone_last').val());
 	});
-
+	$('#new').click(function(){
+		$('#receiver').val("");
+		$('#locat1').val("");
+		$('#locat2').val("");
+		$('#locat3').val("");
+		$('.phone_f').val('010');
+		$('#phone_fs').val('010');
+		$('.phone_m').val("");
+		$('.phone_l').val("");
+	});
 	
 	var totalPrice = 0;
 	$('.list').each(function(){
@@ -470,6 +533,7 @@ $(function(){
 	});
 	
 	var discount = (totalPrice -2500)/10;
+	var lp = 0;
 	if(0<(discount%10)<6){
 		discount = discount - (discount%10);
 	}else{
@@ -479,14 +543,83 @@ $(function(){
 	$('.discount span').html(tp);
 	
 	if(totalPrice >= 30000){
-		var lp = totalPrice-discount;
+		lp = totalPrice-discount;
 	}else{
-		var lp = totalPrice+2500-discount;
+		lp = totalPrice+2500-discount;
 	}
+		$('#tprice').val(lp);
 		var tp = numberWithCommas(lp);
 		$('.finalPrice span').html(tp);
 		$('.totalArea-price span').html(tp);
 	deliverPrice(totalPrice);
+	
+	var user_select = "";
+	var user_esc = false;
+	$('#pay1').click(function(){
+		$('#pay-info').css('display','table');
+		$('#escro-info').css('display','none');
+		$('#card-info').css('display','none');
+	});
+	$('#pay2').click(function(){
+		$('#pay-info').css('display','none');
+		$('#escro-info').css('display','none');
+		$('#card-info').css('display','block');
+		user_select = 'card';
+	});
+	$('#pay3').click(function(){
+		$('#pay-info').css('display','none');
+		$('#escro-info').css('display','table');
+		$('#card-info').css('display','none');
+		user_select = 'trans';
+		if($('#es-check').is(':checked')){
+			user_esc = true;
+		}else{
+			user_esc = false;
+		}
+	});
+
+	$('#pay-button').click(function(){
+		if ($('#agreeCheck').prop('checked') == false){
+			alert("구매진행에 동의하지 않았습니다.");
+		}else{
+			if($('#pay1').is(':checked')){
+				if($('#user').val() != ""){
+					
+				}else{
+					
+				}
+			}else{
+				var IMP = window.IMP; // 생략가능
+				IMP.init('imp37914188'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+				IMP.request_pay({
+				    pg : 'inicis', // version 1.1.0부터 지원.
+				    pay_method : user_select,
+				    escrow : user_esc,
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : '주문명:결제테스트',
+				    amount : lp,
+				    buyer_email : 'iamport@siot.do',
+				    buyer_name : '${member.name}',
+				    buyer_tel : '${member.phone}',
+				    buyer_addr : '${member.address}',
+				    buyer_postcode : '123-456',
+				    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+				}, function(rsp) {
+				    if ( rsp.success ) {
+				        var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				    } else {
+				        var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				    }
+				    alert(msg);
+				});
+			}
+		}
+	});
 	
 	$('.btn_delete').click(function(){
 		var check = 0;
@@ -529,7 +662,24 @@ $(function(){
 			}
 		}
 	});
+	
+	$('#AllCheck').click(function(){
+		if($('#AllCheck').is(':checked')){
+			$('.list').each(function(){
+				$(this).find('#oneCheck').prop('checked', true);
+			});
+		}else{
+			$('.list').each(function(){
+				$(this).find('#oneCheck').prop('checked', false);
+			});
+		}
+	});
+	
 });
+
+function addressList(){
+	window.open('../address/addressForm','window_name','width=800,height=500,location=no,status=no,scrollbars=yes');
+}
 
 function deliverPrice(totalPrice){
 	if(totalPrice >= 30000){
@@ -584,7 +734,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<table>
 					<thead>
 						<tr>
-							<th><input type="checkbox"></th>
+							<th><input type="checkbox" id="AllCheck"></th>
 							<th>이미지</th>
 							<th>상품정보</th>
 							<th>판매가</th>
@@ -610,7 +760,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 							<td class="deliver">기본배송</td>
 							<td class="deleverPrice">[조건]</td>
 							<td class="total">
-								<input type="hidden" id="tprice" name="tprice">
+								
 							</td>
 						</tr>
 						</c:forEach>
@@ -627,7 +777,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				</div>
 				<div class="selectBox">
 					<span><strong>선택상품을</strong> <a class="btn_delete" href="#none">삭제하기</a></span>
-					<a class="btn_back" href="../cart/myCart">장바구니 이동</a>
+					<a class="btn_back" href="../cart/myCart">장바구니</a>
 				</div>
 			</div>
 		</div>
@@ -639,7 +789,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			<table class="table1">
 				<tr>
 					<th>주문하시는 분 <img src="/Project_final/resources/images/icon/ico_required.png"></th>
-					<td><input id="name" type="text" name="name"></td>
+					<td><input id="name" type="text" name="name" value="${member.name}"></td>
 				</tr>
 				<tr>
 					<th>주소 <img src="/Project_final/resources/images/icon/ico_required.png"></th>
@@ -659,7 +809,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 								<option value="018">018</option>
 								<option value="019">019</option>
 							</select>-
-								<input class="phone_first" name="phone_first" type="hidden" value="010">
+								<input class="phone_first" name="phone_first" type="hidden">
 								<input class="phone_middle" numberOnly name="phone_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
 								<input class="phone_last" numberOnly name="phone_last" type="text" style="width:70px;margin-left:5px;">
 								<input id="phone" type="hidden" name ="phone"></td>
@@ -691,7 +841,14 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			<table class="table2">
 				<tr>
 					<th>배송지 선택</th>
-					<td></td>
+					<td class="addr">
+						<div>
+							<input type="radio" id="equal" name="addr_select"><label for="equal">주문자 정보와 동일</label>
+							<input type="radio" id="new" name="addr_select"><label for="new">새로운 배송지</label>
+							<a href="#none" onclick="addressList()"><i class="fa fa-map-marker" aria-hidden="true"></i> 주소록 보기</a>
+							
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<th>받으시는 분 <img src="/Project_final/resources/images/icon/ico_required.png"></th>
@@ -722,7 +879,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				</tr>
 				<tr>
 					<th>배송메시지</th>
-					<td><textarea id="msg" name="message" cols="155" rows="3" style="resize: none;border:1px solid #e7e7e7;"></textarea></td>
+					<td><textarea id="msg" name="message" cols="152" rows="3" style="resize: none;border:1px solid #e7e7e7;"></textarea></td>
 				</tr>
 			</table>
 			<div class="table_info">
@@ -746,9 +903,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			<div class="payArea">
 				<div class="payment">
 					<div class="method">
-						<span><input id="pay1" type="radio" name="payment" checked="checked"><label for="pay1">무통장 입금</label></span>
-						<span><input id="pay2" type="radio" name="payment"><label for="pay2">카드 결제</label></span>
-						<span><input id="pay3" type="radio" name="payment"><label for="pay3">에스크로(실시간 계좌이체)</label></span>
+						<span><input id="pay1" type="radio" name="payment" value="bank" checked="checked"><label for="pay1">무통장 입금</label></span>
+						<span><input id="pay2" type="radio" name="payment" value="card"><label for="pay2">카드 결제</label></span>
+						<span><input id="pay3" type="radio" name="payment" value="escro"><label for="pay3">에스크로(실시간 계좌이체)</label></span>
 					</div>
 					<div class="base-table">
 						<!-- 무통장 입금 -->
@@ -756,7 +913,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 							<tbody>
 								<tr>
 									<th>입금자명</th>
-									<td><input id="user" type="text" style="width: 100px;"></td>
+									<td><input id="user" name="bankName" type="text" style="width: 100px;"></td>
 								</tr>
 								<tr>
 									<th>입금은행</th>
@@ -772,15 +929,13 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 						<table id="escro-info">
 							<tbody>
 								<tr>
-									<th></th>
-									<td><input id="escro-check" type="checkbox"><span>에스크로(구매안전)서비스를 적용합니다.</span></td>
+									<th>예금주명</th>
+									<td><input type="text" style="width: 100px;"></td>
 								</tr>
 								<tr>
-									<th>입금은행</th>
-									<td><select id="bank">
-											<option value="810101-04-267951:(주) 엠에스네츄럴:국민은행:www.kbstar.com">국민은행:000000-00-000000 (주) xxxxxx</option>
-										</select>
-										
+									<th></th>
+									<td>
+										<input type="checkbox" id="es-check" value="t"> <label for="es-check" class="es-label">에스크로(구매안전)서비스를 적용합니다.</label>
 									</td>
 								</tr>
 							</tbody>
@@ -798,6 +953,12 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 						<label for="agreeCheck">결제정보를 확인하였으며, 구매진행에 동의합니다.</label>
 					</p>
 					<a id="pay-button" href="#none"><i class="fa fa-check" aria-hidden="true"></i> 결제하기</a>
+					<div class="hidden">
+						<c:forEach items="${cartList}" var="cart">
+							<input type="hidden" name="proname" value="${cart.proname}">
+						</c:forEach>
+						<input type="hidden" id="tprice" name="tprice">
+					</div>
 				</div>
 			</div>
 			<div class="base-help">

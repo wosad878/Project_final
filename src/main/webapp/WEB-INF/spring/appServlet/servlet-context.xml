@@ -21,8 +21,25 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- Interceptor 객체 생성-->
+	<beans:bean id="interceptor" class="com.kim.Project_final.interceptor.LoginInterceptor">
+	</beans:bean>
+	<beans:bean id="AdminInterceptor" class="com.kim.Project_final.interceptor.AdminInterceptor">
+	</beans:bean>
 	
-	
+	<!-- Interceptor 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/cart/myCart"/>
+			<mapping path="/order/orderBoard"/>
+			<mapping path="/member/updateForm"/>
+			<beans:ref bean="interceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/product/product_insert"/>
+			<beans:ref bean="AdminInterceptor"/>
+		</interceptor>
+	</interceptors>	
 	<context:component-scan base-package="com.kim.Project_final" />
 	
 	

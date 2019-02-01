@@ -54,7 +54,7 @@ public class MemberController {
 			request.setAttribute("cartDTO",cartDTO);
 			referer = "../cart/myCart";
 		}
-		if(referer.equals("http://localhost/Project_final/member/loginForm")) {
+		if(referer == null || referer.equals("http://localhost/Project_final/member/loginForm")) {
 			referer = "/index/home";
 		}
 		session.setAttribute("path", referer);

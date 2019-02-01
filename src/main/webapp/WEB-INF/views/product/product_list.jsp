@@ -227,7 +227,7 @@ function numberWithCommas(x) {
 				<c:forEach items="${list}" var="list">
 				<li class="item_li">
 					<div class="pImg">
-						<a href="/Project_final/product/product_select?num=${list.num}"><img src ="/Project_final/resources/photoUpload/${list.fname}"></a>
+						<a href="/Project_final/product/product_select?num=${list.num}"><img src ="/Project_final/resources/photoUpload/${list.fname}" style="width: 290px; height: 290px;"></a>
 					</div>
 					<div class="pInfo">
 						<div class="pName">

@@ -60,7 +60,7 @@
 .logoImage{
 	min-width: 1251px;
 	position: relative;
-	z-index:10;
+	z-index:999;
 }
 .lnb{
 	width: 100%;

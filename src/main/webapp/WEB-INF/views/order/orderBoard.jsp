@@ -460,6 +460,7 @@ select:focus {
 </style>
 <script type="text/javascript">
 $(function(){
+	
 	var address = '${member.address}';
 	var fn = address.indexOf(['||']);
 	var ln = address.lastIndexOf(['||']);
@@ -494,15 +495,9 @@ $(function(){
 	$('#selectEmail').change(function(){
 		$('.email_last').val($('#selectEmail').val());
 	})
+	equal();
 	$('#equal').click(function(){
-		$('#receiver').val($('#name').val());
-		$('#locat1').val($('#location1').val());
-		$('#locat2').val($('#location2').val());
-		$('#locat3').val($('#location3').val());
-		$('.phone_f').val($('.phone_first').val());
-		$('#phone_fs').val($('#phone_first_select').val());
-		$('.phone_m').val($('.phone_middle').val());
-		$('.phone_l').val($('.phone_last').val());
+		equal()
 	});
 	$('#new').click(function(){
 		$('#receiver').val("");
@@ -678,8 +673,19 @@ $(function(){
 	
 });
 
+function equal(){
+	$('#receiver').val($('#name').val());
+	$('#locat1').val($('#location1').val());
+	$('#locat2').val($('#location2').val());
+	$('#locat3').val($('#location3').val());
+	$('.phone_f').val($('.phone_first').val());
+	$('#phone_fs').val($('#phone_first_select').val());
+	$('.phone_m').val($('.phone_middle').val());
+	$('.phone_l').val($('.phone_last').val());
+};
+
 function addressList(){
-	window.open('../address/addressForm','window_name','width=800,height=500,location=no,status=no,scrollbars=yes');
+	window.open('../address/addressList','window_name','width=800,height=500,location=no,status=no,scrollbars=yes');
 }
 
 function deliverPrice(totalPrice){

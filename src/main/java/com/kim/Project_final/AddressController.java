@@ -20,10 +20,13 @@ public class AddressController {
 	@Inject
 	private AddressService addressService;
 	
-	@RequestMapping("addressForm")
+	@RequestMapping("addressList")
 	public void addressList(HttpSession session, Model model) throws Exception {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		List<AddressDTO> ar = addressService.selectList(memberDTO.getId());
 		 model.addAttribute("list", ar);
 	}
+	
+	@RequestMapping("addressForm")
+	public void addressForm() {}
 }

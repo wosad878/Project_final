@@ -532,9 +532,10 @@ $(function(){
 		$(this).children('.total').html(tprice+"원");
 	});
 	
-	var discount = (totalPrice -2500)/10;
+	var discount = (totalPrice)*0.01;
 	var lp = 0;
-	if(0<(discount%10)<6){
+	
+	if((discount%10)<6){
 		discount = discount - (discount%10);
 	}else{
 		discount = discount + (10 - discount%10);
@@ -843,7 +844,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 					<th>배송지 선택</th>
 					<td class="addr">
 						<div>
-							<input type="radio" id="equal" name="addr_select"><label for="equal">주문자 정보와 동일</label>
+							<input type="radio" id="equal" name="addr_select" checked="checked"><label for="equal">주문자 정보와 동일</label>
 							<input type="radio" id="new" name="addr_select"><label for="new">새로운 배송지</label>
 							<a href="#none" onclick="addressList()"><i class="fa fa-map-marker" aria-hidden="true"></i> 주소록 보기</a>
 							

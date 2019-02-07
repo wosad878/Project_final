@@ -18,8 +18,9 @@ public class ProductBoardDAO {
 	public int insert(ProductBoardDTO productBoardDTO) throws Exception {
 		return session.insert(NAMESPACE+"insert", productBoardDTO);
 	}
-	public int imgInsert(List<ProductImageDTO> ar) throws Exception {
+	public int imgInsert(List<ProductImageDTO> ar, int num) throws Exception {
 		for(int i=0; i< ar.size(); i++) {
+			ar.get(i).setNum(num);
 			session.insert(NAMESPACE+"imgInsert", ar.get(i));
 		}
 		return 1;

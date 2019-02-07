@@ -14,7 +14,7 @@ public class productBoardService {
 	@Inject
 	private ProductBoardDAO productBoardDAO;
 	
-	public int imgInsert(List<ProductImageDTO> ar) throws Exception {
-		return productBoardDAO.imgInsert(ar);
+	public int imgInsert(List<ProductImageDTO> ar, int num) throws Exception {
+		return productBoardDAO.imgInsert(ar, num);
 	}
 }

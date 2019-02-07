@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="productImageMapper">
 	<insert id="insert" parameterType="ProductImageDTO">
-		insert into ps_img(num, name, fname, oname) values(ps_img_seq.nextval,#{name},#{fname},#{oname})
+		insert into ps_img(num, name, fname, oname) values(#{num},#{name},#{fname},#{oname})
 	</insert>
 	<select id="selectImages" parameterType="java.lang.String" resultType="ProductImageDTO">
 		select * from ps_img where name = #{name}

@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="productBoardMapper">
   	<insert id="insert" parameterType="ProductBoardDTO">
-  		insert into pro_board(num,name,contents,reg_date) values(pro_board_seq.nextval,#{name},#{contents},sysdate)
+  		insert into pro_board(num,name,contents,reg_date) values(#{num},#{name},#{contents},sysdate)
   	</insert>
   	<insert id="imgInsert" parameterType="ProductImageDTO">
-  		insert into pro_board_img (num,name,fname) values(proboardimg_seq.nextval, #{name}, #{fname})
+  		insert into pro_board_img (num,name,fname) values(#{num}, #{name}, #{fname})
   	</insert>
   	<select id="selectOne" parameterType="java.lang.String" resultType="ProductBoardDTO">
   		select * from pro_board where name= #{name}

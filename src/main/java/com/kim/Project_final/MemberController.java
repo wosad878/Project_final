@@ -38,6 +38,7 @@ public class MemberController {
 	
 	@RequestMapping(value="joinResult",method=RequestMethod.POST)
 	public Model joinResult(MemberDTO memberDTO, Model model) throws Exception {
+		System.out.println(memberDTO.getTel());
 		int result = memberService.memberJoin(memberDTO);
 		if(result == 1) {
 			model.addAttribute("member", memberDTO).addAttribute("result", 1);

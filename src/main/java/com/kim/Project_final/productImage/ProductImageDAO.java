@@ -14,9 +14,10 @@ public class ProductImageDAO {
 	private SqlSession session;
 	private final String NAMESPACE = "productImageMapper.";
 	
-	public int insert(List<ProductImageDTO> ar) throws Exception{
+	public int insert(List<ProductImageDTO> ar, int num) throws Exception{
 		int result = 0;
 		for(int i=0; i< ar.size(); i++) {
+			ar.get(i).setNum(num);
 			result = session.insert(NAMESPACE+"insert", ar.get(i));
 			if(result < 1) {
 				new Exception("DB저장 오류");

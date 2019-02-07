@@ -4,15 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="memberMapper">
   	<insert id="insert" parameterType="MemberDTO">
-  		insert into member(num,id,password,name,address,tel,phone,email,
+  		insert into member(id,password,name,address,tel,phone,email,
   		birth,smscheck,emailcheck,membertype)
   		values(
-  			member_seq.nextval,#{id},#{password},#{name},#{address},#{tel},
+  			#{id},#{password},#{name},#{address},#{tel, jdbcType=VARCHAR},
   			#{phone},#{email},#{birth},#{smscheck},#{emailcheck},#{membertype}
   		)
   	</insert>
   	<select id="memberLogin" resultType="MemberDTO" parameterType="MemberDTO">
-  		select num, id, name, address, tel, phone, email, birth, membertype,
+  		select id, name, address, tel, phone, email, birth, membertype,
   		 smscheck, emailcheck from member
   		 where id=#{id} and password=#{password}
   	</select>

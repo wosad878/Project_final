@@ -196,7 +196,9 @@ function numberWithCommas(x) {
 			</div>
 			<div class="name_inner">
 				<h3 class="pro_name">전체상품</h3>
-				<a class="inputProduct" href="/Project_final/product/product_insert">상품등록</a>
+				<c:if test="${member.membertype eq 'admin'}">
+					<a class="inputProduct" href="/Project_final/product/product_insert">상품등록</a>
+				</c:if>
 			</div>
 		</div>
 		<div class="sub-menu">

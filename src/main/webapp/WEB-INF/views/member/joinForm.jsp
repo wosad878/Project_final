@@ -113,8 +113,8 @@
 								<option value="019">019</option>
 							</select>-
 							<input class="tel_first" name="tel_first" type="hidden" value="02">
-							<input class="tel_middle" numberOnly name ="tel_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
-							<input class="tel_last" numberOnly name ="tel_last" type="text" style="width:70px;margin-left:5px;">
+							<input class="tel_middle" numberOnly name ="tel_middle" type="number" style="width:70px;margin-right:10px;margin-left:5px;">-
+							<input class="tel_last" numberOnly name ="tel_last" type="number" style="width:70px;margin-left:5px;">
 							<input id="tel" type="hidden" name ="tel"></td>
 					</tr>
 					<tr>

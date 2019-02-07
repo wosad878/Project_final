@@ -123,7 +123,8 @@ public class ProductController {
 			productImageDTO.setFname(ar2.get(i));
 			ar3.add(productImageDTO);
 		}
-		productBoardService.imgInsert(ar3);
+		int num = productService.selectOne(productDTO.getName()).getNum();
+		productBoardService.imgInsert(ar3, num);
 		for(int i=0; i<ar.size(); i++) {
 			FileUploader.nioFileDelete(inFolder+ar.get(i));
 		}

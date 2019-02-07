@@ -89,9 +89,8 @@ $(document).ready(function(){
 			if($('.tel_last').val() != "" && $('.tel_middle').val() != ""){
 				$('#tel').val($('.tel_first').val()+"-"+$('.tel_middle').val()+"-"+$('.tel_last').val());
 			}else{
-				$('#tel').val("0");
+				$('#tel').removeAttr('name');
 			}
-			
 			if($('#smscheck').is(':checked')){
 				$('#smscheck1').val('check');
 			}else{

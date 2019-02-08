@@ -6,4 +6,9 @@
   		<select id="selectList" parameterType="java.lang.String" resultType="AddressDTO">
   			select * from address where id=#{id}
 	  	</select>
+	  	<insert id="insert" parameterType="AddressDTO">
+	  		insert into address(id,adrname,receiver,tel1,tel2,tel3,phone1,phone2,phone3,address1,address2,address3) values(
+	  		#{id},#{adrName, jdbcType=VARCHAR},#{receiver},#{tel1, jdbcType=VARCHAR},#{tel2, jdbcType=VARCHAR},#{tel3, jdbcType=VARCHAR},
+	  		#{phone1},#{phone2},#{phone3},#{address1},#{address2},#{address3})
+	  	</insert>
   </mapper>

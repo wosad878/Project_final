@@ -7,6 +7,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/temp/link.jsp" />
+<script type="text/javascript">
+$(function(){
+	var idx;
+	$('.list').each(function(index){
+		$(this).find('.select').click(function(){
+// 			var adrName = $(this).closest('td').siblings('.adrName').html().trim();
+// 			if(adrName == '미지정'){
+// 				adrName = "";
+// 			}
+// 			var receiver = $(this).closest('td').siblings('.receiver').html().trim();
+// 			var tel = $(this).closest('td').siblings('.tel').html().trim();
+// 			var phone = $(this).closest('td').siblings('.phone').html().trim();
+			idx = $(this).parents('.list').index();
+			$('#index').val(idx);
+			opener.document.getElementById('idx').value = idx;
+			window.close();
+		});
+	});
+});
+</script>
 <style type="text/css">
 .content{
 	width: 760px;
@@ -58,12 +78,56 @@ table{
 table th{
 	padding: 11px 0 9px;
     border-left: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
     font-weight: normal;
     background: #fbfafa;
     vertical-align: top;
 }
 table th:first-child {
 	border-left: 0;
+}
+table th:nth-child(2){
+	width: 85px;
+}
+table th:nth-child(3){
+	width: 85px;
+}
+table th:nth-child(4){
+	width: 85px;
+}
+table th:nth-child(7){
+	width: 150px;
+}
+table td {
+	text-align: center;
+	vertical-align: middle;
+	padding: 10px 5px;
+	font-size: 12px;
+}
+table td a {
+	width: 39px;
+	height: 26px;
+	box-sizing: border-box;
+	padding-top: 2px;
+	display: inline-block;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-align: center;
+}
+table td .save{
+    background: #7d7d7d;
+    color: #ffffff;
+    border: 1px solid #858585;
+}
+table td .select{
+    background: #272727;
+    color: #ffffff;
+    border: 1px solid #272727;
+}
+table td .update{
+    background: #fff;
+    color: #7d7d7d;
+    border: 1px solid #ccc;
 }
 .btnArea{
 	position: fixed;
@@ -125,20 +189,21 @@ table th:first-child {
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="list">
-					<tr>
+					<tr class="list">
 						<td><input type="checkbox" id="checkOne"></td>
-						<td></td>
-						<td>
+						<td><a class="save" href="#none">고정</a></td>
+						<td class="adrName">
 							<c:choose>
-								<c:when test="${list.adrname eq null}">미지정</c:when>
-								<c:otherwise>${list.adrname}</c:otherwise>
+								<c:when test="${list.adrName eq null}">미지정</c:when>
+								<c:otherwise>${list.adrName}</c:otherwise>
 							</c:choose>
 						</td>
-						<td>${list.receiver}</td>
-						<td>${list.tel}</td>
-						<td>${list.phone}</td>
-						<td>${list.address}</td>
-						<td></td>
+						<td class="receiver">${list.receiver}</td>
+						<td class="tel">${list.tel1}-${list.tel2}-${list.tel3}</td>
+						<td class="phone">${list.phone1}-${list.phone2}-${list.phone3}</td>
+						<td class="address">(${list.address1})${list.address2}${list.address3}</td>
+						<td><a class="select" href="#none">적용</a>
+							<a class="update" href="#none">수정</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

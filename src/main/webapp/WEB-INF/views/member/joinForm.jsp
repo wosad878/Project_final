@@ -72,11 +72,11 @@
 					</tr>
 					<tr>
 						<th>주소 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
-						<td><input id="location1" type="text" name="zip" readonly="readonly" style="width: 90px;margin-bottom: 5px;">
+						<td><input id="location1" type="text" name="address1" readonly="readonly" style="width: 90px;margin-bottom: 5px;">
 							<a class="adrbutton" onclick="goPopup()" style="cursor:pointer;"><i class="fa fa-map-o" aria-hidden="true" style=" margin-right:5px;"></i>주소검색</a><br>
-							<input id="location2" type="text" name="road" readonly="readonly" style="width: 300px;margin-bottom: 5px;"><span>기본주소</span><br>
-							<input id="location3" type="text" name="detail" style="width: 300px;"><span>나머지주소</span>
-							<input id="address" type="hidden" name ="address"></td>
+							<input id="location2" type="text" name="address2" readonly="readonly" style="width: 300px;margin-bottom: 5px;"><span>기본주소</span><br>
+							<input id="location3" type="text" name="address3" style="width: 300px;"><span>나머지주소</span>
+						</td>
 					</tr>
 					<tr>
 						<th>일반전화</th>
@@ -112,10 +112,10 @@
 								<option value="018">018</option>
 								<option value="019">019</option>
 							</select>-
-							<input class="tel_first" name="tel_first" type="hidden" value="02">
-							<input class="tel_middle" numberOnly name ="tel_middle" type="number" style="width:70px;margin-right:10px;margin-left:5px;">-
-							<input class="tel_last" numberOnly name ="tel_last" type="number" style="width:70px;margin-left:5px;">
-							<input id="tel" type="hidden" name ="tel"></td>
+							<input class="tel_first" name="tel1" type="hidden" value="02">
+							<input class="tel_middle" numberOnly name ="tel2" type="number" style="width:70px;margin-right:10px;margin-left:5px;">-
+							<input class="tel_last" numberOnly name ="tel3" type="number" style="width:70px;margin-left:5px;">
+						</td>
 					</tr>
 					<tr>
 						<th>휴대전화 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>
@@ -127,10 +127,10 @@
 								<option value="018">018</option>
 								<option value="019">019</option>
 							</select>-
-								<input class="phone_first" name="phone_first" type="hidden" value="010">
-								<input class="phone_middle" numberOnly name="phone_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
-								<input class="phone_last" numberOnly name="phone_last" type="text" style="width:70px;margin-left:5px;">
-								<input id="phone" type="hidden" name ="phone"></td>
+								<input class="phone_first" name="phone1" type="hidden" value="010">
+								<input class="phone_middle" numberOnly name="phone2" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
+								<input class="phone_last" numberOnly name="phone3" type="text" style="width:70px;margin-left:5px;">
+						</td>
 					</tr>
 					<tr>
 						<th>이메일 <img src="<%=pageContext.getServletContext().getContextPath()%>/resources/images/icon/ico_required.png"></th>

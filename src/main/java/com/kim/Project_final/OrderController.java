@@ -28,7 +28,11 @@ public class OrderController {
 	ProductService productService;
 	
 	@RequestMapping(value="orderBoard", method=RequestMethod.GET)
-	public void oreder(@RequestParam(required=false)String[] ary,HttpSession session, Model model, @ModelAttribute()CartDTO cartDTO) throws Exception {
+	public void oreder(@RequestParam(required=false)String[] ary,HttpSession session, Model model, @ModelAttribute()CartDTO cartDTO,
+			@RequestParam(required=false) Integer idx) throws Exception {
+		if(idx != null) {
+			System.out.println(idx);
+		}
 		List<CartDTO> ar;
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		if(ary != null) {
@@ -60,7 +64,7 @@ public class OrderController {
 		}else {
 			ar = cartService.cartSelectList(memberDTO.getId());
 		}
-		model.addAttribute("cartList",ar);
+		model.addAttribute("cartList",ar).addAttribute("member", memberDTO);
 	}
 	
 	

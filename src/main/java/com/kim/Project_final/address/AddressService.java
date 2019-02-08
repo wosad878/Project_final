@@ -15,4 +15,7 @@ public class AddressService {
 	public List<AddressDTO> selectList(String id) throws Exception {
 		return addressDAO.selectList(id);
 	}
+	public int insert(AddressDTO addressDTO) throws Exception {
+		return addressDAO.insert(addressDTO);
+	}
 }

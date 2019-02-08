@@ -461,28 +461,14 @@ select:focus {
 <script type="text/javascript">
 $(function(){
 	
-	var address = '${member.address}';
-	var fn = address.indexOf(['||']);
-	var ln = address.lastIndexOf(['||']);
-	
-	var adr1 = address.substring(0,fn);
-	var adr2 = address.substring(fn+2,ln);
-	var adr3 = address.substring(ln+2);
-	$('#location1').val(adr1);
-	$('#location2').val(adr2);
-	$('#location3').val(adr3);
+	$('#location1').val('${member.address1}');
+	$('#location2').val('${member.address2}');
+	$('#location3').val('${member.address3}');
 		
-	var phone = '${member.phone}';
-	fn = phone.indexOf(['-']);
-	ln = phone.lastIndexOf(['-']);
-	
-	var ph1 = phone.substring(0,fn);
-	var ph2 = phone.substring(fn+1,ln);
-	var ph3 = phone.substring(ln+1);
-	$('.phone_first').val(ph1);
-	$('#phone_first_select').val(ph1);
-	$('.phone_middle').val(ph2);
-	$('.phone_last').val(ph3);
+	$('.phone_first').val('${member.phone1}');
+	$('#phone_first_select').val('${member.phone1}');
+	$('.phone_middle').val('${member.phone2}');
+	$('.phone_last').val('${member.phone3}');
 	
 	var email = '${member.email}';
 	fn = email.indexOf(['@']);
@@ -596,8 +582,8 @@ $(function(){
 				    amount : lp,
 				    buyer_email : 'iamport@siot.do',
 				    buyer_name : '${member.name}',
-				    buyer_tel : '${member.phone}',
-				    buyer_addr : '${member.address}',
+				    buyer_tel : '${member.phone1}+-+${member.phone2}+-+${member.phone3}',
+				    buyer_addr : '${member.address1}${member.address2}${member.address3}',				    
 				    buyer_postcode : '123-456',
 				    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 				}, function(rsp) {
@@ -670,7 +656,6 @@ $(function(){
 			});
 		}
 	});
-	
 });
 
 function equal(){
@@ -800,11 +785,11 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				</tr>
 				<tr>
 					<th>주소 <img src="/Project_final/resources/images/icon/ico_required.png"></th>
-					<td><input id="location1" type="text" name="zip" readonly="readonly" style="width: 90px;margin-bottom: 5px;">
+					<td><input id="location1" type="text" name="address1" readonly="readonly" style="width: 90px;margin-bottom: 5px;">
 							<a class="adrbutton" onclick="goPopup('location')" style="cursor:pointer;">주소검색</a><br>
-							<input id="location2" type="text" name="road" readonly="readonly" style="width: 300px;margin-bottom: 5px;"><span>기본주소</span><br>
-							<input id="location3" type="text" name="detail" style="width: 300px;"><span>나머지주소(선택입력가능)</span>
-							<input id="address" type="hidden" name ="address"></td>
+							<input id="location2" type="text" name="address2" readonly="readonly" style="width: 300px;margin-bottom: 5px;"><span>기본주소</span><br>
+							<input id="location3" type="text" name="address3" style="width: 300px;"><span>나머지주소(선택입력가능)</span>
+					</td>
 				</tr>
 				<tr>
 					<th>휴대전화 <img src="/Project_final/resources/images/icon/ico_required.png"></th>
@@ -816,10 +801,10 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 								<option value="018">018</option>
 								<option value="019">019</option>
 							</select>-
-								<input class="phone_first" name="phone_first" type="hidden">
-								<input class="phone_middle" numberOnly name="phone_middle" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
-								<input class="phone_last" numberOnly name="phone_last" type="text" style="width:70px;margin-left:5px;">
-								<input id="phone" type="hidden" name ="phone"></td>
+								<input class="phone_first" name="phone1" type="hidden">
+								<input class="phone_middle" numberOnly name="phone2" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
+								<input class="phone_last" numberOnly name="phone3" type="text" style="width:70px;margin-left:5px;">
+					</td>
 				</tr>
 				<tr>
 					<th>이메일 <img src="/Project_final/resources/images/icon/ico_required.png"></th>
@@ -867,7 +852,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 							<a class="adrbutton" onclick="goPopup('locat')" style="cursor:pointer;">주소검색</a><br>
 							<input id="locat2" type="text" name="road" readonly="readonly" style="width: 300px;margin-bottom: 5px;"><span>기본주소</span><br>
 							<input id="locat3" type="text" name="detail" style="width: 300px;"><span>나머지주소(선택입력가능)</span>
-							<input id="destination" type="hidden" name ="destination"></td>
+					</td>
 				</tr>
 				<tr>
 					<th>휴대전화 <img src="/Project_final/resources/images/icon/ico_required.png"></th>
@@ -882,7 +867,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 								<input class="phone_f" name="phone_f" type="hidden" value="010">
 								<input class="phone_m" numberOnly name="phone_m" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
 								<input class="phone_l" numberOnly name="phone_l" type="text" style="width:70px;margin-left:5px;">
-								<input id="rPhone" type="hidden" name ="rPhone"></td>
+					</td>
 				</tr>
 				<tr>
 					<th>배송메시지</th>

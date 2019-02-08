@@ -4,20 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="memberMapper">
   	<insert id="insert" parameterType="MemberDTO">
-  		insert into member(id,password,name,address,tel,phone,email,
+  		insert into member(id,password,name,address1,address2,address3,tel1,tel2,tel3,phone1,phone2,phone3,email,
   		birth,smscheck,emailcheck,membertype)
   		values(
-  			#{id},#{password},#{name},#{address},#{tel, jdbcType=VARCHAR},
-  			#{phone},#{email},#{birth},#{smscheck},#{emailcheck},#{membertype}
+  			#{id},#{password},#{name},#{address1},#{address2},#{address3},#{tel1, jdbcType=VARCHAR},#{tel2, jdbcType=VARCHAR},#{tel3, jdbcType=VARCHAR},
+  			#{phone1},#{phone2},#{phone3},#{email},#{birth},#{smscheck},#{emailcheck},#{membertype}
   		)
   	</insert>
   	<select id="memberLogin" resultType="MemberDTO" parameterType="MemberDTO">
-  		select id, name, address, tel, phone, email, birth, membertype,
+  		select id, name, address1, address2, address3, tel1, tel2, tel3, phone1, phone2, phone3, email, birth, membertype,
   		 smscheck, emailcheck from member
   		 where id=#{id} and password=#{password}
   	</select>
   	<update id="memberUpdate" parameterType="MemberDTO">
-  		update member set password=#{password},address=#{address},tel=#{tel},phone=#{phone},
+  		update member set password=#{password},address1=#{address1},address2=#{address2},address3=#{address3},
+  		tel1=#{tel1},tel2=#{tel2},tel3=#{tel3},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3},
   		email=#{email},birth=#{birth},smscheck=#{smscheck},emailcheck=#{emailcheck}
   		where id = #{id}
   	</update>

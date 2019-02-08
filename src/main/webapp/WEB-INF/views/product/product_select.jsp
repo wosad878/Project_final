@@ -16,6 +16,7 @@ $(function(){
 	$('.sprice').html(pText);
 	$('#tprice').html(pText);
 	
+	$('#productNum').val(${product.num});
 	$('#productName').val('${product.name}');
 	$('#productPrice').val('${product.price}');
 	$('#productImage').val('${product.fname}');
@@ -466,7 +467,7 @@ function priceText(q){
 			    	<a class="btn_cart" href="#none"><span>장바구니</span></a>
 			    	<a class="btn_wish" href=""><span>관심상품</span></a>
 			    	<form id="frm" method="post">
-			    		<input id="productNum" type="hidden" name="num" value="${product.num}">
+			    		<input id="productNum" type="hidden" name="num">
 				    	<input id="productName" type="hidden" name="proname">
 				    	<input id="productQuantity" type="hidden" name="quantity">
 			    	</form>

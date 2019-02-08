@@ -17,4 +17,7 @@ public class AddressDAO {
 	public List<AddressDTO> selectList(String id) throws Exception {
 		return session.selectList(NAMESPACE+"selectList", id);
 	}
+	public int insert(AddressDTO addressDTO) throws Exception {
+		return session.insert(NAMESPACE+"insert", addressDTO);
+	}
 }

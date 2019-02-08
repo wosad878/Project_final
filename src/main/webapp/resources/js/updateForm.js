@@ -22,7 +22,6 @@ $(document).ready(function(){
 		
 		if(flag){
 			if($('#location1').val() != "" && $('#location2').val() != ""){
-				$('#address').val($('#location1').val()+"||"+$('#location2').val()+"||"+$("#location3").val());
 				flag = true;
 			}else{
 				message = "주소가 입력되지 않았습니다.";
@@ -32,7 +31,6 @@ $(document).ready(function(){
 		}
 		if(flag){
 			if($('#phone_first').val() != "" && $('.phone_middle').val() != "" && $('.phone_last').val() != ""){
-				$('#phone').val($('.phone_first').val()+"-"+$('.phone_middle').val()+"-"+$('.phone_last').val());
 				flag = true;
 			}else{
 				message = "휴대폰번호를 입력해 주세요.";
@@ -62,10 +60,8 @@ $(document).ready(function(){
 		}
 		
 		if(flag){
-			if($('.tel_last').val() != "" && $('.tel_middle').val() != ""){
-				$('#tel').val($('.tel_first').val()+"-"+$('.tel_middle').val()+"-"+$('.tel_last').val());
-			}else{
-				$('#tel').val("0");
+			if($('.tel_last').val() == "" || $('.tel_middle').val() == ""){
+				$('#tel').removeAttr('name');
 			}
 			
 			if($('#smscheckOn').is(':checked')){

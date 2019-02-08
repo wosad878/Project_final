@@ -19,6 +19,14 @@ import com.kim.Project_final.cart.CartService;
 import com.kim.Project_final.member.MemberDTO;
 import com.kim.Project_final.member.MemberService;
 
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.RSAPublicKeySpec;
 
 @Controller
 @RequestMapping("/member/**")
@@ -38,7 +46,6 @@ public class MemberController {
 	
 	@RequestMapping(value="joinResult",method=RequestMethod.POST)
 	public Model joinResult(MemberDTO memberDTO, Model model) throws Exception {
-		System.out.println(memberDTO.getTel());
 		int result = memberService.memberJoin(memberDTO);
 		if(result == 1) {
 			model.addAttribute("member", memberDTO).addAttribute("result", 1);
@@ -49,10 +56,30 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="loginForm",method=RequestMethod.GET)
-	public void loginForm(HttpServletRequest request, HttpSession session, CartDTO cartDTO) {
+	public void loginForm(HttpServletRequest request, HttpSession session, CartDTO cartDTO) throws Exception {
+		KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+		generator.initialize(1024);
+		KeyPair keyPair = generator.genKeyPair();
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		PublicKey publicKey = keyPair.getPublic();
+		PrivateKey privateKey = keyPair.getPrivate();
+		
+		session.setAttribute("_RSA_WEB_KEY", privateKey);	//세션에 RSA 개인키를 저장
+		
+		RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec
+		(publicKey, RSAPublicKeySpec.class);
+		String publicKeyModulus = publicSpec.getModulus().toString(16);
+		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+		
+		request.setAttribute("RSAModulus", publicKeyModulus);	
+		//로그인 폼의 Input Hidden에 값을 세팅하기 위해
+		request.setAttribute("RSAExponent", publicKeyExponent);
+		//로그인 폼의 Input Hidden에 값을 세팅하기 위해
+		
+		
 		String referer = request.getHeader("Referer");
 		if(cartDTO.getProname() != null) {
-			request.setAttribute("cartDTO",cartDTO);
+			session.setAttribute("cartDTO",cartDTO);
 			referer = "../cart/myCart";
 		}
 		if(referer == null || referer.equals("http://localhost/Project_final/member/loginForm")) {
@@ -62,33 +89,30 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="loginForm",method=RequestMethod.POST)
-	public String loginFrom(MemberDTO memberDTO, HttpSession session, CartDTO cartDTO, RedirectAttributes rd) throws Exception {
+	public String loginFrom(HttpSession session, RedirectAttributes rd) throws Exception {
 		String referer = (String)session.getAttribute("path");
-		memberDTO = memberService.memberLogin(memberDTO);
-		if(memberDTO != null) {
-			session.setAttribute("member", memberDTO);
-			if(cartDTO.getProname() != "") {
-				int check = 0;
-				List<CartDTO> ar = cartService.cartSelectList(memberDTO.getId());
-				for(int i=0; i< ar.size(); i++) {
-					if(ar.get(i).getProname().equals(cartDTO.getProname())) {
-						cartService.cartUpdate(cartDTO);
-						check = 1;
-						break;
-					}else {
-						check = 2;
-					}
+		CartDTO cartDTO = (CartDTO)session.getAttribute("cartDTO");
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		cartDTO.setId(memberDTO.getId());
+		if(cartDTO.getProname() != null) {
+			int check = 0;
+			List<CartDTO> ar = cartService.cartSelectList(memberDTO.getId());
+			for(int i=0; i< ar.size(); i++) {
+				if(ar.get(i).getProname().equals(cartDTO.getProname())) {
+					cartService.cartUpdate(cartDTO);
+					check = 1;
+					break;
+				}else {
+					check = 2;
 				}
-				if(check == 2) {
-					cartService.cartInsert(cartDTO);
-				}
-			}else {
 			}
-			return "redirect:"+referer;
+			if(check == 2) {
+				System.out.println(cartDTO.getNum());
+				cartService.cartInsert(cartDTO);
+			}
 		}else {
-			rd.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해주세요");
-			return "redirect:/member/loginForm";
 		}
+		return "redirect:"+referer;
 	}
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
@@ -99,26 +123,7 @@ public class MemberController {
 	@RequestMapping(value="updateForm")
 	public String updateForm(HttpSession session,Model model) throws Exception {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		StringTokenizer st = new StringTokenizer(memberDTO.getAddress(), "||");
-		
-		List<String> addr = new ArrayList<String>();
-		while(st.hasMoreTokens()) {
-			 addr.add(st.nextToken());
-		}
-		
-		List<String> phone = new ArrayList<String>();
-		st = new StringTokenizer(memberDTO.getPhone(), "-");
-		while(st.hasMoreTokens()) {
-			phone.add(st.nextToken());
-		}
-		
-		List<String> tel = new ArrayList<String>();
-		if(memberDTO.getTel() != "0") {
-			st = new StringTokenizer(memberDTO.getTel(), "-");
-			while(st.hasMoreTokens()) {
-				tel.add(st.nextToken());
-			}
-		}
+		StringTokenizer st = new StringTokenizer(memberDTO.getEmail(), "||");
 		
 		List<String> email = new ArrayList<String>();
 		st = new StringTokenizer(memberDTO.getEmail(), "@");
@@ -131,8 +136,7 @@ public class MemberController {
 		while(st.hasMoreTokens()) {
 			birth.add(st.nextToken());
 		}
-		model.addAttribute("addr", addr).addAttribute("email", email).addAttribute("phone", phone)
-		.addAttribute("tel", tel).addAttribute("member",memberDTO).addAttribute("birth",birth);
+		model.addAttribute("email", email).addAttribute("member",memberDTO).addAttribute("birth",birth);
 		return "member/updateForm";
 	}
 	

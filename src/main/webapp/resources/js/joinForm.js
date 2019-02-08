@@ -38,7 +38,6 @@ $(document).ready(function(){
 		}
 		if(flag){
 			if($('#location1').val() != "" && $('#location2').val() != ""){
-				$('#address').val($('#location1').val()+"||"+$('#location2').val()+"||"+$("#location3").val());
 				flag = true;
 			}else{
 				message = "주소가 입력되지 않았습니다.";
@@ -86,9 +85,7 @@ $(document).ready(function(){
 			}
 		}
 		if(flag){
-			if($('.tel_last').val() != "" && $('.tel_middle').val() != ""){
-				$('#tel').val($('.tel_first').val()+"-"+$('.tel_middle').val()+"-"+$('.tel_last').val());
-			}else{
+			if($('.tel_last').val() == "" || $('.tel_middle').val() == ""){
 				$('#tel').removeAttr('name');
 			}
 			if($('#smscheck').is(':checked')){

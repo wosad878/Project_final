@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- RSA 자바스크립트 라이브러리 -->
+<script type="text/javascript" src="/Project_final/resources/js/RSA/jsbn.js"></script>
+<script type="text/javascript" src="/Project_final/resources/js/RSA/rsa.js"></script>
+<script type="text/javascript" src="/Project_final/resources/js/RSA/prng4.js"></script>
+<script type="text/javascript" src="/Project_final/resources/js/RSA/rng.js"></script>	
+
+<!-- RSA 암호화 처리 스크립트 -->
+
 <c:import url="/WEB-INF/views/temp/link.jsp"/>
 <c:import url="/WEB-INF/views/temp/header.jsp"/>
 
@@ -29,8 +38,34 @@
 	function check(){
 		var check = false;
 		var message = "";
-		if($('#id').val() != "" && $('#password').val() != ""){
-			$('#logincheck').submit();
+		var uid = $('#id').val();
+		var pwd = $('#password').val();
+		if(uid != "" && pwd != ""){
+			//RSA 암호화 생성
+			var rsa = new RSAKey();
+			rsa.setPublic($('#RSAModulus').val(), $('#RSAExponent').val());
+			
+			//사용자 계정정보를 암호화 처리
+			uid = rsa.encrypt(uid);
+			pwd = rsa.encrypt(pwd);
+			$.ajax({
+				type:"POST",
+				url:"../ajax/login_proc",
+				data:{user_id:uid, user_pwd:pwd},	//사용자 암호화된 계정정보를 서버로 전송
+				dataType:"json",
+				success:function(msg){
+					if(msg.state == "true"){
+			 			$('#logincheck').submit();
+// 						location.href = "./";
+					}else if(msg.state == "false"){
+						alert("로그인에 실패하였습니다. 아이디 패스워드를 확인하여주세요.");
+					}else{
+						alert("잘못된 경로로 접근하였습니다. 암호화 인증에 실패하였습니다."); 
+					}
+				}
+			})
+			
+			
 		}else{
 			if($('#id').val() == "") {
 				message = "아이디 항목은 필수 입력값입니다.";
@@ -228,11 +263,14 @@
 					<h3>MEMBER LOGIN</h3>
 				</div>
 				<div class="loginInner">
-					<form id="logincheck" action="./loginForm" method="post" onkeyup="enterkey()">
+					<form id="logincheck" action="./loginForm" method="post" onkeyup="enterkey()" >
 						<c:if test="${not empty cartDTO}">
 							<input type="hidden" name="proname" value="${cartDTO.proname}">
 							<input type="hidden" name="quantity" value="${cartDTO.quantity}">
 						</c:if>
+					</form>
+						<input type="hidden" id="RSAModulus" value="${RSAModulus}">
+						<input type="hidden" id="RSAExponent" value="${RSAExponent}">
 						<div class="idbox">
 							<span>ID</span>
 							<input id="id" type="text" name="id">
@@ -241,7 +279,6 @@
 							<span>PASSWORD</span>
 							<input id="password" type="password" name="password">
 						</div>
-					</form>
 					<div class="seq">
 						<p>
 							<img src="/Project_final/resources/images/icon/ico_security.png">

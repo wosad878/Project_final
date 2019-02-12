@@ -69,8 +69,10 @@
 		}else{
 			if($('#id').val() == "") {
 				message = "아이디 항목은 필수 입력값입니다.";
+				$('#id').focus();
 			}else if($('#password').val() == "") {
 				message = "패스워드 항목은 필수 입력값입니다.";
+				$('#password').focus();
 			}
 			alert(message);
 		}
@@ -263,7 +265,7 @@
 					<h3>MEMBER LOGIN</h3>
 				</div>
 				<div class="loginInner">
-					<form id="logincheck" action="./loginForm" method="post" onkeyup="enterkey()" >
+					<form id="logincheck" action="./loginForm" method="post" >
 						<c:if test="${not empty cartDTO}">
 							<input type="hidden" name="proname" value="${cartDTO.proname}">
 							<input type="hidden" name="quantity" value="${cartDTO.quantity}">
@@ -277,7 +279,7 @@
 						</div>
 						<div class="pwbox">
 							<span>PASSWORD</span>
-							<input id="password" type="password" name="password">
+							<input id="password" type="password" name="password" onkeyup="enterkey()">
 						</div>
 					<div class="seq">
 						<p>

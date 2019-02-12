@@ -18,4 +18,10 @@ public class AddressService {
 	public int insert(AddressDTO addressDTO) throws Exception {
 		return addressDAO.insert(addressDTO);
 	}
+	public AddressDTO selectOne(int num) throws Exception {
+		return addressDAO.selectOne(num);
+	}
+	public int update(AddressDTO addressDTO) throws Exception {
+		return addressDAO.update(addressDTO);
+	}
 }

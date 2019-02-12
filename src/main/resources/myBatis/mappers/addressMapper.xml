@@ -3,12 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="addressMapper">
+    	<select id="selectOne" parameterType="java.lang.Integer" resultType="AddressDTO">
+    		select * from address where num=#{num}
+    	</select>
   		<select id="selectList" parameterType="java.lang.String" resultType="AddressDTO">
   			select * from address where id=#{id}
 	  	</select>
 	  	<insert id="insert" parameterType="AddressDTO">
-	  		insert into address(id,adrname,receiver,tel1,tel2,tel3,phone1,phone2,phone3,address1,address2,address3) values(
-	  		#{id},#{adrName, jdbcType=VARCHAR},#{receiver},#{tel1, jdbcType=VARCHAR},#{tel2, jdbcType=VARCHAR},#{tel3, jdbcType=VARCHAR},
-	  		#{phone1},#{phone2},#{phone3},#{address1},#{address2},#{address3})
+	  		insert into address(num,id,adrname,receiver,tel1,tel2,tel3,phone1,phone2,phone3,address1,address2,address3) values(
+	  		address_seq.nextval,#{id},#{adrName, jdbcType=VARCHAR},#{receiver},#{tel1, jdbcType=VARCHAR},#{tel2, jdbcType=VARCHAR},
+	  		#{tel3, jdbcType=VARCHAR},#{phone1},#{phone2},#{phone3},#{address1},#{address2},#{address3})
 	  	</insert>
+	  	<update id="update" parameterType="AddressDTO">
+	  		update address set receiver = #{receiver}, adrname = #{adrName}, tel1 = #{tel1}, tel2 = #{tel2}, tel3 = #{tel3},
+	  		phone1 = #{phone1}, phone2 = #{phone2}, phone3 = #{phone3}, address1 = #{address1}, address2 = #{address2}, address3 = #{address3}
+	  	</update>
   </mapper>

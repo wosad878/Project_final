@@ -670,6 +670,7 @@ function equal(){
 };
 
 function addressList(){
+	$('#new').prop('checked',true);
 	window.open('../address/addressList','window_name','width=800,height=500,location=no,status=no,scrollbars=yes');
 }
 
@@ -701,9 +702,9 @@ function goPopup(id){
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
 						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
 	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-	document.getElementById(id+1).value = zipNo;
-	document.getElementById(id+2).value = roadAddrPart1;
-	document.getElementById(id+3).value = addrDetail;
+	document.getElementById(openId+1).value = zipNo;
+	document.getElementById(openId+2).value = roadAddrPart1;
+	document.getElementById(openId+3).value = addrDetail;
 }
 </script>
 </head>
@@ -864,9 +865,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 								<option value="018">018</option>
 								<option value="019">019</option>
 							</select>-
-								<input class="phone_f" name="phone_f" type="hidden" value="010">
-								<input class="phone_m" numberOnly name="phone_m" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
-								<input class="phone_l" numberOnly name="phone_l" type="text" style="width:70px;margin-left:5px;">
+								<input id="phone_f" class="phone_f" name="phone_f" type="hidden" value="010">
+								<input id="phone_m" class="phone_m" numberOnly name="phone_m" type="text" style="width:70px;margin-right:10px;margin-left:5px;">-
+								<input id="phone_l" class="phone_l" numberOnly name="phone_l" type="text" style="width:70px;margin-left:5px;">
 					</td>
 				</tr>
 				<tr>

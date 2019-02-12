@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddressDTO {
 
+	int num;
 	private String id;
 	private String adrName;
 	private String receiver;
@@ -18,7 +19,12 @@ public class AddressDTO {
 	private String address2;
 	private String address3;
 	
-	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getId() {
 		return id;
 	}

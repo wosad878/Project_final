@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kim.Project_final.Ajax.AjaxService;
@@ -62,11 +61,10 @@ public class AjaxController {
 	}
 //	로그인체크
 	@RequestMapping(value="login_proc",method= RequestMethod.POST)
-	public JSONObject longinChk(HttpServletRequest request) {
+	public JSONObject longinChk(HttpServletRequest request, HttpSession session) {
 		JSONObject listObj = new JSONObject();
 		String uid = request.getParameter("user_id");
 		String pwd = request.getParameter("user_pwd");
-		HttpSession session = request.getSession();
 		
 		PrivateKey privateKey = (PrivateKey) session.getAttribute("_RSA_WEB_KEY");
 		//로그인 전에 세션에 저장된 개인키를 가져온다.

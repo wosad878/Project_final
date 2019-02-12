@@ -20,4 +20,10 @@ public class AddressDAO {
 	public int insert(AddressDTO addressDTO) throws Exception {
 		return session.insert(NAMESPACE+"insert", addressDTO);
 	}
+	public AddressDTO selectOne(int num) throws Exception {
+		return session.selectOne(NAMESPACE+"selectOne", num);
+	}
+	public int update(AddressDTO addressDTO) throws Exception {
+		return session.update(NAMESPACE+"update", addressDTO);
+	}
 }

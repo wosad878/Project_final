@@ -1,8 +1,6 @@
 package com.kim.Project_final;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -39,6 +37,18 @@ public class AddressController {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		addressDTO.setId(memberDTO.getId());
 		int result = addressService.insert(addressDTO);
+		return "redirect:./addressList";
+	}
+	
+	@RequestMapping("addressUpdateForm")
+	public void addressUpdateForm(int num, Model model) throws Exception {
+		AddressDTO addressDTO = addressService.selectOne(num);
+		model.addAttribute("address", addressDTO);
+	}
+	
+	@RequestMapping(value="addressUpdateForm", method=RequestMethod.POST)
+	public String addressUpdateForm(AddressDTO addressDTO) throws Exception {
+		int result = addressService.update(addressDTO);
 		return "redirect:./addressList";
 	}
 }

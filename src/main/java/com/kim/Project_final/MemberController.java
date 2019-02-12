@@ -93,8 +93,10 @@ public class MemberController {
 		String referer = (String)session.getAttribute("path");
 		CartDTO cartDTO = (CartDTO)session.getAttribute("cartDTO");
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		cartDTO.setId(memberDTO.getId());
-		if(cartDTO.getProname() != null) {
+		if(cartDTO == null) {
+			return "redirect:"+referer;
+		}else {
+			cartDTO.setId(memberDTO.getId());
 			int check = 0;
 			List<CartDTO> ar = cartService.cartSelectList(memberDTO.getId());
 			for(int i=0; i< ar.size(); i++) {
@@ -110,7 +112,6 @@ public class MemberController {
 				System.out.println(cartDTO.getNum());
 				cartService.cartInsert(cartDTO);
 			}
-		}else {
 		}
 		return "redirect:"+referer;
 	}

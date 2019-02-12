@@ -1,3 +1,6 @@
+<%@page import="org.springframework.ui.Model"%>
+<%@page import="com.kim.Project_final.address.AddressDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,19 +12,26 @@
 <c:import url="/WEB-INF/views/temp/link.jsp" />
 <script type="text/javascript">
 $(function(){
-	var idx;
 	$('.list').each(function(index){
 		$(this).find('.select').click(function(){
-// 			var adrName = $(this).closest('td').siblings('.adrName').html().trim();
-// 			if(adrName == '미지정'){
-// 				adrName = "";
-// 			}
-// 			var receiver = $(this).closest('td').siblings('.receiver').html().trim();
-// 			var tel = $(this).closest('td').siblings('.tel').html().trim();
-// 			var phone = $(this).closest('td').siblings('.phone').html().trim();
-			idx = $(this).parents('.list').index();
-			$('#index').val(idx);
-			opener.document.getElementById('idx').value = idx;
+			var index = $(this).attr('title');
+			var receiver = $('.receiver'+index).html();
+			var phone1 = $('.phone_f'+index).html();
+			var phone2 = $('.phone_m'+index).html();
+			var phone3 = $('.phone_l'+index).html();
+			var address1 = $('.address_f'+index).html();
+			var address2 = $('.address_m'+index).html();
+			var address3 = $('.address_l'+index).html();
+			
+			opener.document.getElementById('receiver').value= receiver;
+			opener.document.getElementById('locat1').value= address1;
+			opener.document.getElementById('locat2').value= address2;
+			opener.document.getElementById('locat3').value= address3;
+			opener.document.getElementById('phone_fs').value= phone1;
+			opener.document.getElementById('phone_f').value= phone1;
+			opener.document.getElementById('phone_m').value= phone2;
+			opener.document.getElementById('phone_l').value= phone3;
+			
 			window.close();
 		});
 	});
@@ -188,7 +198,7 @@ table td .update{
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="list">
+				<c:forEach items="${list}" var="list" varStatus="i">
 					<tr class="list">
 						<td><input type="checkbox" id="checkOne"></td>
 						<td><a class="save" href="#none">고정</a></td>
@@ -198,12 +208,14 @@ table td .update{
 								<c:otherwise>${list.adrName}</c:otherwise>
 							</c:choose>
 						</td>
-						<td class="receiver">${list.receiver}</td>
+						<td class="receiver${i.index}" >${list.receiver}</td>
 						<td class="tel">${list.tel1}-${list.tel2}-${list.tel3}</td>
-						<td class="phone">${list.phone1}-${list.phone2}-${list.phone3}</td>
-						<td class="address">(${list.address1})${list.address2}${list.address3}</td>
-						<td><a class="select" href="#none">적용</a>
-							<a class="update" href="#none">수정</a></td>
+						<td class="phone"><span class="phone_f${i.index}">${list.phone1}</span>-
+						<span class="phone_m${i.index}">${list.phone2}</span>-<span class="phone_l${i.index}">${list.phone3}</span></td>
+						<td class="address">(<span class="address_f${i.index}">${list.address1}</span>)
+						<span class="address_m${i.index}">${list.address2}</span><span class="address_l${i.index}">${list.address3}</span></td>
+						<td><a class="select" href="#none" title="${i.index}">적용</a>
+							<a class="update" href="./addressUpdateForm?num=${list.num}">수정</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

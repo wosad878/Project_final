@@ -35,6 +35,16 @@ public class ProductController {
 	@Inject
 	private productBoardService productBoardService;
 	
+	@RequestMapping("product_list_order")
+	public String product_order(Pager pager, Model model) throws Exception {
+		pager.makeRow();
+		int totalCount = productService.totalCount(pager);
+		pager.makePage(totalCount);
+		List<ProductDTO> ar = productService.selectOrder(pager);
+		System.out.println(ar.size());
+		model.addAttribute("list", ar);
+		return "product/product_list";
+	}
 	
 	@RequestMapping(value="product_list")
 	public String product(Model model, Pager pager, HttpSession session) throws Exception {

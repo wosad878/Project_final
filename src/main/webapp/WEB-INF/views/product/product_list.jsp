@@ -10,7 +10,7 @@
 <c:import url="/WEB-INF/views/temp/header.jsp"></c:import>
 <script type="text/javascript">
 $(function(){
-	
+		
 	$('.pPrice').each(function(){
 		var price = $(this).find('span').html();
 		var s = numberWithCommas(price);
@@ -119,11 +119,11 @@ function numberWithCommas(x) {
 		color:#888;
 	}
 	.item_li{
-		width: 290px;
-		float:left;
+		width: 280px;
+		display:inline-block;
+		vertical-align:top;
 		margin-left: 30px;
 		margin-top: 25px;
-	
 	}
 	.product_item{
 		height: 100%;
@@ -203,26 +203,26 @@ function numberWithCommas(x) {
 		</div>
 		<div class="sub-menu">
 			<ul class="depth">
-				<li><a href=""><span>전체보기<p></p></span></a></li>
-				<li><a href=""><span>세트상품<p></p></span></a></li>
-				<li><a href=""><span>천연비누<p></p></span></a></li>
-				<li><a href=""><span>스킨/로션/미스트<p></p></span></a></li>
-				<li><a href=""><span>에센스/세럼/크림<p></p></span></a></li>
-				<li><a href=""><span>선케어/메이크업<p></p></span></a></li>
-				<li><a href=""><span>팩/필링젤/클렌징<p></p></span></a></li>
-				<li><a href=""><span>바디/헤어<p></p></span></a></li>
-				<li><a href=""><span>미용도구<p></p></span></a></li>
+				<li><a href="./product_list"><span>전체보기<p></p></span></a></li>
+				<li><a href="product_list?category2=3"><span>세트상품<p></p></span></a></li>
+				<li><a href="product_list?category2=4"><span>천연비누<p></p></span></a></li>
+				<li><a href="product_list?category2=5"><span>스킨/로션/미스트<p></p></span></a></li>
+				<li><a href="product_list?category2=6"><span>에센스/세럼/크림<p></p></span></a></li>
+				<li><a href="product_list?category2=7"><span>선케어/메이크업<p></p></span></a></li>
+				<li><a href="product_list?category2=8"><span>팩/필링젤/클렌징<p></p></span></a></li>
+				<li><a href="product_list?category2=9"><span>바디/헤어<p></p></span></a></li>
+				<li><a href="product_list?category2=10"><span>미용도구<p></p></span></a></li>
 			</ul>
 		</div>
 		<div class="product_list">
 			<div class="list_menu">
 				<span style="font-size:12px;color:#888;">Total <strong style="color:#333;font-weight:bold;">${totalCount}</strong> items</span>
 				<ul class="list_menu_ul">
-					<li><a href="">신상품</a></li>
-					<li><a href="">상품명</a></li>
-					<li><a href="">낮은가격</a></li>
-					<li><a href="">높은가격</a></li>
-					<li><a href="">사용후기</a></li>
+					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=1">신상품</a></li>
+					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=2">상품명</a></li>
+					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=3">낮은가격</a></li>
+					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=4">높은가격</a></li>
+					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=5">사용후기</a></li>
 				</ul>
 			</div>
 			<ul class="product_item">
@@ -231,7 +231,7 @@ function numberWithCommas(x) {
 					<div class="pImg">
 						<a href="/Project_final/product/product_select?num=${list.num}"><img src ="/Project_final/resources/photoUpload/${list.fname}" style="width: 290px; height: 290px;"></a>
 					</div>
-					<div class="pInfo">
+					<div class="pInfo" title="${list.num}">
 						<div class="pName">
 							<a href="/Project_final/product/product_select?num=${list.num}"><h3>${list.name}</h3></a>
 						</div>

@@ -225,9 +225,9 @@ table td a{
 			</tr>
 			<tr>
 				<th><span>주소</span> <img src="/Project_final/resources/images/icon/ico_required.png"></th>
-				<td><input id="location1" type="text" name="address1"  style="width: 90px;margin-bottom: 5px;" value="${address.address1}">
+				<td><input id="location1" type="text" name="address1" readonly="readonly" style="width: 90px;margin-bottom: 5px;" value="${address.address1}">
 						<a class="adrbutton" onclick="goPopup('location')" style="cursor:pointer;">우편번호</a><br>
-						<input id="location2" class="must" type="text" name="address2" style="width: 450px;margin-bottom: 5px;"value="${address.address2}">
+						<input id="location2" class="must" type="text" name="address2" readonly="readonly" style="width: 450px;margin-bottom: 5px;"value="${address.address2}">
 							<span>기본주소</span><br>
 						<input id="location3" type="text" name="address3" style="width: 450px;"value="${address.address3}">
 							<span>나머지주소(선택입력가능)</span>
@@ -267,7 +267,7 @@ table td a{
 						<option value="019">019</option>
 					</select>-
 					<input class="tel_first" name="tel1" type="hidden" value="${address.tel1}">
-					<input class="tel_middle" name ="tel2" type="text" style="width:70px;margin-right:10px;margin-left:5px;" value="${address.tel2"}>-
+					<input class="tel_middle" name ="tel2" type="text" style="width:70px;margin-right:10px;margin-left:5px;" value="${address.tel2}">-
 					<input class="tel_last" name ="tel3" type="text" style="width:70px;margin-left:5px;" value="${address.tel3}">
 				</td>
 			</tr>

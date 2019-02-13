@@ -12,7 +12,7 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/temp/header.jsp"></c:import>
-<div class="container">
+<div class="container1">
 	<!-- Slider main container -->
 	<div class="swiper-container swiper1">
 		<!-- Additional required wrapper -->
@@ -39,14 +39,14 @@
 			<li><div class="prise"><a href=""><img src="<%=pageContext.getServletContext().getContextPath() %>/resources/images/indexImages/prise.jpg"></a></div></li>
 			<li><div class="event"><a href=""><img src="<%=pageContext.getServletContext().getContextPath() %>/resources/images/indexImages/event.jpg"></a></div></li>
 			<li><div class="notice"><h3><a href=""><span>공지사항</span><span>+</span></a></h3>
-					<div class="notice_contents">
-						<p>d</p>
-						<p>s</p>
-						<p>d</p>
-						<p>d</p>
-						<p>뭐라고쓸까</p>
-						<p>d</p>
-					</div>
+				</div>
+				<div class="notice_contents">
+					<p>d</p>
+					<p>s</p>
+					<p>d</p>
+					<p>d</p>
+					<p>뭐라고쓸까</p>
+					<p>d</p>
 				</div>
 			</li>
 		</ul>
@@ -81,6 +81,50 @@
 					<a href=""><img src="<%=pageContext.getServletContext().getContextPath() %>/resources/images/indexImages/9281b75119a342058343ded70d0e0285.jpg"></a>
 				</li>
 			</ul>
+		</div>
+	</div>
+	<div class="bestItem">
+		<h3>베스트아이템</h3>
+		<span>아이샤드 고객님이 선택한 베스트 제품</span>
+		<div class="swiper-container swiper3">
+			<!-- Additional required wrapper -->
+		    <div class="swiper-wrapper">
+		        <!-- Slides -->
+		        <c:forEach items="${best}" var="best">
+		        <div class="swiper-slide" style=""><a href="../product/product_select?num=${best.num}">
+		        	<img src="/Project_final/resources/photoUpload/${best.fname}"></a></div>
+		        </c:forEach>
+		    </div>
+		    <!-- If we need pagination -->
+		    <div class="swiper-pagination"></div>
+		
+		    <!-- If we need navigation buttons -->
+<!-- 		    <div class="swiper-button-prev"></div> -->
+<!-- 		    <div class="swiper-button-next"></div> -->
+		
+		    <!-- If we need scrollbar -->
+		</div>
+	</div>
+		<div class="newItem">
+		<h3>신상품</h3>
+		<span>아이샤드의 신상품을 가장 먼저 만나보세요</span>
+		<div class="swiper-container swiper4">
+			<!-- Additional required wrapper -->
+		    <div class="swiper-wrapper">
+		        <!-- Slides -->
+		        <c:forEach items="${newItem}" var="newItem">
+		        <div class="swiper-slide" style=""><a href="../product/product_select?num=${newItem.num}">
+		        	<img src="/Project_final/resources/photoUpload/${newItem.fname}"></a></div>
+		        </c:forEach>
+		    </div>
+		    <!-- If we need pagination -->
+		    <div class="swiper-pagination"></div>
+		
+		    <!-- If we need navigation buttons -->
+<!-- 		    <div class="swiper-button-prev"></div> -->
+<!-- 		    <div class="swiper-button-next"></div> -->
+		
+		    <!-- If we need scrollbar -->
 		</div>
 	</div>
 	<c:import url="/WEB-INF/views/temp/swiperJs.jsp"></c:import>

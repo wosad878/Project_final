@@ -28,6 +28,10 @@ public class ProductService {
 		return productDAO.totalCount(pager);
 	}
 	
+	public List<ProductDTO> selectOrder (Pager pager) throws Exception {
+		return productDAO.selectOrder(pager);
+	}
+	
 	public List<ProductDTO> selectList(Pager pager) throws Exception {
 		return productDAO.selectList(pager);
 	}
@@ -49,5 +53,11 @@ public class ProductService {
 	}
 	public ProductDTO selectOne(String name) throws Exception {
 		return productDAO.selectOne(name);
+	}
+	public List<ProductDTO> bestMenuList(String check) throws Exception {
+		return productDAO.bestMenuList(check);
+	}
+	public List<ProductDTO> newItemList() throws Exception {
+		return productDAO.newItemList();
 	}
 }

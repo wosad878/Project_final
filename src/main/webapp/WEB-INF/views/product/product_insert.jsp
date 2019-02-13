@@ -12,6 +12,18 @@
 <%-- <script type="text/javascript" src="<%=pageContext.getServletContext().getContextPath()%>/resources/editor/sample/js/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script> --%>
 <script type="text/javascript">
 $(document).ready(function() {
+	$('#cate1').change(function(){
+		var cate1 = $('#cate1 option:selected').val();
+		if(cate1 == 1){
+			$('.category2-1').css('display','table-row');
+			$('.category2-2').css('display','none');
+		}else{
+			$('.category2-1').css('display','none');
+			$('.category2-2').css('display','table-row');
+		}
+	});
+	
+	
 	var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함. 
 	
 // Editor Setting 
@@ -255,7 +267,7 @@ th span{
 						<input id="category1" type="hidden" name="category1">
 					</td>
 				</tr>	
-				<tr>
+				<tr class="category2-1">
 					<th><span>카테고리2</span></th>
 					<td><select id="cate2">
 							<option value="3" selected="selected">세트</option>
@@ -266,6 +278,17 @@ th span{
 							<option value="8">팩/필링젤/클렌징</option>
 							<option value="9">바디/헤어</option>
 							<option value="10">미용도구</option>
+						</select>
+						<input id="category2" type="hidden" name="category2">
+					</td>
+				</tr>
+				<tr class="category2-2" style="display: none;">
+					<th><span>카테고리2</span></th>
+					<td><select id="cate2">
+							<option value="11" selected="selected">트러블/모공</option>
+							<option value="12">미백/흔적</option>
+							<option value="13">수분/보습</option>
+							<option value="14">민감/진정</option>
 						</select>
 						<input id="category2" type="hidden" name="category2">
 					</td>
@@ -297,10 +320,6 @@ th span{
 				<tr>
 					<th><span>설명</span></th>
 					<td><input id="memo" type="text" name="memo" style="width: 100%;"></td>
-				</tr>
-				<tr>
-					<th><span>묶음상품 이름</span></th>
-					<td><input id="bindname" type="text" name="bindname" style="width: 200px;"></td>
 				</tr>
 				<tr>
 					<th><span>재고</span></th>

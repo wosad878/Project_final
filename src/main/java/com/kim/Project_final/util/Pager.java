@@ -14,11 +14,12 @@ public class Pager {
 	private int totalPage;
 	private String category1;
 	private String category2;
+	private int orderBy;
 	
 	private String search;
 	
 	public Pager() {
-		this.perPage=5;
+		this.perPage=20;
 		this.perBlock=5;
 	}
 	
@@ -150,6 +151,14 @@ public class Pager {
 	
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
+	}
+
+	public int getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(int orderBy) {
+		this.orderBy = orderBy;
 	}
 	
 }

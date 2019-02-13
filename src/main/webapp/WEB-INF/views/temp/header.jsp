@@ -47,29 +47,29 @@
 			<li><a href=""><span>브랜드 스토리</span></a></li>
 			<li><a href="/Project_final/product/product_list"><span>전체상품</span></a>
 				<ul>
-					<li><a href="/Project_final/product/product_list">세트상품</a></li>
-					<li><a href="/Project_final/product/product_list">천연비누</a></li>
-					<li><a href="/Project_final/product/product_list">스킨/로션/미스트</a></li>
-					<li><a href="/Project_final/product/product_list">에센스/세럼/크림</a></li>
-					<li><a href="/Project_final/product/product_list">선케어/메이크업</a></li>
-					<li><a href="/Project_final/product/product_list">팩/필링젤/클렌징</a></li>
-					<li><a href="/Project_final/product/product_list">바디/헤어</a></li>
-					<li><a href="/Project_final/product/product_list">미용도구</a></li>
+					<li><a href="/Project_final/product/product_list?category2=3">세트상품</a></li>
+					<li><a href="/Project_final/product/product_list?category2=4">천연비누</a></li>
+					<li><a href="/Project_final/product/product_list?category2=5">스킨/로션/미스트</a></li>
+					<li><a href="/Project_final/product/product_list?category2=6">에센스/세럼/크림</a></li>
+					<li><a href="/Project_final/product/product_list?category2=7">선케어/메이크업</a></li>
+					<li><a href="/Project_final/product/product_list?category2=8">팩/필링젤/클렌징</a></li>
+					<li><a href="/Project_final/product/product_list?category2=9">바디/헤어</a></li>
+					<li><a href="/Project_final/product/product_list?category2=10">미용도구</a></li>
 				</ul>
 			</li>
 			<li><a href="/Project_final/product/product_list"><span>피부고민별</span></a>
 				<ul>
-					<li><a href="/Project_final/product/product_list">트러블/모공</a></li>
-					<li><a href="/Project_final/product/product_list">미백/흔적</a></li>
-					<li><a href="/Project_final/product/product_list">수분/보습</a></li>
-					<li><a href="/Project_final/product/product_list">민감/진정</a></li>				
+					<li><a href="/Project_final/product/product_list?category2=11">트러블/모공</a></li>
+					<li><a href="/Project_final/product/product_list?category2=12">미백/흔적</a></li>
+					<li><a href="/Project_final/product/product_list?category2=13">수분/보습</a></li>
+					<li><a href="/Project_final/product/product_list?category2=14">민감/진정</a></li>				
 				</ul>
 			</li>
 			<li><a href="/Project_final/product/product_list"><span>제품별</span></a>
 				<ul>
-					<li><a href="/Project_final/product/product_list">신상품</a></li>
-					<li><a href="/Project_final/product/product_list">베스트셀러</a></li>
-					<li><a href="/Project_final/product/product_list">이벤트상품</a></li>
+					<li><a href="/Project_final/product/product_list_order?&orderBy=1">신상품</a></li>
+					<li><a href="/Project_final/product/product_list_order?&orderBy=5">베스트셀러</a></li>
+					<li><a href="/Project_final/product/product_list_order?&orderBy=3">이벤트상품</a></li>
 				</ul>
 			</li>
 			<li><a href="/Project_final/product/product_list"><span>이벤트상품</span></a></li>

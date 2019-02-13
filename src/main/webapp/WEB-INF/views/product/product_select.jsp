@@ -9,6 +9,7 @@
 <c:import url="/WEB-INF/views/temp/swiperCss.jsp" />
 <c:import url="/WEB-INF/views/temp/header.jsp" />
 <script type="text/javascript" src="http://kenwheeler.github.io/slick/slick/slick.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	var q = $('#quantity').val();
@@ -16,7 +17,7 @@ $(function(){
 	$('.sprice').html(pText);
 	$('#tprice').html(pText);
 	
-	$('#productNum').val(${product.num});
+	$('#productNum').val('${product.num}');
 	$('#productName').val('${product.name}');
 	$('#productPrice').val('${product.price}');
 	$('#productImage').val('${product.fname}');
@@ -473,8 +474,19 @@ function priceText(q){
 			    	</form>
 			    </div>
 			    <div class="kakao">
-			    	<a class="btn_kakao" href="">
+			    	<a class="btn_kakao" href="javascript:void plusFriendChat()">
 			    		<span><img src="/Project_final/resources/images/icon/btn_svc_kakaotalk.png" style="width:21px;">카카오톡 상담 @아이샤드</span>
+			    		<script type='text/javascript'>
+						  //<![CDATA[
+						    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+						    Kakao.init('30b67dc03a7287bf348428fa68b2ce32');
+						    function plusFriendChat() {
+						      Kakao.PlusFriend.chat({
+						        plusFriendId: '_xcLqmC' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
+						      });
+						    }
+						  //]]>
+						 </script>
 			    	</a>
 			    </div>
 			</div>

@@ -4,20 +4,49 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	<mapper namespace="productMapper">
 		<select id="totalCount" resultType="java.lang.Integer" parameterType="Pager">
-			select count(num) from product where name like '%'||#{search}||'%'
+			select count(num) from product where name like '%'||#{search}||'%' and
+			 category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%'
 		</select>
 		
-		<select id="searchList" resultType="ProductDTO" parameterType="Pager">
+		<select id="selectOrder" parameterType="Pager" resultType="ProductDTO">
 			select * from(
 				select rownum R, p.* from (
-					select * from product where name like '%'||#{search}||'%'
-				)p ) where R between #{startRow} and #{lastRow}
+					select * from product where category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%' 
+					<choose>
+						<when test="orderBy == 1">
+							order by reg_date desc 
+						</when>
+						<when test="orderBy == 2">
+							order by name asc 
+						</when>
+						<when test="orderBy == 3">
+							order by price asc 
+						</when>
+						<when test="orderBy == 4">
+							order by price desc 
+						</when>
+						<otherwise>
+							order by count desc 
+						</otherwise>
+					</choose>
+					)p 
+					
+					) where R between #{startRow} and #{lastRow}
 		</select>
+		
 		<select id="selectList" resultType="ProductDTO" parameterType="Pager">
 			select * from(
 				select rownum R, p.* from (
-					select * from product where category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%'
-				)p ) where R between #{startRow} and #{lastRow}
+					select * from product where
+					<choose>
+						<when test="search != ''">
+							 name like '%'||#{search}||'%'
+						</when>
+						<otherwise>
+							 category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%'
+						</otherwise>
+					</choose>
+					)p ) where R between #{startRow} and #{lastRow}
 		</select>
 		<insert id="insert" parameterType="ProductDTO">
 			insert into product(num,name,category1,category2,price,weight,life,minorder,event,tag,
@@ -31,5 +60,18 @@
 		<select id="selectNOne" resultType="ProductDTO" parameterType="java.lang.String">
 			select * from product where name = #{name}
 		</select>
-		
+		<select id="bestMenu" parameterType="java.util.Map" resultType="ProductDTO">
+			select * from(
+   				select rownum R, p.* from(select * from product order by 
+				<choose>
+					<when test="check == 'count'">	
+						count desc)p
+				) where R between 1 and 5
+	  				</when>
+	  				<otherwise>
+	  					reg_date desc)p
+				) where R between 1 and 10
+		  			</otherwise>
+				</choose>
+		</select>
 	</mapper>

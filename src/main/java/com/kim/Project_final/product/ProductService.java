@@ -38,17 +38,21 @@ public class ProductService {
 	
 	@Transactional()
 	public void insert(ProductDTO productDTO, ProductBoardDTO productBoardDTO, List<ProductImageDTO> ar) throws Exception {
-		productDAO.insert(productDTO);
-		int num = (productDAO.selectOne(productDTO.getName())).getNum();
-		productBoardDTO.setNum(num);
+		int result = productDAO.insert(productDTO);
+		productBoardDTO.setNum(productDTO.getNum());
 		productBoardDAO.insert(productBoardDTO);
-		productImageDAO.insert(ar, num);
+		productImageDAO.insert(ar, productDTO.getNum());
+	}
+	public void update(ProductDTO productDTO, ProductBoardDTO productBoardDTO, List<ProductImageDTO> ar) throws Exception {
+		productDAO.update(productDTO);
+		productBoardDTO.setNum(productDTO.getNum());
+		productBoardDAO.update(productBoardDTO);
+		productImageDAO.update(ar, productDTO.getNum());
 	}
 	public ProductDTO selectOne(int num) throws Exception {
 		ProductDTO productDTO = productDAO.selectOne(num);
-		String name = productDTO.getName();
-		productDTO.setImages(productImageDAO.selectImages(name));
-		productDTO.setProductBoardDTO(productBoardDAO.selectOne(name));
+		productDTO.setImages(productImageDAO.selectImages(num));
+		productDTO.setProductBoardDTO(productBoardDAO.selectOne(num));
 		return productDTO;
 	}
 	public ProductDTO selectOne(String name) throws Exception {

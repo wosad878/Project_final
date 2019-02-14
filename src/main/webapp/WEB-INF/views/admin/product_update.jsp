@@ -17,9 +17,13 @@ $(document).ready(function() {
 		if(cate1 == 1){
 			$('.category2-1').css('display','table-row');
 			$('.category2-2').css('display','none');
+			$('#category2-1').attr('name','category2');
+			$('#category2-2').removeAttr('name');
 		}else{
 			$('.category2-1').css('display','none');
 			$('.category2-2').css('display','table-row');
+			$('#category2-2').attr('name','category2');
+			$('#category2-1').removeAttr('name');
 		}
 	});
 	
@@ -47,8 +51,6 @@ $(document).ready(function() {
 	});
 	
 	$('.insert').click(function(){
-		$('#category1').val($('#cate1 option:selected').val());
-		$('#category2').val($('#cate2 option:selected').val());
 
  		if($('#name').val() == ""){
  			alert("상품이름은 필수입력 사항 입니다");
@@ -252,93 +254,92 @@ th span{
 			</div>
 		</div>
 		<div class="inputText">
-			<form action="./product_insert" method="post" id="frm" enctype="multipart/form-data">
+			<form action="./product_update" method="post" id="frm" enctype="multipart/form-data">
+				<input type="hidden" name="num" value="${product.num}">
 				<table class="pro_table">
 				<tr>
 					<th><span>상품 이름</span></th>
-					<td><input id="name" type="text" name="name" style="width: 500px;"><br></td>
+					<td><input id="name" type="text" name="name" style="width: 500px;" value="${product.name}"><br></td>
 				</tr>
 				<tr>
 					<th><span>카테고리1</span></th>
-					<td><select id="cate1">
+					<td><select id="cate1" name="category1">
 							<option value="1" selected="selected">전체</option>
 							<option value="2">피부고민별</option>
 						</select>
-						<input id="category1" type="hidden" name="category1">
 					</td>
 				</tr>	
 				<tr class="category2-1">
 					<th><span>카테고리2</span></th>
-					<td><select id="cate2">
-							<option value="3" selected="selected">세트</option>
-							<option value="4">천연비누</option>
-							<option value="5">스킨/로션/미스트</option>
-							<option value="6">에센스/세럼/크림</option>
-							<option value="7">신커에/메이크업</option>
-							<option value="8">팩/필링젤/클렌징</option>
-							<option value="9">바디/헤어</option>
-							<option value="10">미용도구</option>
+					<td><select id="category2-1" class="category2" name="category2">
+							<option value="세트" selected="selected">세트</option>
+							<option value="천연비누">천연비누</option>
+							<option value="스킨/로션/미스트">스킨/로션/미스트</option>
+							<option value="에센스/세럼/크림">에센스/세럼/크림</option>
+							<option value="신커에/메이크업">신커에/메이크업</option>
+							<option value="팩/필링젤/클렌징">팩/필링젤/클렌징</option>
+							<option value="바디/헤어">바디/헤어</option>
+							<option value="미용도구">미용도구</option>
 						</select>
-						<input id="category2" type="hidden" name="category2">
 					</td>
 				</tr>
 				<tr class="category2-2" style="display: none;">
 					<th><span>카테고리2</span></th>
-					<td><select id="cate2">
-							<option value="11" selected="selected">트러블/모공</option>
-							<option value="12">미백/흔적</option>
-							<option value="13">수분/보습</option>
-							<option value="14">민감/진정</option>
+					<td><select id="category2-2"  class="category2">
+							<option value="트러블/모공" selected="selected">트러블/모공</option>
+							<option value="미백/흔적">미백/흔적</option>
+							<option value="수분/보습">수분/보습</option>
+							<option value="민감/진정">민감/진정</option>
 						</select>
-						<input id="category2" type="hidden" name="category2">
 					</td>
 				</tr>
+
 				<tr>
 					<th><span>가격</span></th>
-					<td><input id="price" type="text" name="price" style="width: 200px;"></td>
+					<td><input id="price" type="text" name="price" style="width: 200px;" value="${product.price}"></td>
 				</tr>
 				<tr>
 					<th><span>중량</span></th>
-					<td><input id="weight" type="text" name="weight" style="width: 200px;"></td>
+					<td><input id="weight" type="text" name="weight" style="width: 200px;" value="${product.weight}"></td>
 				</tr>
 				<tr>
 					<th><span>유통기한</span></th>
-					<td><input id="life" type="text" name="life" style="width: 200px;"></td>
+					<td><input id="life" type="text" name="life" style="width: 200px;" value="${product.life}"></td>
 				</tr>
 				<tr>
 					<th><span>최소주문수량</span></th>
-					<td><input id="minorder" type="text" name="minorder" style="width: 200px;"></td>
+					<td><input id="minorder" type="text" name="minorder" style="width: 200px;" value="${product.minorder}"></td>
 				</tr>
 				<tr>
 					<th><span>이벤트 내용</span></th>
-					<td><input id="event" type="text" name="event" style="width: 700px;"></td>
+					<td><input id="event" type="text" name="event" style="width: 700px;" value="${product.event}"></td>
 				</tr>
 				<tr>
 					<th><span>태그</span></th>
-					<td><input id="tag" type="text" name="tag" style="width: 700px;"></td>
+					<td><input id="tag" type="text" name="tag" style="width: 700px;" value="${product.tag}"></td>
 				</tr>
 				<tr>
 					<th><span>설명</span></th>
-					<td><input id="memo" type="text" name="memo" style="width: 100%;"></td>
+					<td><input id="memo" type="text" name="memo" style="width: 100%;" value="${product.memo}"></td>
 				</tr>
 				<tr>
 					<th><span>재고</span></th>
-					<td><input id="stock" type="text" name="stock" style="width: 200px;"></td>
+					<td><input id="stock" type="text" name="stock" style="width: 200px;" value="${product.stock}"></td>
 				</tr>
 				<tr>
 					<th><span>배송안내</span></th>
-					<td><input id="deliver" type="text" name="deliver" style="width: 200px;"></td>
+					<td><input id="deliver" type="text" name="deliver" style="width: 200px;" value="${product.deliver}"></td>
 				</tr>
 				
 				<tr>
 					<th><span>대표이미지</span></th>
-					<td><input id="mainImage" class="mainImage" type="file" name="mainImage"></td>
+					<td><input id="mainImage" class="mainImage" type="file" name="mainImage" value="${product.fname}"></td>
 				</tr>
 				<tr>
 					<th><span>상세이미지</span></th>
 					<td id="subImage_td">
 						<div class="subIname_div">
-							<input id="subImage" class="subImage" type="file" name="subImage">
+							<input id="subImage" class="subImage" type="file" name="subImage">	
 							<i id="imageAdd" class="fa fa-plus" style="font-size:24px"></i>
 						</div>
 					</td>
@@ -351,7 +352,8 @@ th span{
 					</div>
 				</div>
 				
-				<textarea name="contents" id="smarteditor" rows="10" cols="100" style="width:100%; height:800px;"></textarea>
+				<textarea name="contents" id="smarteditor" rows="10" cols="100" style="width:100%; height:800px;">
+				</textarea>
 			</form>
 		</div>
 		<div class="inputbuttons">

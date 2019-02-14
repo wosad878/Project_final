@@ -11,7 +11,11 @@
 		<select id="selectOrder" parameterType="Pager" resultType="ProductDTO">
 			select * from(
 				select rownum R, p.* from (
-					select * from product where category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%' 
+					select * from product where
+					<if test="category1 != ''">
+						 category1 like '%'||#{category1}||'%' and
+					</if>
+					  category2 like '%'||#{category2}||'%' 
 					<choose>
 						<when test="orderBy == 1">
 							order by reg_date desc 
@@ -43,17 +47,28 @@
 							 name like '%'||#{search}||'%'
 						</when>
 						<otherwise>
-							 category1 like '%'||#{category1}||'%' and category2 like '%'||#{category2}||'%'
+						<if test="category1 != ''">
+							 category1 like '%'||#{category1}||'%' and
+						</if>
+						  category2 like '%'||#{category2}||'%'
 						</otherwise>
 					</choose>
 					)p ) where R between #{startRow} and #{lastRow}
 		</select>
 		<insert id="insert" parameterType="ProductDTO">
+			<selectKey keyProperty="num" order="BEFORE" resultType="java.lang.Integer">
+				select product_seq.nextval FROM DUAL
+			</selectKey>
 			insert into product(num,name,category1,category2,price,weight,life,minorder,event,tag,
 								memo,stock,reg_date,count,fname,oname,deliver)values(
-			product_seq.nextval,#{name},#{category1},#{category2},#{price},#{weight},
-			#{life},#{minorder},#{event},#{tag},#{memo},#{stock},sysdate,0,#{fname},#{oname},#{deliver})
+			#{num},#{name},#{category1},#{category2},#{price},#{weight},
+			#{life},#{minorder},#{event},#{tag},#{memo},#{stock, jdbcType=INTEGER},sysdate,0,#{fname},#{oname},#{deliver})
 		</insert>
+		<update id="update" parameterType="ProductDTO">
+			update product set name=#{name}, category1=#{category1}, category2=#{category2}, price=#{price}, weight=#{weight}, life=#{life},
+			 minorder=#{minorder}, event=#{event}, tag=#{tag}, memo=#{memo}, stock=#{stock, jdbcType=INTEGER}, fname=#{fname}, oname=#{oname}, deliver=#{deliver}
+			 where num=#{num}
+		</update>
 		<select id="selectOne" parameterType="java.lang.Integer" resultType="ProductDTO" >
 			select * from product where num = #{num}
 		</select>

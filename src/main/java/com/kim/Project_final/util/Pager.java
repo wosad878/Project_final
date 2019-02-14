@@ -54,7 +54,7 @@ public class Pager {
 	
 	public String getCategory1() {
 		if(category1 == null) {
-			category1 = "1";
+			category1 = "";
 		}
 		return category1;
 	}

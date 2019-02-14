@@ -57,7 +57,7 @@
 					<li><a href="/Project_final/product/product_list?category2=10">미용도구</a></li>
 				</ul>
 			</li>
-			<li><a href="/Project_final/product/product_list"><span>피부고민별</span></a>
+			<li><a href="/Project_final/product/product_list?category1=2"><span>피부고민별</span></a>
 				<ul>
 					<li><a href="/Project_final/product/product_list?category2=11">트러블/모공</a></li>
 					<li><a href="/Project_final/product/product_list?category2=12">미백/흔적</a></li>
@@ -65,14 +65,14 @@
 					<li><a href="/Project_final/product/product_list?category2=14">민감/진정</a></li>				
 				</ul>
 			</li>
-			<li><a href="/Project_final/product/product_list"><span>제품별</span></a>
+			<li><a href="/Project_final/product/product_list_order?&orderBy=1"><span>제품별</span></a>
 				<ul>
 					<li><a href="/Project_final/product/product_list_order?&orderBy=1">신상품</a></li>
 					<li><a href="/Project_final/product/product_list_order?&orderBy=5">베스트셀러</a></li>
-					<li><a href="/Project_final/product/product_list_order?&orderBy=3">이벤트상품</a></li>
+					<li><a href="/Project_final/product/product_list?category2=이벤트&orderBy=1">이벤트상품</a></li>
 				</ul>
 			</li>
-			<li><a href="/Project_final/product/product_list"><span>이벤트상품</span></a></li>
+			<li><a href="/Project_final/product/product_list?category2=이벤트&orderBy=1"><span>이벤트상품</span></a></li>
 			<li><a href=""><span>이벤트</span></a>
 				<ul>
 					<li><a href="">진행중 이벤트</a></li>

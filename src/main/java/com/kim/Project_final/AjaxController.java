@@ -79,6 +79,10 @@ public class AjaxController {
 				MemberDTO memberDTO = new MemberDTO();
 				memberDTO.setId(_uid);
 				memberDTO.setPassword(_pwd);
+//				System.out.println(uid);
+//				System.out.println(pwd);
+//				System.out.println(_uid);
+//				System.out.println(_pwd);
 				memberDTO = ajaxService.loginChk(memberDTO);
 				if(memberDTO.getName() != null) {
 					listObj.put("state", "true");

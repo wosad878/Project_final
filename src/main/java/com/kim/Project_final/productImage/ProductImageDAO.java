@@ -25,7 +25,24 @@ public class ProductImageDAO {
 		}
 		return result;
 	}
-	public List<ProductImageDTO> selectImages(String name) throws Exception {
-		return session.selectList(NAMESPACE+"selectImages", name);
+	public int update(List<ProductImageDTO> ar, int num) throws Exception{
+		int result = 0;
+		for(int i=0; i< ar.size(); i++) {
+			ar.get(i).setNum(num);
+			result = session.insert(NAMESPACE+"update", ar.get(i));
+			if(result < 1) {
+				new Exception("DB저장 오류");
+			}
+		}
+		return result;
+	}
+	public int imgDelete(int num) throws Exception {
+		return session.delete(NAMESPACE+"imgDelete", num);
+	}
+//	public List<ProductImageDTO> selectImages(String name) throws Exception {
+//		return session.selectList(NAMESPACE+"selectImages", name);
+//	}
+	public List<ProductImageDTO> selectImages(int num) throws Exception {
+		return session.selectList(NAMESPACE+"selectImages", num);
 	}
 }

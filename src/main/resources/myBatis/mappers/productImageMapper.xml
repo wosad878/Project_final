@@ -6,7 +6,16 @@
 	<insert id="insert" parameterType="ProductImageDTO">
 		insert into ps_img(num, name, fname, oname) values(#{num},#{name},#{fname},#{oname})
 	</insert>
-	<select id="selectImages" parameterType="java.lang.String" resultType="ProductImageDTO">
+	<update id="update" parameterType="ProductImageDTO">
+		update ps_img set name=#{name}, fname=#{fname}, oname=#{oname} where num=#{num}
+	</update>
+	<delete id="imgDelete" parameterType="java.lang.Integer">
+		delete ps_img where num=#{num}
+	</delete>
+	<select id="selectImagess" parameterType="java.lang.String" resultType="ProductImageDTO">
 		select * from ps_img where name = #{name}
+	</select>
+	<select id="selectImages" parameterType="java.lang.Integer" resultType="ProductImageDTO">
+		select * from ps_img where num = #{num}
 	</select>
   </mapper>

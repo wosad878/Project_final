@@ -6,10 +6,16 @@
   	<insert id="insert" parameterType="ProductBoardDTO">
   		insert into pro_board(num,name,contents,reg_date) values(#{num},#{name},#{contents},sysdate)
   	</insert>
+  	<update id="update" parameterType="ProductBoardDTO">
+  		update pro_board set name=#{name}, contents=#{contents} where num=#{num}
+  	</update>
+  	<delete id="imgDelete" parameterType="java.lang.Integer">
+  		delete pro_board_img where num=#{num}
+  	</delete>
   	<insert id="imgInsert" parameterType="ProductImageDTO">
   		insert into pro_board_img (num,name,fname) values(#{num}, #{name}, #{fname})
   	</insert>
-  	<select id="selectOne" parameterType="java.lang.String" resultType="ProductBoardDTO">
-  		select * from pro_board where name= #{name}
+  	<select id="selectOne" parameterType="java.lang.Integer" resultType="ProductBoardDTO">
+  		select * from pro_board where num= #{num}
   	</select>
   </mapper>

@@ -10,7 +10,28 @@
 <c:import url="/WEB-INF/views/temp/header.jsp"></c:import>
 <script type="text/javascript">
 $(function(){
+		var category1 = '${pager.category1}';
+		var category2 = '${pager.category2}';
+		var orderBy = '${pager.orderBy}';
 		
+		if(orderBy != 0){
+			$('.menu1').css('display','none');
+			$('.menu2').css('display','none');
+			$('.menu3').css('display','block');
+		}else if(category1 == '' || category1 == 1){
+			$('.menu1').css('display','block');
+			$('.menu2').css('display','none');
+			$('.menu3').css('display','none');
+		}else if(category1 == 2){
+			$('.menu1').css('display','none');
+			$('.menu2').css('display','block');
+			$('.menu3').css('display','none');
+		}
+		if(category2 == ""){
+			category2 = '전체보기';
+		}
+		$('.menu').html(category2);
+	
 	$('.pPrice').each(function(){
 		var price = $(this).find('span').html();
 		var s = numberWithCommas(price);
@@ -22,12 +43,19 @@ $(function(){
 			$(this).css('background-color','#f2f2f2');
 		}
 	});
+	$('.update').each(function(){
+		$(this).click(function(){
+			var num = $(this).attr('title');
+			location.href="../admin/product_update?num="+num;
+		});
+	});
 });
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 </script>
 <style type="text/css">
+	
 	.contents{
 		margin: 0 auto;
 		min-width: 1100px;
@@ -55,7 +83,7 @@ function numberWithCommas(x) {
 		box-sizing: border-box;
 		padding-top: 10px;
 	}
-	.inputProduct{
+	.admin{
 		display: inline-block;
 		width: 90px;
 		height: 30px;
@@ -67,30 +95,37 @@ function numberWithCommas(x) {
 		margin-left: 20px;
 		background-color: #9b9b9b;
 	}
-	.inputProduct:visited{
+	.admin:visited{
 		color: white;
 	}
-	.inputProduct:link{
+	.admin:link{
 		color: white;
 	}
 	.sub-menu{
-		height:96px;
 		margin: 30px 0;
+		height: auto;
+		display: block;
+		overflow: hidden;
 	}
-	.depth{
-		
+	.sub-menu .depth{
 		margin: 0 -5px 0 -5px;
+		width: 100%;
+		height: auto;
+		overflow: hidden;
 	}
 	.depth li{
-		width: 16.666%;
+		width: 172.8px;
+	    height: 36px;
+		display: block;
 		position: relative;
 		float:left;
+		margin-bottom: 15px;
+		padding: 0 5px;
 	}
 	.depth li a{
 	    position: relative;
-	    margin: 5px;
-	    padding: 0 12px;
 	    display: block;
+	    padding-left: 15px;
 	    height: 36px;
 	    line-height: 36px;
 	    border: 1px solid #e4e4e4;
@@ -185,6 +220,9 @@ function numberWithCommas(x) {
 	    font-size: 10px;
 	    line-height: 31px;
 	}
+	.update, .delete{
+		margin-top: 8px;
+	}
 </style>
 </head>
 <body>
@@ -192,26 +230,38 @@ function numberWithCommas(x) {
 	<div class="contents">
 		<div class="product_name">
 			<div class="page_location">
-				<h6>Home > 전체상품</h6>
+				<h6>Home > <span class="menu">전체상품</span></h6>
 			</div>
 			<div class="name_inner">
-				<h3 class="pro_name">전체상품</h3>
+				<h3 class="pro_name menu">전체상품</h3>
 				<c:if test="${member.membertype eq 'admin'}">
-					<a class="inputProduct" href="/Project_final/product/product_insert">상품등록</a>
+					<a class="inputProduct admin" href="/Project_final/admin/product_insert">상품등록</a>
 				</c:if>
 			</div>
 		</div>
 		<div class="sub-menu">
-			<ul class="depth">
-				<li><a href="./product_list"><span>전체보기<p></p></span></a></li>
-				<li><a href="product_list?category2=3"><span>세트상품<p></p></span></a></li>
-				<li><a href="product_list?category2=4"><span>천연비누<p></p></span></a></li>
-				<li><a href="product_list?category2=5"><span>스킨/로션/미스트<p></p></span></a></li>
-				<li><a href="product_list?category2=6"><span>에센스/세럼/크림<p></p></span></a></li>
-				<li><a href="product_list?category2=7"><span>선케어/메이크업<p></p></span></a></li>
-				<li><a href="product_list?category2=8"><span>팩/필링젤/클렌징<p></p></span></a></li>
-				<li><a href="product_list?category2=9"><span>바디/헤어<p></p></span></a></li>
-				<li><a href="product_list?category2=10"><span>미용도구<p></p></span></a></li>
+			<ul class="depth menu1">
+				<li><a href="./product_list"><span>전체보기</span></a></li>
+				<li><a href="./product_list?category2=세트상품"><span>세트상품</span></a></li>
+				<li><a href="./product_list?category2=천연비누"><span>천연비누</span></a></li>
+				<li><a href="./product_list?category2=스킨/로션/미스트"><span>스킨/로션/미스트</span></a></li>
+				<li><a href="./product_list?category2=에센스/세럼/크림"><span>에센스/세럼/크림</span></a></li>
+				<li><a href="./product_list?category2=선케어/메이크업"><span>선케어/메이크업</span></a></li>
+				<li><a href="./product_list?category2=팩/필링젤/클렌징"><span>팩/필링젤/클렌징</span></a></li>
+				<li><a href="./product_list?category2=바디/헤어"><span>바디/헤어</span></a></li>
+				<li><a href="./product_list?category2=미용도구"><span>미용도구</span></a></li>
+			</ul>
+			<ul class="depth menu2">
+				<li><a href="./product_list?category1=2"><span>전체보기</span></a></li>
+				<li><a href="./product_list?category1=2&category2=트러블/모공"><span>트러블/모공</span></a></li>
+				<li><a href="./product_list?category1=2&category2=미백/흔적"><span>미백/흔적</span></a></li>
+				<li><a href="./product_list?category1=2&category2=수분/보습"><span>수분/보습</span></a></li>
+				<li><a href="./product_list?category1=2&category2=민감/진정"><span>민감/진정</span></a></li>
+			</ul>
+			<ul class="depth menu3">
+				<li><a href="./product_list_order?category2=신상품&orderBy=1"><span>신상품</span></a></li>
+				<li><a href="./product_list_order?category2=베스트셀러&orderBy=5"><span>베스트셀러</span></a></li>
+				<li><a href="./product_list_order?category2=이벤트&orderBy=1"><span>이벤트</span></a></li>
 			</ul>
 		</div>
 		<div class="product_list">
@@ -237,6 +287,10 @@ function numberWithCommas(x) {
 						</div>
 						<div class="pPrice">
 							<ul>
+								<c:if test="${member.membertype eq 'admin'}">
+									<li><a class="update admin" href="#none" title="${list.num}">수정</a>
+										<a class="delete admin" href="#none" title="${list.num}">삭제</a></li>
+								</c:if>
 								<li><span>${list.price}</span></li>
 								<li><p>${list.event}</p></li>
 							</ul>

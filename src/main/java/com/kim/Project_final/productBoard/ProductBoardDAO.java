@@ -18,6 +18,12 @@ public class ProductBoardDAO {
 	public int insert(ProductBoardDTO productBoardDTO) throws Exception {
 		return session.insert(NAMESPACE+"insert", productBoardDTO);
 	}
+	public int update(ProductBoardDTO productBoardDTO) throws Exception {
+		return session.insert(NAMESPACE+"update", productBoardDTO);
+	}
+	public int imgDelete(int num) throws Exception {
+		return session.delete(NAMESPACE+"imgDelete", num);
+	}
 	public int imgInsert(List<ProductImageDTO> ar, int num) throws Exception {
 		for(int i=0; i< ar.size(); i++) {
 			ar.get(i).setNum(num);
@@ -25,7 +31,7 @@ public class ProductBoardDAO {
 		}
 		return 1;
 	}
-	public ProductBoardDTO selectOne(String name) throws Exception {
-		return session.selectOne(NAMESPACE+"selectOne", name);
+	public ProductBoardDTO selectOne(int num) throws Exception {
+		return session.selectOne(NAMESPACE+"selectOne", num);
 	}
 }

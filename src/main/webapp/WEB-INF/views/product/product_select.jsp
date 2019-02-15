@@ -410,9 +410,11 @@ function priceText(price, quantity){
 				</div>
 				<div class="proInfo_detail">
 					<table>
-						<tr>
-							<td><span>정상가격</span><p class="oprice" style="text-decoration: line-through;"></p></td>
-						</tr>
+						<c:if test="${product.oPrice ne null}">
+							<tr>
+								<td><span>정상가격</span><p class="oprice" style="text-decoration: line-through;"></p></td>
+							</tr>
+						</c:if>
 						<tr>
 							<td><span>판매가격</span><p class="sprice" style="font-size: 16px; color: #6aa47b; font-weight: bold;"></p></td>
 						</tr>

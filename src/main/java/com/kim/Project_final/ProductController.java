@@ -47,12 +47,12 @@ public class ProductController {
 		List<ProductDTO> ar2 = new ArrayList<ProductDTO>();
 		if(pager.getCategory2().equals("이벤트")) {
 			ar2 = event(pager);
-			model.addAttribute("list", ar2);
+			model.addAttribute("list", ar2).addAttribute("totalCount", totalCount);
 		}else {
 			pager.setCategory2("");
 			List<ProductDTO> ar = productService.selectOrder(pager);
 			pager.setCategory2(cat);
-			model.addAttribute("list", ar);
+			model.addAttribute("list", ar).addAttribute("totalCount", totalCount);
 		}
 		return "product/product_list";
 	}

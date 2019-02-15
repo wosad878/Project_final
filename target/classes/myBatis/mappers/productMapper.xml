@@ -47,9 +47,7 @@
 							 name like '%'||#{search}||'%'
 						</when>
 						<otherwise>
-						<if test="category1 != ''">
-							 category1 like '%'||#{category1}||'%' and
-						</if>
+  						 category1 like '%'||#{category1}||'%' and
 						  category2 like '%'||#{category2}||'%'
 						</otherwise>
 					</choose>

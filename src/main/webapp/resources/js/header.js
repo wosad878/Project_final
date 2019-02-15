@@ -10,9 +10,7 @@ $(function(){
 		$('.logoImg').attr("src","/Project_final/resources/images/logo/logo1.png");
 	});
 	$(".fa-search").click(function(){
-		var text = $('.find').val();
-		alert(text);
-		location.href="/Project_final/product/product_search?text="+text;
+		$('#searchFrm').submit();
 	});
 	$(window).bind('scroll', function() {
 		if ($(window).scrollTop() > 150) {

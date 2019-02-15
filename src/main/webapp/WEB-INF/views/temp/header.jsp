@@ -27,9 +27,9 @@
 			</ul>
 		</div>
 		<div class="innerright">
-			<form>
-				<input style="float: left;" type="text" class="find" id="search" name="search">
-				<a class="searchbutton" style="float: right;margin-left: 5px; margin-top: 3px" href="#none"><i class="fa fa-search"></i></a>
+			<form action="/Project_final/product/product_search" id="searchFrm">
+				<input style="float: left;" type="text" class="find" id="search" name="text">
+				<a class="searchbutton" style="position: relative; top: 4px;margin-left: 5px; margin-top: 3px" href="#none"><i class="fa fa-search"></i></a>
 			</form>
 		</div>
 	</div>

@@ -25,7 +25,7 @@ public class ProductController {
 	public String product_search(String text, Model model) throws Exception {
 		Pager pager = new Pager();
 		pager.makeRow();
-		pager.setSearch(text);
+		pager.setSearch(text.trim());
 		int totalCount = productService.totalCount(pager);
 		pager.makePage(totalCount);
 		List<ProductDTO> ar = productService.selectList(pager);

@@ -11,7 +11,8 @@ $(function(){
 	});
 	$(".fa-search").click(function(){
 		var text = $('.find').val();
-		location.href="/Project_final/product/product_search?"+text;
+		alert(text);
+		location.href="/Project_final/product/product_search?text="+text;
 	});
 	$(window).bind('scroll', function() {
 		if ($(window).scrollTop() > 150) {

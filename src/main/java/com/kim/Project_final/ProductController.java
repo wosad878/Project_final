@@ -21,6 +21,18 @@ public class ProductController {
 	@Inject
 	private ProductService productService;
 	
+	@RequestMapping("product_search")
+	public String product_search(String text, Model model) throws Exception {
+		Pager pager = new Pager();
+		pager.makeRow();
+		pager.setSearch(text);
+		int totalCount = productService.totalCount(pager);
+		pager.makePage(totalCount);
+		List<ProductDTO> ar = productService.selectList(pager);
+		model.addAttribute("list", ar).addAttribute("totalCount", totalCount);
+		return "/product/product_list";
+	}
+	
 	public List<ProductDTO> event(Pager pager) throws Exception {
 		pager.setCategory2("");
 		List<ProductDTO> ar = productService.selectOrder(pager);
@@ -31,10 +43,6 @@ public class ProductController {
 			}
 		}
 		return ar2;
-	}
-	@RequestMapping("product_search")
-	public void product_search(String text) throws Exception {
-		
 	}
 	
 	@RequestMapping("product_list_order")

@@ -28,7 +28,7 @@
 		</div>
 		<div class="innerright">
 			<form>
-				<input style="float: left;" type="text" class="find" name="search">
+				<input style="float: left;" type="text" class="find" id="search" name="search">
 				<a class="searchbutton" style="float: right;margin-left: 5px; margin-top: 3px" href="#none"><i class="fa fa-search"></i></a>
 			</form>
 		</div>

@@ -172,7 +172,7 @@ $(document).ready(function() {
 	border-right:1px solid #e7e7e7;
     border-bottom: 1px solid #e7e7e7;
 }
-#name,#price,#weight,#life,#deliver,#event,#tag,#memo,#bindname,#stock,#minorder{
+#name,#oPrice,#price,#weight,#life,#deliver,#event,#tag,#memo,#bindname,#stock,#minorder{
 	height: 20px;
 	border:1px solid #e7e7e7;
 	display: inline-block;
@@ -275,7 +275,7 @@ th span{
 							<option value="천연비누">천연비누</option>
 							<option value="스킨/로션/미스트">스킨/로션/미스트</option>
 							<option value="에센스/세럼/크림">에센스/세럼/크림</option>
-							<option value="신커에/메이크업">신커에/메이크업</option>
+							<option value="선케어/메이크업">선케어/메이크업</option>
 							<option value="팩/필링젤/클렌징">팩/필링젤/클렌징</option>
 							<option value="바디/헤어">바디/헤어</option>
 							<option value="미용도구">미용도구</option>
@@ -292,9 +292,12 @@ th span{
 						</select>
 					</td>
 				</tr>
-
 				<tr>
-					<th><span>가격</span></th>
+					<th><span>기본 가격(할인하지 않을 땐 공란)</span></th>
+					<td><input id="oPrice" type="text" name="oPrice" style="width: 200px;"></td>
+				</tr>
+				<tr>
+					<th><span>할인된 가격(할인하지 않을 땐 기본가격 입력)</span></th>
 					<td><input id="price" type="text" name="price" style="width: 200px;"></td>
 				</tr>
 				<tr>

@@ -33,6 +33,10 @@ public class ProductController {
 		}
 		return ar2;
 	}
+	@RequestMapping("product_search")
+	public void product_search(String text) throws Exception {
+		
+	}
 	
 	@RequestMapping("product_list_order")
 	public String product_order(Pager pager, Model model) throws Exception {

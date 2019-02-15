@@ -59,16 +59,19 @@
 			<selectKey keyProperty="num" order="BEFORE" resultType="java.lang.Integer">
 				select product_seq.nextval FROM DUAL
 			</selectKey>
-			insert into product(num,name,category1,category2,price,weight,life,minorder,event,tag,
+			insert into product(num,name,category1,category2,oprice,price,weight,life,minorder,event,tag,
 								memo,stock,reg_date,count,fname,oname,deliver)values(
-			#{num},#{name},#{category1},#{category2},#{price},#{weight},
+			#{num},#{name},#{category1},#{category2},#{oPrice, jdbcType=INTEGER},#{price},#{weight},
 			#{life},#{minorder},#{event},#{tag},#{memo},#{stock, jdbcType=INTEGER},sysdate,0,#{fname},#{oname},#{deliver})
 		</insert>
 		<update id="update" parameterType="ProductDTO">
-			update product set name=#{name}, category1=#{category1}, category2=#{category2}, price=#{price}, weight=#{weight}, life=#{life},
+			update product set name=#{name}, category1=#{category1}, category2=#{category2}, price=#{price}, weight=#{weight, jdbcType=VARCHAR}, life=#{life},
 			 minorder=#{minorder}, event=#{event}, tag=#{tag}, memo=#{memo}, stock=#{stock, jdbcType=INTEGER}, fname=#{fname}, oname=#{oname}, deliver=#{deliver}
 			 where num=#{num}
 		</update>
+		<delete id="delete" parameterType="java.lang.Integer">
+			delete product where num=#{num}
+		</delete>
 		<select id="selectOne" parameterType="java.lang.Integer" resultType="ProductDTO" >
 			select * from product where num = #{num}
 		</select>

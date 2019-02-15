@@ -55,6 +55,11 @@ public class ProductService {
 		productDTO.setProductBoardDTO(productBoardDAO.selectOne(num));
 		return productDTO;
 	}
+	public void deleteAll(int num) throws Exception {
+		productDAO.delete(num);
+		productBoardDAO.delete(num);
+		productImageDAO.imgDelete(num);
+	}
 	public ProductDTO selectOne(String name) throws Exception {
 		return productDAO.selectOne(name);
 	}

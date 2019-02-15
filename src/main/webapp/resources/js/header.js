@@ -9,6 +9,10 @@ $(function(){
 	$(".logo").mouseleave(function(){
 		$('.logoImg').attr("src","/Project_final/resources/images/logo/logo1.png");
 	});
+	$(".fa-search").click(function(){
+		var text = $('.find').val();
+		location.href="/Project_final/product/product_search?"+text;
+	});
 	$(window).bind('scroll', function() {
 		if ($(window).scrollTop() > 150) {
 			$('.lnb').css('position','fixed');

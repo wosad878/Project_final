@@ -36,6 +36,9 @@ public class ProductDAO {
 	public int update(ProductDTO productDTO) throws Exception {
 		return session.update(NAMESPACE+"update", productDTO);
 	}
+	public int delete(int num) throws Exception {
+		return session.delete(NAMESPACE+"delete", num);
+	}
 	public ProductDTO selectOne(int num) throws Exception {
 		return session.selectOne(NAMESPACE+"selectOne", num);
 	}

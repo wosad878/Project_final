@@ -14,11 +14,7 @@ $(function(){
 		var category2 = '${pager.category2}';
 		var orderBy = '${pager.orderBy}';
 		
-		if(orderBy != 0){
-			$('.menu1').css('display','none');
-			$('.menu2').css('display','none');
-			$('.menu3').css('display','block');
-		}else if(category1 == '' || category1 == 1){
+		if(category1 == 1){
 			$('.menu1').css('display','block');
 			$('.menu2').css('display','none');
 			$('.menu3').css('display','none');
@@ -26,6 +22,10 @@ $(function(){
 			$('.menu1').css('display','none');
 			$('.menu2').css('display','block');
 			$('.menu3').css('display','none');
+		}else if(category1 == ''){
+			$('.menu1').css('display','none');
+			$('.menu2').css('display','none');
+			$('.menu3').css('display','block');
 		}
 		if(category2 == ""){
 			category2 = '전체보기';
@@ -47,6 +47,12 @@ $(function(){
 		$(this).click(function(){
 			var num = $(this).attr('title');
 			location.href="../admin/product_update?num="+num;
+		});
+	});
+	$('.delete').each(function(){
+		$(this).click(function(){
+			var num = $(this).attr('title');
+			location.href="../admin/product_delete?num="+num;
 		});
 	});
 });
@@ -241,15 +247,15 @@ function numberWithCommas(x) {
 		</div>
 		<div class="sub-menu">
 			<ul class="depth menu1">
-				<li><a href="./product_list"><span>전체보기</span></a></li>
-				<li><a href="./product_list?category2=세트상품"><span>세트상품</span></a></li>
-				<li><a href="./product_list?category2=천연비누"><span>천연비누</span></a></li>
-				<li><a href="./product_list?category2=스킨/로션/미스트"><span>스킨/로션/미스트</span></a></li>
-				<li><a href="./product_list?category2=에센스/세럼/크림"><span>에센스/세럼/크림</span></a></li>
-				<li><a href="./product_list?category2=선케어/메이크업"><span>선케어/메이크업</span></a></li>
-				<li><a href="./product_list?category2=팩/필링젤/클렌징"><span>팩/필링젤/클렌징</span></a></li>
-				<li><a href="./product_list?category2=바디/헤어"><span>바디/헤어</span></a></li>
-				<li><a href="./product_list?category2=미용도구"><span>미용도구</span></a></li>
+				<li><a href="./product_list?category1=1"><span>전체보기</span></a></li>
+				<li><a href="./product_list?category1=1&category2=세트"><span>세트상품</span></a></li>
+				<li><a href="./product_list?category1=1&category2=천연비누"><span>천연비누</span></a></li>
+				<li><a href="./product_list?category1=1&category2=스킨/로션/미스트"><span>스킨/로션/미스트</span></a></li>
+				<li><a href="./product_list?category1=1&category2=에센스/세럼/크림"><span>에센스/세럼/크림</span></a></li>
+				<li><a href="./product_list?category1=1&category2=선케어/메이크업"><span>선케어/메이크업</span></a></li>
+				<li><a href="./product_list?category1=1&category2=팩/필링젤/클렌징"><span>팩/필링젤/클렌징</span></a></li>
+				<li><a href="./product_list?category1=1&category2=바디/헤어"><span>바디/헤어</span></a></li>
+				<li><a href="./product_list?category1=1&category2=미용도구"><span>미용도구</span></a></li>
 			</ul>
 			<ul class="depth menu2">
 				<li><a href="./product_list?category1=2"><span>전체보기</span></a></li>
@@ -268,11 +274,11 @@ function numberWithCommas(x) {
 			<div class="list_menu">
 				<span style="font-size:12px;color:#888;">Total <strong style="color:#333;font-weight:bold;">${totalCount}</strong> items</span>
 				<ul class="list_menu_ul">
-					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=1">신상품</a></li>
-					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=2">상품명</a></li>
-					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=3">낮은가격</a></li>
-					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=4">높은가격</a></li>
-					<li><a href="./product_list_order?category2=${pager.category2}&orderBy=5">사용후기</a></li>
+					<li><a href="./product_list_order?category1=${pager.category1}&category2=${pager.category2}&orderBy=1">신상품</a></li>
+					<li><a href="./product_list_order?category1=${pager.category1}&category2=${pager.category2}&orderBy=2">상품명</a></li>
+					<li><a href="./product_list_order?category1=${pager.category1}&category2=${pager.category2}&orderBy=3">낮은가격</a></li>
+					<li><a href="./product_list_order?category1=${pager.category1}&category2=${pager.category2}&orderBy=4">높은가격</a></li>
+					<li><a href="./product_list_order?category1=${pager.category1}&category2=${pager.category2}&orderBy=5">사용후기</a></li>
 				</ul>
 			</div>
 			<ul class="product_item">

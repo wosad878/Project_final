@@ -14,6 +14,7 @@ public class ProductDTO {
 	private String name;
 	private String category1;
 	private String category2;
+	private Integer oPrice;
 	private Integer price;
 	private String weight;
 	private String life;
@@ -66,6 +67,12 @@ public class ProductDTO {
 	}
 	public void setCategory2(String category2) {
 		this.category2 = category2;
+	}
+	public Integer getoPrice() {
+		return oPrice;
+	}
+	public void setoPrice(Integer oPrice) {
+		this.oPrice = oPrice;
 	}
 	public Integer getPrice() {
 		return price;

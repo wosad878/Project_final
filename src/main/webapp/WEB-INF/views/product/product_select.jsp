@@ -12,8 +12,14 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	var q = $('#quantity').val();
-	var pText = priceText(q);
+	var price = '${product.price}';
+	var oprice = '${product.oPrice}';
+	var quantity = $('#quantity').val();
+	if(oprice != ""){
+		var pText = priceText(oprice, quantity);	
+		$('.oprice').html(pText);	
+	}
+	var pText = priceText(price, quantity);
 	$('.sprice').html(pText);
 	$('#tprice').html(pText);
 	
@@ -97,9 +103,9 @@ $(function(){
 });
 
 
-function priceText(q){
-	var price = ${product.price};
-	var tprice = String(price * q);
+function priceText(price, quantity){
+	
+	var tprice = String(price * quantity);
 	var string = tprice.substring(tprice.length-3);
 	var string2;
 	var string3;
@@ -405,7 +411,10 @@ function priceText(q){
 				<div class="proInfo_detail">
 					<table>
 						<tr>
-							<td><span>판매가격</span><p class="sprice"></p></td>
+							<td><span>정상가격</span><p class="oprice" style="text-decoration: line-through;"></p></td>
+						</tr>
+						<tr>
+							<td><span>판매가격</span><p class="sprice" style="font-size: 16px; color: #6aa47b; font-weight: bold;"></p></td>
 						</tr>
 						<c:if test="${product.weight ne null}">
 							<tr>

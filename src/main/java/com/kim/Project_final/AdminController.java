@@ -2,13 +2,11 @@ package com.kim.Project_final;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kim.Project_final.ImgTemp.ImageTempService;
+import com.kim.Project_final.cart.CartDTO;
+import com.kim.Project_final.cart.CartService;
 import com.kim.Project_final.member.MemberDTO;
 import com.kim.Project_final.product.ProductDTO;
 import com.kim.Project_final.product.ProductService;
 import com.kim.Project_final.productBoard.ProductBoardDTO;
 import com.kim.Project_final.productBoard.ProductBoardService;
 import com.kim.Project_final.productImage.ProductImageDTO;
-import com.kim.Project_final.productImage.ProductImageService;
 import com.kim.Project_final.util.FileUploader;
 
 @Controller
@@ -37,7 +36,7 @@ public class AdminController {
 	@Inject
 	private ProductBoardService productBoardService;
 	@Inject
-	private ProductImageService productImageService;
+	private CartService cartService;
 	
 	public List<ProductImageDTO> array3(List<String> ar2, String inFolder, String outFolder, ProductDTO productDTO){
 		List<ProductImageDTO> ar = new  ArrayList<ProductImageDTO>(); 
@@ -116,7 +115,7 @@ public class AdminController {
 		}
 		imageTempService.imageNameDelete(userId);
 			
-		return "redirect:/product/product_list";
+		return "redirect:/product/product_list?categoty1=1";
 	}
 	
 	@RequestMapping("product_update")
@@ -159,6 +158,22 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping("product_delete")
+	public String product_delete(int num, HttpSession session) throws Exception {
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		CartDTO cartDTO = new CartDTO();
+		cartDTO.setNum(num);
+		cartDTO.setId(memberDTO.getId());
+		List<CartDTO> ar = cartService.cartSelectList(memberDTO.getId());
+		for(CartDTO dto : ar) {
+			if(num == dto.getNum()) {
+				cartService.cartDeleteOne(dto.getProname());
+			}
+		}
+		productService.deleteAll(num);
+		productBoardService.deleteAll(num);
+		return "redirect:/product/product_list";
+	}
 //	@RequestMapping(value="imageDelete",method=RequestMethod.GET)
 //	public String product_insert(HttpSession session,boolean check) throws Exception {
 //		String userId = ((MemberDTO)session.getAttribute("member")).getId();

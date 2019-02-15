@@ -17,6 +17,10 @@ public class ProductBoardService {
 	public int imgInsert(List<ProductImageDTO> ar, int num) throws Exception {
 		return productBoardDAO.imgInsert(ar, num);
 	}
+	public void deleteAll(int num) throws Exception {
+		productBoardDAO.delete(num);
+		productBoardDAO.imgDelete(num);
+	}
 	public int imgDelete(int num) throws Exception {
 		return productBoardDAO.imgDelete(num);
 	}

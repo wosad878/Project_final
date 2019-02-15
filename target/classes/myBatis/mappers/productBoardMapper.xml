@@ -9,6 +9,9 @@
   	<update id="update" parameterType="ProductBoardDTO">
   		update pro_board set name=#{name}, contents=#{contents} where num=#{num}
   	</update>
+  	<delete id="delete" parameterType="java.lang.Integer">
+  		delete pro_board where num=#{num}
+  	</delete>
   	<delete id="imgDelete" parameterType="java.lang.Integer">
   		delete pro_board_img where num=#{num}
   	</delete>

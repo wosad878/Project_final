@@ -21,6 +21,9 @@ public class ProductBoardDAO {
 	public int update(ProductBoardDTO productBoardDTO) throws Exception {
 		return session.insert(NAMESPACE+"update", productBoardDTO);
 	}
+	public int delete(int num) throws Exception {
+		return session.delete(NAMESPACE+"delete", num);
+	}
 	public int imgDelete(int num) throws Exception {
 		return session.delete(NAMESPACE+"imgDelete", num);
 	}

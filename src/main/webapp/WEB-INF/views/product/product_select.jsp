@@ -394,6 +394,7 @@ function priceText(price, quantity){
 			    	</c:forEach>
 			    </div>
 			    <div class="slider slider-nav">
+			    	<div class="swiper-slide"><img src="/Project_final/resources/photoUpload/${product.fname}"></div>
 			    	<c:forEach items="${images}" var="images">
 				    	<div class="swiper-slide"><img src="/Project_final/resources/photoUpload/${images.fname}"></div>
 			    	</c:forEach>

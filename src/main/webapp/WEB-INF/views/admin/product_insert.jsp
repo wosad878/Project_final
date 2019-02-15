@@ -271,7 +271,7 @@ th span{
 				<tr class="category2-1">
 					<th><span>카테고리2</span></th>
 					<td><select id="category2-1" class="category2" name="category2">
-							<option value="세트" selected="selected">세트</option>
+							<option value="세트상품" selected="selected">세트상품</option>
 							<option value="천연비누">천연비누</option>
 							<option value="스킨/로션/미스트">스킨/로션/미스트</option>
 							<option value="에센스/세럼/크림">에센스/세럼/크림</option>

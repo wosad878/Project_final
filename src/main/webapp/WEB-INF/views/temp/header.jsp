@@ -47,7 +47,7 @@
 			<li><a href=""><span>브랜드 스토리</span></a></li>
 			<li><a href="/Project_final/product/product_list?category1=1"><span>전체상품</span></a>
 				<ul>
-					<li><a href="/Project_final/product/product_list?category1=1&category2=세트">세트상품</a></li>
+					<li><a href="/Project_final/product/product_list?category1=1&category2=세트상품">세트상품</a></li>
 					<li><a href="/Project_final/product/product_list?category1=1&category2=천연비누">천연비누</a></li>
 					<li><a href="/Project_final/product/product_list?category1=1&category2=스킨/로션/미스트">스킨/로션/미스트</a></li>
 					<li><a href="/Project_final/product/product_list?category1=1&category2=에센스/세럼/크림">에센스/세럼/크림</a></li>
@@ -67,12 +67,12 @@
 			</li>
 			<li><a href="/Project_final/product/product_list_order?&orderBy=1"><span>제품별</span></a>
 				<ul>
-					<li><a href="/Project_final/product/product_list_order?&orderBy=1">신상품</a></li>
-					<li><a href="/Project_final/product/product_list_order?&orderBy=5">베스트셀러</a></li>
-					<li><a href="/Project_final/product/product_list?category2=이벤트&orderBy=1">이벤트상품</a></li>
+					<li><a href="/Project_final/product/product_list_order?category2=신상품&orderBy=1">신상품</a></li>
+					<li><a href="/Project_final/product/product_list_order?category2=베스트셀러&orderBy=5">베스트셀러</a></li>
+					<li><a href="/Project_final/product/product_list_order?category2=이벤트&orderBy=1">이벤트상품</a></li>
 				</ul>
 			</li>
-			<li><a href="/Project_final/product/product_list?category2=이벤트&orderBy=1"><span>이벤트상품</span></a></li>
+			<li><a href="/Project_final/product/product_list_order?category2=이벤트&orderBy=1"><span>이벤트상품</span></a></li>
 			<li><a href=""><span>이벤트</span></a>
 				<ul>
 					<li><a href="">진행중 이벤트</a></li>

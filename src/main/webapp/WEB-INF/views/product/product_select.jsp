@@ -388,6 +388,7 @@ function priceText(price, quantity){
 		<div class="proImage">
 			<div class="s-box">
 			    <div class="slider slider-for">
+			    	<div class="swiper-slide"><img src="/Project_final/resources/photoUpload/${product.fname}"></div>
 			    	<c:forEach items="${images}" var="images">
 				    	<div class="swiper-slide"><img src="/Project_final/resources/photoUpload/${images.fname}"></div>
 			    	</c:forEach>

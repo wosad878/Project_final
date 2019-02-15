@@ -65,7 +65,7 @@
 					<li><a href="/Project_final/product/product_list?category1=2&category2=민감/진정">민감/진정</a></li>				
 				</ul>
 			</li>
-			<li><a href="/Project_final/product/product_list_order?&orderBy=1"><span>제품별</span></a>
+			<li><a href="/Project_final/product/product_list?"><span>제품별</span></a>
 				<ul>
 					<li><a href="/Project_final/product/product_list_order?category2=신상품&orderBy=1">신상품</a></li>
 					<li><a href="/Project_final/product/product_list_order?category2=베스트셀러&orderBy=5">베스트셀러</a></li>

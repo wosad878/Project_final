@@ -265,6 +265,7 @@ function numberWithCommas(x) {
 				<li><a href="./product_list?category1=2&category2=민감/진정"><span>민감/진정</span></a></li>
 			</ul>
 			<ul class="depth menu3">
+				<li><a href="./product_list?"><span>전체보기</span></a></li>
 				<li><a href="./product_list_order?category2=신상품&orderBy=1"><span>신상품</span></a></li>
 				<li><a href="./product_list_order?category2=베스트셀러&orderBy=5"><span>베스트셀러</span></a></li>
 				<li><a href="./product_list_order?category2=이벤트&orderBy=1"><span>이벤트</span></a></li>

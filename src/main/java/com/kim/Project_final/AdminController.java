@@ -115,7 +115,7 @@ public class AdminController {
 		}
 		imageTempService.imageNameDelete(userId);
 			
-		return "redirect:/product/product_list?categoty1=1";
+		return "redirect:/product/product_list?category1=1";
 	}
 	
 	@RequestMapping("product_update")

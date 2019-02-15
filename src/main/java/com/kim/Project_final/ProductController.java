@@ -25,7 +25,6 @@ public class ProductController {
 		pager.setCategory2("");
 		List<ProductDTO> ar = productService.selectOrder(pager);
 		List<ProductDTO> ar2 = new ArrayList<ProductDTO>();
-		pager.setCategory2("이벤트");
 		for(ProductDTO dto : ar) {
 			if(dto.getEvent() != null) {
 				ar2.add(dto);
@@ -47,6 +46,20 @@ public class ProductController {
 		List<ProductDTO> ar2 = new ArrayList<ProductDTO>();
 		if(pager.getCategory2().equals("이벤트")) {
 			ar2 = event(pager);
+			totalCount = ar2.size();
+			pager.setCategory2("이벤트");
+			model.addAttribute("list", ar2).addAttribute("totalCount", totalCount);
+		}else if(pager.getCategory2().equals("신상품")||pager.getCategory2().equals("베스트셀러")){
+			cat = pager.getCategory2();
+			pager.setCategory2("");
+			List<ProductDTO> ar = productService.selectOrder(pager);
+			for(int i = 0; i < ar.size(); i++) {
+				if(i < 10) {
+					ar2.add(ar.get(i));
+				}
+			}
+			totalCount = ar2.size();
+			pager.setCategory2(cat);
 			model.addAttribute("list", ar2).addAttribute("totalCount", totalCount);
 		}else {
 			pager.setCategory2("");

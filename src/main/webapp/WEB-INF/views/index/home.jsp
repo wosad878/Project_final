@@ -41,12 +41,11 @@
 			<li><div class="notice"><h3><a href=""><span>공지사항</span><span>+</span></a></h3>
 				</div>
 				<div class="notice_contents">
-					<p>d</p>
-					<p>s</p>
-					<p>d</p>
-					<p>d</p>
-					<p>뭐라고쓸까</p>
-					<p>d</p>
+					<p>2018년 12얼 31일 휴무 공지 안내드립니다.</p>
+					<p>새해 복 많이 받으세요</p>
+					<p>2019년 새해 이벤트 안내드립니다(필독)</p>
+					<p>12월 이벤트 변경안내 공지 입니다.</p>
+					<p>아이샤드 퍼펙트 커버쿠션 단종안내 드립니다.</p>
 				</div>
 			</li>
 		</ul>
@@ -128,6 +127,7 @@
 		</div>
 	</div>
 	<c:import url="/WEB-INF/views/temp/swiperJs.jsp"></c:import>
+	
 </div>
 <div class="footer">
 		<c:import url="/WEB-INF/views/temp/footer.jsp"></c:import>

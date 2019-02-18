@@ -46,6 +46,15 @@
 .notice_contents{
 	border: 1px solid #e8e8e8;
 	height: 132px;
+	padding: 10px;
+	box-sizing: border-box;
+	line-height: 21px;
+}
+.notice_contents p{
+	display: block;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
 }
 .notice {
 	height: 31px;

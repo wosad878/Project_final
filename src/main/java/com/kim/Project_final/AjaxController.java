@@ -33,11 +33,6 @@ public class AjaxController {
 		String decryptedValue = "";
 		try {
 			Cipher cipher = Cipher.getInstance("RSA");
-			/**
-			* 암호화 된 값은 byte 배열이다.
-			* 이를 문자열 폼으로 전송하기 위해 16진 문자열(hex)로 변경한다. 
-			* 서버측에서도 값을 받을 때 hex 문자열을 받아서 이를 다시 byte 배열로 바꾼 뒤에 복호화 과정을 수행한다.
-			*/
 			byte[] encryptedBytes = hexToByteArray(securedValue);
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
 			byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
@@ -47,7 +42,6 @@ public class AjaxController {
 		}
 		return decryptedValue;
 	}
-//	16진 문자열을 byte 배열로 변환한다.
 	public static byte[] hexToByteArray(String hex) {
 		if(hex == null || hex.length() % 2 != 0) {
 			return new byte[] {};
@@ -79,10 +73,6 @@ public class AjaxController {
 				MemberDTO memberDTO = new MemberDTO();
 				memberDTO.setId(_uid);
 				memberDTO.setPassword(_pwd);
-//				System.out.println(uid);
-//				System.out.println(pwd);
-//				System.out.println(_uid);
-//				System.out.println(_pwd);
 				memberDTO = ajaxService.loginChk(memberDTO);
 				if(memberDTO.getName() != null) {
 					listObj.put("state", "true");

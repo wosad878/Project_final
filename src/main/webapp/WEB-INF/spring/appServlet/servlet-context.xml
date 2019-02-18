@@ -36,7 +36,7 @@
 			<beans:ref bean="interceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/product/product_insert"/>
+			<mapping path="/admin/**"/>
 			<beans:ref bean="AdminInterceptor"/>
 		</interceptor>
 	</interceptors>	

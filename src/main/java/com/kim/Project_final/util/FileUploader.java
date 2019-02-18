@@ -28,14 +28,9 @@ public class FileUploader {
 		file.transferTo(f);
 		return saveName;
 	}
-	
-	
-	
-	// 파일 복사하는 메소드
 	public static boolean nioFileCopy(String inFileName, String outFileName) {
 		Path source = Paths.get(inFileName);
 		Path target = Paths.get(outFileName);
-
 		// 사전체크
 		if (source == null) {
 			throw new IllegalArgumentException("source must be specified");
@@ -43,14 +38,11 @@ public class FileUploader {
 		if (target == null) {
 			throw new IllegalArgumentException("target must be specified");
 		}
-
 		// 소스파일이 실제로 존재하는지 체크
 		if (!Files.exists(source, new LinkOption[] {})) {
 			throw new IllegalArgumentException("Source file doesn't exist: "
 					+ source.toString());
 		}
-
-		
 		try {
 			Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING); // 파일복사
 
